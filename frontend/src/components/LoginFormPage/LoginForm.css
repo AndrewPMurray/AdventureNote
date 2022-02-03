@@ -1,0 +1,24 @@
+.login-form-container {
+	display: flex;
+	align-items: flex-end;
+	width: 50%;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.login-form * {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	margin: 2px;
+}
+
+.login-button {
+	background-color: blue;
+	color: white;
+	border-radius: 10px;
+	border: transparent;
+	cursor: pointer;
+}
