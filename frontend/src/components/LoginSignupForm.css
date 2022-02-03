@@ -1,21 +1,21 @@
-.login-form-container {
+.login-signup-form-container {
 	display: flex;
 	align-items: flex-end;
 	width: 50%;
 }
 
-.login-form {
+.login-signup-form {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
 }
 
-.login-form * {
+.login-signup-form * {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	margin: 2px;
 }
 
-.login-button {
+.login-signup-button {
 	background-color: blue;
 	color: white;
 	border-radius: 10px;
