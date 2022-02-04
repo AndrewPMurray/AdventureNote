@@ -5,6 +5,7 @@
 	right: 0;
 	background-color: #930c10;
 	color: white;
+	border-bottom: 1px solid black;
 }
 
 .nav-link {
@@ -17,14 +18,37 @@
 	list-style: none;
 }
 
+.nav li {
+	display: flex;
+	width: auto;
+	justify-content: space-between;
+	list-style: none;
+}
+
 .profile-dropdown {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
+	align-items: flex-start;
+}
+
+.profile-items {
+	background-color: #930c10;
+	position: absolute;
+	border: 1px solid black;
+	padding: 10px;
+	top: 53px;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-items * {
+	list-style: none;
 }
 
 .nav-user-button {
 	width: 30px;
+	margin-right: 10px;
 }
 
 .nav-login-signup-links * {
