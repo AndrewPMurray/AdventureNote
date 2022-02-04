@@ -1,7 +1,9 @@
 .login-signup-form-container {
 	display: flex;
-	align-items: flex-end;
-	width: 50%;
+	align-items: center;
+	justify-content: center;
+	width: 50vw;
+	height: 50vh;
 }
 
 .login-signup-form {
@@ -21,4 +23,9 @@
 	border-radius: 10px;
 	border: transparent;
 	cursor: pointer;
+}
+
+#errors * {
+	color: red;
+	list-style: none;
 }

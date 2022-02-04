@@ -26,4 +26,9 @@
 
 .nav-login-signup-links * {
 	padding: 0 10px;
+	background-color: transparent;
+	border: none;
+	color: white;
+	cursor: pointer;
+	text-decoration: underline;
 }
