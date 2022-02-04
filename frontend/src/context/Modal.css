@@ -23,3 +23,37 @@
 	background-color: white;
 	border-radius: 10px;
 }
+
+.fade-in {
+	animation-name: fade-in;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+}
+
+.fade-out {
+	animation-name: fade-out;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes fade-in {
+	from {
+		transform: translateY(-50%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-50%);
+		opacity: 0;
+	}
+}
