@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import '../LoginSignupForm.css';
 
-const SignupFormPage = () => {
+const SignupForm = () => {
 	const dispatch = useDispatch();
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
@@ -78,4 +78,4 @@ const SignupFormPage = () => {
 	);
 };
 
-export default SignupFormPage;
+export default SignupForm;

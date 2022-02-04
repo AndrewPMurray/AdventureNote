@@ -11,6 +11,10 @@
 
 .nav-link {
 	color: white;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .nav {
@@ -45,6 +49,7 @@
 
 .profile-items * {
 	list-style: none;
+	padding: 2px;
 }
 
 .nav-user-button {
