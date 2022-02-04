@@ -26,9 +26,6 @@
 	cursor: pointer;
 }
 
-#error {
-}
-
 #errors * {
 	color: red;
 	list-style: none;
