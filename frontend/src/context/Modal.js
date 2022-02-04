@@ -27,7 +27,7 @@ export function Modal({ onClose, children }) {
 	useEffect(() => {
 		const modalBackground = document.querySelector('#modal-background');
 		const modalContent = document.querySelector('#modal-content');
-		const timeout = () => setTimeout(onClose, 150);
+		const timeout = () => setTimeout(onClose, 175);
 
 		modalBackground.addEventListener('click', (e) => {
 			if (e.target === modalBackground) {
