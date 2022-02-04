@@ -21,12 +21,12 @@ const LoginForm = () => {
 
 	return (
 		<div className='login-signup-form-container'>
+			<ul id='errors'>
+				{errors.map((error, i) => (
+					<li key={i}>{error}</li>
+				))}
+			</ul>
 			<form className='login-signup-form' onSubmit={handleSubmit}>
-				<ul id='errors'>
-					{errors.map((error, i) => (
-						<li key={i}>{error}</li>
-					))}
-				</ul>
 				<label>
 					Username or Email
 					<input
