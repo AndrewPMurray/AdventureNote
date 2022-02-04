@@ -32,7 +32,9 @@ export function Modal({ onClose, children }) {
 		modalBackground.addEventListener('click', (e) => {
 			if (e.target === modalBackground) {
 				modalContent.classList.remove('fade-in');
+				modalBackground.classList.remove('fade-in');
 				modalContent.classList.add('fade-out');
+				modalBackground.classList.add('fade-out');
 				timeout();
 			}
 
@@ -46,7 +48,7 @@ export function Modal({ onClose, children }) {
 
 	return ReactDOM.createPortal(
 		<div id='modal'>
-			<div id='modal-background' />
+			<div id='modal-background' className='fade-in' />
 			<div id='modal-content' className='fade-in'>
 				{children}
 			</div>
