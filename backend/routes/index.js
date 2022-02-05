@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
 
-router.use('/api', apiRouter);
-
 if (process.env.NODE_ENV === 'production') {
 	const path = require('path');
 
-	router.get('*', function (req, res) {
-		res.redirect('https://' + req.headers.host + req.url);
+	router.get('*', (req, res, next) => {
+		if (!req.headers.referer.startsWith('https')) {
+			res.redirect('https://' + req.headers.host + req.url);
+		}
+		next();
 	});
 
 	router.get('/', (req, res) => {
