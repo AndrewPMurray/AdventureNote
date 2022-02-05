@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
 	);
 
 	User.associate = function (models) {
-		// associations can be defined here
+		User.hasMany(models.Note, { foreignKey: 'userId' });
 	};
 
 	User.getCurrentUserById = async function (id) {

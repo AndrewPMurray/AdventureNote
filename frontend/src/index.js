@@ -26,7 +26,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 function Root() {
-	console.log(window.location.protocol);
 	return (
 		<Provider store={store}>
 			<ModalProvider>
