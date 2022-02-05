@@ -13,3 +13,11 @@ To launch the application:
     - npx dotenv sequelize db:seed:all
   - You will need to start servers for both front end and back end. To do so, run the following command in each respective folder:
     - npm start
+
+### Technologies used:
+  - React/Redux (frontend)
+  - Express (backend)
+
+### Links:
+  - [Live website](https://adventurenote.herokuapp.com/)
+  - [View the wiki](https://github.com/AndrewPMurray/AdventureNote/wiki)
