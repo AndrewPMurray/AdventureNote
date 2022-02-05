@@ -16,7 +16,8 @@ To launch the application:
 
 ### Technologies used:
   - Frontend:
-    - React/Redux
+    - React
+    - Redux
   - Backend
     - Express
     - Sequelize
