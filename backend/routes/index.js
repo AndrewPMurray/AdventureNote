@@ -7,7 +7,7 @@ router.use('/api', apiRouter);
 if (process.env.NODE_ENV === 'production') {
 	const path = require('path');
 
-	http.get('*', function (req, res) {
+	router.get('*', function (req, res) {
 		res.redirect('https://' + req.headers.host + req.url);
 	});
 
