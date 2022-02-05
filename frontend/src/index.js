@@ -19,9 +19,12 @@ if (process.env.NODE_ENV !== 'production') {
 	window.csrfFetch = csrfFetch;
 	window.store = store;
 	window.sessionActions = sessionActions;
+} else if (window.location.protocol == 'http:') {
+	window.location.href = window.location.href.replace('http:', 'https:');
 }
 
 function Root() {
+	console.log(window.location.protocol);
 	return (
 		<Provider store={store}>
 			<ModalProvider>
