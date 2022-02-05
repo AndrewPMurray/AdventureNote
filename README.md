@@ -15,8 +15,12 @@ To launch the application:
     - npm start
 
 ### Technologies used:
-  - React/Redux (frontend)
-  - Express (backend)
+  - Frontend:
+    - React/Redux
+  - Backend
+    - Express
+    - Sequelize
+    - PostgreSQL
 
 ### Links:
   - [Live website](https://adventurenote.herokuapp.com/)
