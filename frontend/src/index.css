@@ -1,1 +1,32 @@
 /* TODO Add site wide styles */
+
+/* animations */
+.fade-in {
+	animation-name: fade-in;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+}
+
+.fade-out {
+	animation-name: fade-out;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
