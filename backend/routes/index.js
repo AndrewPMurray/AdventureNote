@@ -2,16 +2,10 @@ const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
 
+router.use('/api', apiRouter);
+
 if (process.env.NODE_ENV === 'production') {
 	const path = require('path');
-
-	router.get('*', (req, res, next) => {
-		console.log(req.headers);
-		if (!req.headers.referer.startsWith('https')) {
-			res.redirect('https://' + req.headers.host + req.url);
-		}
-		next();
-	});
 
 	router.get('/', (req, res) => {
 		res.cookie('XSRF-TOKEN', req.csrfToken());
