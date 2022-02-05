@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'production') {
 	const path = require('path');
 
 	router.get('*', (req, res, next) => {
+		console.log(req.headers);
 		if (!req.headers.referer.startsWith('https')) {
 			res.redirect('https://' + req.headers.host + req.url);
 		}
