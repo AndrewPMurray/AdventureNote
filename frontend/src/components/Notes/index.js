@@ -3,16 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getNotes, addNote } from '../../store/notes';
 import NoteNode from './NoteNode';
-import './ClientLanding.css';
+import './Notes.css';
 
-function ClientLanding() {
-	const notes = useSelector((state) => state.notes);
+function Notes() {
+	const notes = useSelector((state) => state.notes.list);
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const notesArr = Object.values(notes);
-	console.log(notesArr);
 
 	useEffect(() => {
 		if (user === null) {
@@ -28,7 +27,6 @@ function ClientLanding() {
 		e.preventDefault();
 
 		const newNote = await dispatch(addNote(user.id));
-		return history.push(`/notes/${newNote.id}`);
 	};
 
 	return (
@@ -37,7 +35,9 @@ function ClientLanding() {
 			{!notesArr.length && <span>No notes available</span>}
 
 			<div className='notes-list'>
-				{notesArr.map((note) => note.userId === user?.id && <NoteNode note={note} />)}
+				{notesArr.map(
+					(note) => note.userId === user?.id && <NoteNode key={note.id} note={note} />
+				)}
 				<div id='note' onClick={addNewNote}>
 					<p>Add a new note</p>
 				</div>
@@ -46,4 +46,4 @@ function ClientLanding() {
 	);
 }
 
-export default ClientLanding;
+export default Notes;

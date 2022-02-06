@@ -74,16 +74,30 @@ export const deleteNote = (noteId) => async (dispatch) => {
 	}
 };
 
-const initialState = {};
+const sortByDate = (list) => {
+	return list
+		.map((note) => note)
+		.sort((noteA, noteB) => {
+			return noteB.updatedAt.replace(/[^\d]/g, '') - noteA.updatedAt.replace(/[^\d]/g, '');
+		});
+};
+
+const initialState = {
+	list: [],
+};
 
 const notesReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case LOAD_NOTES: {
-			const allNotes = {};
+			const notes = {};
 			action.list.forEach((note) => {
-				allNotes[note.id] = note;
+				notes[note.id] = note;
 			});
-			return { ...allNotes, state };
+			return {
+				...notes,
+				...state,
+				list: sortByDate(action.list),
+			};
 		}
 		case ADD_NOTE: {
 			const newState = { ...state, [action.id]: { id: action.id } };

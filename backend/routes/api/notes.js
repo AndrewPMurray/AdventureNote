@@ -2,6 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const csurf = require('csurf');
+const { restoreUser } = require('../../utils/auth');
 
 const csrfProtection = csurf({ cookie: true });
 
@@ -12,8 +13,15 @@ const router = express.Router();
 
 router.get(
 	'/',
+	restoreUser,
 	asyncHandler(async (req, res) => {
-		const notes = await Note.findAll();
+		const { user } = req;
+		const notes = await Note.findAll({
+			where: {
+				userId: user.id,
+			},
+		});
+		console.log(notes);
 		return res.json(notes);
 	})
 );
@@ -24,8 +32,8 @@ router.post(
 	asyncHandler(async (req, res) => {
 		const userId = req.body.userId;
 		const newNote = await Note.create({
-			name: 'Untitled',
-			content: '',
+			name: null,
+			content: null,
 			userId,
 			notebookId: null,
 		});

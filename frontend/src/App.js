@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Sidebar from './components/Sidebar';
 import Landing from './components/Landing';
-import ClientLanding from './components/ClientLanding';
+import Notes from './components/Notes';
 
 // utils
 import * as sessionActions from './store/session';
@@ -37,7 +37,7 @@ function App() {
 					<Route path='/client'>
 						<div id='client-landing-container'>
 							<Sidebar isLoaded={isLoaded} />
-							<ClientLanding />
+							<Notes />
 						</div>
 					</Route>
 					<Route>
