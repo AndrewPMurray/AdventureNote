@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import { ModalProvider } from './context/Modal';
-import ActiveNoteProvider from './context/ActiveNote';
+import ShowHideProvider from './context/ShowHide';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 
 import configureStore from './store';
@@ -29,13 +29,13 @@ if (process.env.NODE_ENV !== 'production') {
 function Root() {
 	return (
 		<Provider store={store}>
-			<ActiveNoteProvider>
+			<ShowHideProvider>
 				<ModalProvider>
 					<BrowserRouter>
 						<App />
 					</BrowserRouter>
 				</ModalProvider>
-			</ActiveNoteProvider>
+			</ShowHideProvider>
 		</Provider>
 	);
 }

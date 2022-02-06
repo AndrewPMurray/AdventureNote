@@ -11,8 +11,8 @@ const router = express.Router();
 const validateLogin = [
 	check('credential')
 		.exists({ checkFalsy: true })
-		.withMessage('Please provide a valid email or username.'),
-	check('password').exists({ checkFalsy: true }).withMessage('Please provide a password.'),
+		.withMessage('Please provide a valid email or username'),
+	check('password').exists({ checkFalsy: true }).withMessage('Please provide a password'),
 	handleValidationErrors,
 ];
 
@@ -30,6 +30,23 @@ router.post(
 	validateLogin,
 	asyncHandler(async (req, res, next) => {
 		const { credential, password } = req.body;
+
+		if (credential === 'MattMercer') {
+			const demoUser = await User.findOne({ where: { username: credential } });
+			if (demoUser === null) {
+				await User.signup({
+					email: 'MattMercerRocks@gmail.com',
+					username: 'MattMercer',
+					password: 'password',
+				});
+			}
+			const user = await User.login({
+				credential,
+				password,
+			});
+			await setTokenCookie(res, user);
+			return res.json({ user });
+		}
 
 		const user = await User.login({
 			credential,

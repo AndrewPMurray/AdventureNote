@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getNotes, addNote } from '../../store/notes';
-import { useActiveNote } from '../../context/ActiveNote';
+import { useShowHide } from '../../context/ShowHide';
 import NoteNode from './NoteNode';
 import './Notes.css';
 
 function Notes() {
 	const notes = useSelector((state) => state.notes.list);
 	const user = useSelector((state) => state.session.user);
-	const { activeNote, setActiveNote } = useActiveNote();
+	const { activeNote, setActiveNote, expandNote } = useShowHide();
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -40,26 +40,28 @@ function Notes() {
 	}, [notes, setActiveNote]);
 
 	return (
-		<div className='notes-container'>
-			<h2 id='notes-header'>All notes</h2>
+		!expandNote && (
+			<div className='notes-container'>
+				<h2 id='notes-header'>All notes</h2>
 
-			<div className='notes-list'>
-				{notesArr.map((note) => (
-					<div
-						id={`active-${note.id === activeNote}`}
-						key={note.id}
-						onClick={() => setActiveNote(note.id)}
-					>
-						{note.userId === user?.id && <NoteNode key={note.id} note={note} />}
-					</div>
-				))}
-				{!notesArr.length && (
-					<div id='note' className='add-note' onClick={addNewNote}>
-						<span>No notes available, click here to add one now!</span>
-					</div>
-				)}
+				<div className='notes-list'>
+					{notesArr.map((note) => (
+						<div
+							id={`active-${note.id === activeNote}`}
+							key={note.id}
+							onClick={() => setActiveNote(note.id)}
+						>
+							{note.userId === user?.id && <NoteNode key={note.id} note={note} />}
+						</div>
+					))}
+					{!notesArr.length && (
+						<div id='note' className='add-note' onClick={addNewNote}>
+							<span>No notes available, click here to add one now!</span>
+						</div>
+					)}
+				</div>
 			</div>
-		</div>
+		)
 	);
 }
 

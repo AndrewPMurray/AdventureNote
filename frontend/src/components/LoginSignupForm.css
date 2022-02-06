@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 .login-signup-form-container {
 	width: 50vw;
 	min-width: 500px;
@@ -42,15 +44,49 @@
 	font-size: 14px;
 }
 
+#login-demo-buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
 .login-signup-button {
 	background-color: #930c10;
-	min-height: 3vh;
-	min-width: 5vw;
+	height: 30px;
+	width: 85px;
 	color: white;
 	border-radius: 5px;
 	border: transparent;
 	cursor: pointer;
-	align-self: flex-end;
+	text-decoration: none;
+	font-weight: 200;
+	font-family: 'Montserrat';
+	font-size: 12px;
+	transition-duration: .15s;
+}
+
+.demo-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #930c10;
+	height: 30px;
+	width: 85px;
+	color: white;
+	border-radius: 5px;
+	border: transparent;
+	cursor: pointer;
+	text-decoration: none;
+	padding: 0px;
+	font-weight: 200;
+	font-family: 'Montserrat';
+	font-size: 12px;
+	transition-duration: .15s;
+}
+
+.login-signup-button:hover,
+.demo-button:hover {
+	background-color: #AA4F50;
 }
 
 #errors {

@@ -67,6 +67,18 @@ body {
 	animation-timing-function: ease-in-out;
 }
 
+.fade-in-grow {
+	animation-name: fade-in-grow;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+}
+
+.fade-out-shrink {
+		animation-name: fade-out-shrink;
+		animation-duration: 200ms;
+		animation-timing-function: ease-in-out;
+}
+
 @keyframes fade-in {
 	from {
 		opacity: 0;
@@ -81,6 +93,28 @@ body {
 		opacity: 1;
 	}
 	to {
+		opacity: 0;
+	}
+}
+
+@keyframes fade-in-grow {
+	from {
+		transform: scaleY(0.7) scaleX(0.7);
+		opacity: 0;
+	}
+	to {
+		transform: scaleY(1) scaleX(1);
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out-shrink {
+	from {
+		transform: scaleY(1) scaleX(1);
+		opacity: 1;
+	}
+	to {
+		transform: scaleY(0.7) scaleX(0.7);
 		opacity: 0;
 	}
 }

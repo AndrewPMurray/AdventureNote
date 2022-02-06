@@ -11,10 +11,10 @@ import EditNote from './components/EditNote';
 
 // Utils & contexts as needed
 import * as sessionActions from './store/session';
-import { useActiveNote } from './context/ActiveNote';
+import { useShowHide } from './context/ShowHide';
 
 function App() {
-	const { activeNote } = useActiveNote();
+	const { activeNote } = useShowHide();
 	const dispatch = useDispatch();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const user = useSelector((state) => state.session.user);

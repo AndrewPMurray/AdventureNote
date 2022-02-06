@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import * as sessionActions from '../../store/session';
 import '../LoginSignupForm.css';
@@ -16,6 +17,18 @@ const LoginForm = () => {
 		return dispatch(sessionActions.login({ credential, password })).catch(async (res) => {
 			const data = await res.json();
 			if (data && data.errors) setErrors(data.errors);
+		});
+	};
+
+	const demoUser = (e) => {
+		e.preventDefault();
+		return dispatch(
+			sessionActions.login({
+				credential: 'MattMercer',
+				password: 'password',
+			})
+		).catch(async (res) => {
+			const data = await res.json();
 		});
 	};
 
@@ -43,9 +56,14 @@ const LoginForm = () => {
 					/>
 					{errors.password && <li id='errors'>{errors.password}</li>}
 				</div>
-				<button className='login-signup-button' type='submit'>
-					Log In
-				</button>
+				<div id='login-demo-buttons'>
+					<Link className='demo-button' to='/client' onClick={demoUser}>
+						Demo User
+					</Link>
+					<button className='login-signup-button' type='submit'>
+						Log In
+					</button>
+				</div>
 			</form>
 		</div>
 	);

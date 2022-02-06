@@ -1,4 +1,41 @@
 .edit-note {
     background-color: #1A1A1A;
-    width: 55%;
+    width: 100vw;
+    height: 100vh;
+}
+
+#expand-collapse-arrow {
+    cursor: pointer;
+    padding: 5px;
+}
+
+#edit-note-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-note-form * {
+    border: none;
+}
+
+#edit-note-form > input {
+    background-color: transparent;
+    height: 5vh;
+    font-size: 36px;
+    color: white;
+}
+
+#edit-note-form > textarea {
+    background-color: transparent;
+    resize: none;
+    height: 80vh;
+    font-size: 20px;
+    color: white;
+}
+
+.edit-note-button {
+    max-width: 100px;
+    align-self: flex-end;
+    background-color: #FFFEBD;
+    color: black;
 }

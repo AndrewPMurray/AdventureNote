@@ -43,7 +43,7 @@ const validateSignup = [
 		.exists({ checkFalsy: true })
 		.withMessage('Please enter a secure password')
 		.isLength({ min: 8 })
-		.withMessage('Password must be at least 8 characters long.')
+		.withMessage('Password must be at least 8 characters long')
 		.custom((value) => {
 			const letterCheck = /^(?=.*[a-z]).*(?=.*[A-Z]).+$/g;
 			const numCheck = /^(?=.*[0-9]).+$/g;
@@ -65,10 +65,10 @@ const validateSignup = [
 		}),
 	check('confirmPassword')
 		.exists({ checkFalsy: true })
-		.withMessage('please confirm your password')
+		.withMessage('Please confirm your password')
 		.custom((value, { req }) => {
 			if (value !== req.body.password) {
-				throw new Error('password and confirm password do not match');
+				throw new Error('Password and confirm password do not match');
 			}
 			return true;
 		}),

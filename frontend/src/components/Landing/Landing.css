@@ -36,5 +36,9 @@
     height: 60px;
     width: 275px;
     cursor: pointer;
+    transition-duration: .15s
 }
 
+#signup-button:hover {
+	background-color: #AA4F50;
+}
