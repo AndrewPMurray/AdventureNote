@@ -1,0 +1,57 @@
+.profile-items {
+    position: absolute;
+    top: 5vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #080808;
+    border: 1px solid rgba(30, 30, 30, 0.7);
+    list-style: none;
+}
+
+.profile-items * {
+    padding: 10px;
+}
+
+.profile-dropdown {
+	display: flex;
+	flex-direction: column;
+    justify-content: flex-start;
+	align-items: flex-start;
+    position: absolute;
+    color: #FFFEBD;
+}
+
+#sidebar-link {
+    color: #FFFEBD;
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.sidebar-container {
+    background-color: #080808;
+    border-right:  1px solid rgba(30, 30, 30, 0.7);
+    border-width: .01em;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    width: 20vh;
+}
+
+.sidebar-user-button {
+	display: flex;
+	align-items: center;
+    justify-content: space-around;
+	font-size: 1.5rem;
+	width: 18vh;
+	height: 5vh;
+	background-color: transparent;
+	color: #FFFEBD;
+	border: none;
+	margin-right: 10px;
+    cursor: pointer;
+}

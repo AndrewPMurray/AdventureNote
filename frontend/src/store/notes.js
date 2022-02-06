@@ -1,4 +1,5 @@
 import { csrfFetch } from './csrf';
+import { useHistory } from 'react-router-dom';
 
 const LOAD_NOTES = 'notes/LOAD_NOTES';
 const ADD_NOTE = 'notes/ADD_NOTE';
@@ -34,13 +35,10 @@ export const getNotes = () => async (dispatch) => {
 	}
 };
 
-export const addNote = (payload) => async (dispatch) => {
+export const addNote = (userId) => async (dispatch) => {
 	const response = await csrfFetch('/api/notes', {
 		method: 'POST',
-		headers: {
-			'content-type': 'application/json',
-		},
-		body: JSON.stringify(payload),
+		body: JSON.stringify({ userId: userId }),
 	});
 	if (response.ok) {
 		const newNote = await response.json();
@@ -50,14 +48,13 @@ export const addNote = (payload) => async (dispatch) => {
 };
 
 export const editNote = (note) => async (dispatch) => {
-	const response = await csrfFetch(`/api/notes/${note.id}`, {
+	const response = await fetch(`/api/notes/${note.id}`, {
 		method: 'PUT',
 		headers: {
 			'content-type': 'application/JSON',
 		},
 		body: JSON.stringify(note),
 	});
-
 	if (response.ok) {
 		const editedNote = await response.json();
 		dispatch(update(editedNote));

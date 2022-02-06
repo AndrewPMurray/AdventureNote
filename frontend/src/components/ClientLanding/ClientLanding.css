@@ -1,0 +1,24 @@
+#client-landing-container {
+    display: flex;
+    color: white;
+}
+
+.notes-container {
+    margin: 50px;
+}
+
+.notes-list {
+    display: flex;
+    margin: 20px;
+}
+
+.notes-list > * {
+    margin: 10px;
+    border: 5px solid blue;
+}
+
+#note {
+    background-color: red;
+    height: 15vh;
+    width: 15vw;
+}
