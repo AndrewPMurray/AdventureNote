@@ -1,33 +1,59 @@
 .login-signup-form-container {
+	width: 50vw;
+	min-width: 500px;
+	height: 50vh;
+	min-height: 500px;
+	margin-bottom: 50px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 50vw;
-	height: 50vh;
 	color: black;
+}
+
+.login-signup-form-container img {
+	height: 125px;
+	margin-bottom: 50px;
+}
+
+.login-signup-form-container h2 {
+	margin-bottom: 20px;
+	font-size: 20px;
 }
 
 .login-signup-form {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
 }
 
-.login-signup-form * {
+.login-signup-form > * {
 	font-weight: bold;
-	margin: 2px;
+	margin: 10px;
+	min-width: 475px;
+}
+
+.form-field {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-field li{
+	list-style: none;
+	font-size: 14px;
 }
 
 .login-signup-button {
 	background-color: #930c10;
+	min-height: 3vh;
+	min-width: 5vw;
 	color: white;
-	border-radius: 10px;
+	border-radius: 5px;
 	border: transparent;
 	cursor: pointer;
+	align-self: flex-end;
 }
 
-#errors * {
+#errors {
 	color: red;
 	list-style: none;
 }

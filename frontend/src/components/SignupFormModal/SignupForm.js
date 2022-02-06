@@ -10,54 +10,60 @@ const SignupForm = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (password === confirmPassword) {
-			setErrors([]);
-			return dispatch(sessionActions.signup({ email, username, password })).catch(
-				async (res) => {
-					const data = await res.json();
-					if (data && data.errors) setErrors(data.errors);
-				}
-			);
-		}
-		return setErrors(['Password and Confirm Password did not match']);
+		setErrors({});
+		return dispatch(
+			sessionActions.signup({ email, username, password, confirmPassword })
+		).catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
 	};
 
 	return (
 		<div className='login-signup-form-container'>
-			<ul id='errors'>
-				{errors.map((error, i) => (
-					<li key={i}>{error}</li>
-				))}
-			</ul>
+			<img src='/images/quill-pen-graphic-colorized.png' />
+			<h2>Sign up here to begin using AdventureNote</h2>
 			<form className='login-signup-form' onSubmit={handleSubmit}>
-				<input
-					type='text'
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					placeholder='Email'
-				/>
-				<input
-					type='text'
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-					placeholder='Username'
-				/>
-				<input
-					type='password'
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					placeholder='Password'
-				/>
-				<input
-					type='password'
-					value={confirmPassword}
-					onChange={(e) => setConfirmPassword(e.target.value)}
-					placeholder='Confirm Password'
-				/>
+				<div className='form-field'>
+					<input
+						type='text'
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						placeholder='Email'
+					/>
+					{errors.email && <li id='errors'>{errors.email}</li>}
+				</div>
+				<div className='form-field'>
+					<input
+						type='text'
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						placeholder='Username'
+					/>
+					{errors.username && <li id='errors'>{errors.username}</li>}
+				</div>
+				<div className='form-field'>
+					<input
+						type='password'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						placeholder='Password'
+					/>
+					{errors.password && <li id='errors'>{errors.password}</li>}
+				</div>
+				<div className='form-field'>
+					<input
+						type='password'
+						value={confirmPassword}
+						onChange={(e) => setConfirmPassword(e.target.value)}
+						placeholder='Confirm Password'
+					/>
+					{errors.confirmPassword && <li id='errors'>{errors.confirmPassword}</li>}
+				</div>
 				<button className='login-signup-button' type='submit'>
 					Sign Up
 				</button>

@@ -1,6 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
+const { Op } = require('sequelize');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
@@ -11,18 +12,66 @@ const router = express.Router();
 const validateSignup = [
 	check('email')
 		.exists({ checkFalsy: true })
-		.withMessage('please enter an email address')
+		.withMessage('Please enter an email address')
 		.isEmail()
-		.withMessage('Please provide a valid email.'),
+		.withMessage('Email address is not valid')
+		.custom((value) => {
+			return User.findOne({ where: { email: { [Op.iLike]: value } } }).then((user) => {
+				if (user) {
+					return Promise.reject(
+						'The provided email address is already in use by another account'
+					);
+				}
+			});
+		}),
 	check('username')
 		.exists({ checkFalsy: true })
+		.withMessage('Please enter a username')
 		.isLength({ min: 4 })
-		.withMessage('Please provide a username with at least 4 characters.'),
-	check('username').not().isEmail().withMessage('Username cannot be an email.'),
+		.withMessage('Username must be more than 4 characters')
+		.custom((value) => {
+			return User.findOne({ where: { username: { [Op.iLike]: value } } }).then((user) => {
+				if (user) {
+					return Promise.reject(
+						'The provided username is already in use by another account'
+					);
+				}
+			});
+		}),
+	check('username').not().isEmail().withMessage('Username cannot be an email address.'),
 	check('password')
 		.exists({ checkFalsy: true })
-		.isLength({ min: 6 })
-		.withMessage('Password must be 6 characters or more.'),
+		.withMessage('Please enter a secure password')
+		.isLength({ min: 8 })
+		.withMessage('Password must be at least 8 characters long.')
+		.custom((value) => {
+			const letterCheck = /^(?=.*[a-z]).*(?=.*[A-Z]).+$/g;
+			const numCheck = /^(?=.*[0-9]).+$/g;
+			const specCharCheck = /^(?=.*[!@#$%^&*]).+$/g;
+			if (!letterCheck.test(value)) {
+				throw new Error(
+					'Password must contain at least 1 lowercase and one uppercase letter'
+				);
+			}
+			if (!numCheck.test(value)) {
+				throw new Error('Password must contain at least 1 number');
+			}
+			if (!specCharCheck.test(value)) {
+				throw new Error(
+					'Password must contain at least 1 special character: [! @ # $ % ^ & * ( )]'
+				);
+			}
+			return true;
+		}),
+	check('confirmPassword')
+		.exists({ checkFalsy: true })
+		.withMessage('please confirm your password')
+		.custom((value, { req }) => {
+			if (value !== req.body.password) {
+				throw new Error('password and confirm password do not match');
+			}
+			return true;
+		}),
 	handleValidationErrors,
 ];
 
