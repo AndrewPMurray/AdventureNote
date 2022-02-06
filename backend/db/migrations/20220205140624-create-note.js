@@ -11,6 +11,7 @@ module.exports = {
 			name: {
 				allowNull: false,
 				type: Sequelize.STRING(100),
+				defaultValue: 'Untitled',
 			},
 			content: {
 				type: Sequelize.TEXT,

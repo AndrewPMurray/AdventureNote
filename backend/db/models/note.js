@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
 	const Note = sequelize.define(
 		'Note',
 		{
-			name: DataTypes.STRING(100),
+			name: {
+				type: DataTypes.STRING(100),
+				defaultValue: 'Untitled',
+			},
 			content: DataTypes.TEXT,
 			userId: DataTypes.INTEGER,
 			notebookId: DataTypes.INTEGER,
