@@ -13,6 +13,13 @@ function Notes() {
 
 	const notesArr = Object.values(notes);
 
+	const addNewNote = async (e) => {
+		e.preventDefault();
+
+		const newNote = await dispatch(addNote(user.id));
+		dispatch(getNotes(user?.id));
+	};
+
 	useEffect(() => {
 		if (user === null) {
 			history.push('/');
@@ -22,12 +29,6 @@ function Notes() {
 	useEffect(() => {
 		dispatch(getNotes(user?.id));
 	}, [dispatch]);
-
-	const addNewNote = async (e) => {
-		e.preventDefault();
-
-		const newNote = await dispatch(addNote(user.id));
-	};
 
 	return (
 		<div className='notes-container'>
