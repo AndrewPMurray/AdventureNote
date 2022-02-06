@@ -16,10 +16,21 @@
 }
 
 .notes-list > * {
-    border: 5px solid blue;
+    border-top: 1px solid rgba(30, 30, 30, 0.7);
+    border-right: 1px solid rgba(30, 30, 30, 0.7);
+    border-bottom: 1px solid rgba(30, 30, 30, 0.7);
 }
 
 #note {
-    background-color: red;
+    padding: 10px;
     height: 7vh;
+}
+
+.add-note {
+    cursor: pointer;
+}
+
+#active-true {
+    background-color: #FFFEBD;
+    color: black;
 }

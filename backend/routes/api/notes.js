@@ -21,7 +21,6 @@ router.get(
 				userId: user.id,
 			},
 		});
-		console.log(notes);
 		return res.json(notes);
 	})
 );
