@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './Sidebar.css';
 
@@ -38,11 +38,18 @@ function ProfileButton({ user }) {
 				</button>
 				{showMenu && (
 					<ul className='profile-items'>
-						<li>{user.username}</li>
-						<li>{user.email}</li>
-						<button id='sidebar-link' onClick={logout}>
-							Log Out
-						</button>
+						<li>
+							Account
+							<div id='profile-dropdown-user-info'>
+								<div>{user.username}</div>
+								<div>{user.email}</div>
+							</div>
+						</li>
+						<li>
+							<button id='sidebar-link' onClick={logout}>
+								Log Out
+							</button>
+						</li>
 					</ul>
 				)}
 			</div>

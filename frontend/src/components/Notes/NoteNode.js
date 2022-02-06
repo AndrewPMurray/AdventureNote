@@ -1,7 +1,3 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { getNotes } from '../../store/notes';
 import './Notes.css';
 
 function NoteNode({ note }) {

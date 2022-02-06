@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import './EditNote.css';
 
-import * as sessionActions from '../../store/session';
 import '../LoginSignupForm.css';
 
-const EditNote = ({ note }) => {
-	const dispatch = useDispatch();
+const EditNote = ({ activeNote }) => {
+	const noteId = activeNote;
+	const note = useSelector((state) => state.notes[activeNote]);
+	const [title, setTitle] = useState(note?.title || '');
+	const [content, setContent] = useState(note?.content || '');
+
+	useEffect(() => {
+		setTitle(note?.title || '');
+		setContent(note?.content || '');
+	}, [note?.title, note?.content]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 	};
 
-	return (
+	return !activeNote ? null : (
 		<form className='edit-note' onSubmit={handleSubmit}>
 			<input
 				type='text'
@@ -19,7 +27,11 @@ const EditNote = ({ note }) => {
 				onChange={(e) => setTitle(e.target.value)}
 				placeholder='Title'
 			/>
-			<textbox value={content} onChange={(e) => setContent(e.target.value)} />
+			<textarea
+				value={content}
+				onChange={(e) => setContent(e.target.value)}
+				placeholder='Start taking your notes here'
+			/>
 			<button className='edit-note-button' type='submit'>
 				Save
 			</button>

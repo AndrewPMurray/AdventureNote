@@ -34,42 +34,30 @@ const SignupForm = () => {
 				))}
 			</ul>
 			<form className='login-signup-form' onSubmit={handleSubmit}>
-				<label>
-					Email
-					<input
-						type='text'
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Username
-					<input
-						type='text'
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Password
-					<input
-						type='password'
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Confirm Password
-					<input
-						type='password'
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						required
-					/>
-				</label>
+				<input
+					type='text'
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					placeholder='Email'
+				/>
+				<input
+					type='text'
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+					placeholder='Username'
+				/>
+				<input
+					type='password'
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					placeholder='Password'
+				/>
+				<input
+					type='password'
+					value={confirmPassword}
+					onChange={(e) => setConfirmPassword(e.target.value)}
+					placeholder='Confirm Password'
+				/>
 				<button className='login-signup-button' type='submit'>
 					Sign Up
 				</button>

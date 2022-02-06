@@ -6,7 +6,11 @@
 .notes-container {
     margin-top: 20px;
     background-color: #0B0B0B;
-    width: 25vw;
+    width: 25%;
+}
+
+#notes-header {
+    font-size: 24px;
 }
 
 .notes-list {
@@ -24,6 +28,7 @@
 #note {
     padding: 10px;
     height: 7vh;
+    font-weight: bold;
 }
 
 .add-note {

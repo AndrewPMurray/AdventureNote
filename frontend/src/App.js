@@ -7,11 +7,14 @@ import Navigation from './components/Navigation';
 import Sidebar from './components/Sidebar';
 import Landing from './components/Landing';
 import Notes from './components/Notes';
+import EditNote from './components/EditNote';
 
-// utils
+// Utils & contexts as needed
 import * as sessionActions from './store/session';
+import { useActiveNote } from './context/ActiveNote';
 
 function App() {
+	const { activeNote } = useActiveNote();
 	const dispatch = useDispatch();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const user = useSelector((state) => state.session.user);
@@ -38,6 +41,7 @@ function App() {
 						<div id='client-landing-container'>
 							<Sidebar isLoaded={isLoaded} />
 							<Notes />
+							<EditNote activeNote={activeNote} />
 						</div>
 					</Route>
 					<Route>

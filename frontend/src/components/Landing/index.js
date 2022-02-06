@@ -13,13 +13,13 @@ function Landing() {
 		if (user !== null) {
 			history.push('/client');
 		}
-	}, [user]);
+	}, [user, history]);
 
 	return (
 		<div id='landing-container'>
 			<h2>Conquer your Cluttered Quests</h2>
 			<h3>
-				Remember every NPC, interaction, and spell with your notes and schedule all in one
+				Remember every NPC, interaction, and spell with all of your notes organized in one
 				place.
 			</h3>
 			<SignupForm />

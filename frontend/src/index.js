@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import { ModalProvider } from './context/Modal';
+import ActiveNoteProvider from './context/ActiveNote';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 
 import configureStore from './store';
@@ -21,18 +22,20 @@ if (process.env.NODE_ENV !== 'production') {
 	window.csrfFetch = csrfFetch;
 	window.store = store;
 	window.sessionActions = sessionActions;
-} else if (window.location.protocol == 'http:') {
+} else if (window.location.protocol === 'http:') {
 	window.location.href = window.location.href.replace('http:', 'https:');
 }
 
 function Root() {
 	return (
 		<Provider store={store}>
-			<ModalProvider>
-				<BrowserRouter>
-					<App />
-				</BrowserRouter>
-			</ModalProvider>
+			<ActiveNoteProvider>
+				<ModalProvider>
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
+				</ModalProvider>
+			</ActiveNoteProvider>
 		</Provider>
 	);
 }

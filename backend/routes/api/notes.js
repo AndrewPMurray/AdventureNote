@@ -40,4 +40,17 @@ router.post(
 	})
 );
 
+router.put(
+	'/',
+	csrfProtection,
+	asyncHandler(async (req, res) => {
+		const { userId, title, content } = req.body;
+		const note = await Note.findOne({ where: userId });
+		const newNote = await note.update({
+			title,
+			content,
+		});
+	})
+);
+
 module.exports = router;

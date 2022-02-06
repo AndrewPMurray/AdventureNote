@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@700&display=swap');
+
 .nav-container {
 	height: 50px;
 	background-color: transparent;
@@ -30,11 +32,16 @@
 	color: black;
 }
 
+.nav a > h1 {
+	font-family:'Old Standard TT';
+}
+
 .nav-login-signup-links * {
 	padding: 0 10px;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
+	font-family: 'Old Standard TT';
 	text-decoration: none;
 	font-size: 20px;
 }

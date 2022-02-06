@@ -1,7 +1,7 @@
 /* TODO Add site wide styles */
 
 /* default font */
-@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 /* CSS Reset */
 html, body, div, span, applet, object, iframe,
@@ -22,7 +22,7 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	vertical-align: baseline;
-	font-family: Old Standard TT;
+	font-family: 'Montserrat';
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

@@ -1,5 +1,4 @@
 import { csrfFetch } from './csrf';
-import { useHistory } from 'react-router-dom';
 
 const LOAD_NOTES = 'notes/LOAD_NOTES';
 const ADD_NOTE = 'notes/ADD_NOTE';

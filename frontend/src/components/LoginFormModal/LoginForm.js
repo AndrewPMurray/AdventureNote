@@ -27,24 +27,18 @@ const LoginForm = () => {
 				))}
 			</ul>
 			<form className='login-signup-form' onSubmit={handleSubmit}>
-				<label>
-					Username or Email
-					<input
-						type='text'
-						value={credential}
-						onChange={(e) => setCredential(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Password
-					<input
-						type='password'
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</label>
+				<input
+					type='text'
+					value={credential}
+					onChange={(e) => setCredential(e.target.value)}
+					placeholder='Username or Email'
+				/>
+				<input
+					type='password'
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					placeholder='Password'
+				/>
 				<button className='login-signup-button' type='submit'>
 					Log In
 				</button>
