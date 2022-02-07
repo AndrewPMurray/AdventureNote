@@ -28,7 +28,7 @@
     right: 1vw;
     top: 4vh;
     background-color: #080808;
-    border: 1px solid rgba(30, 30, 30, 0.7);
+    border-radius: 5px;
 }
 
 .note-menu-items * {
@@ -73,7 +73,6 @@
     margin-right: 25px;
     width: 100px;
     height: 50px;
-    font-family: 'Old Standard TT';
     border-radius: 5px;
     font-size: 20px;
     align-self: flex-end;

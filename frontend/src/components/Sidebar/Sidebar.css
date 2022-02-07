@@ -8,13 +8,14 @@
     flex-direction: column;
     justify-content: space-around;
     background-color: #1A1A1A;
-    border: 1px solid rgba(30, 30, 30, 0.7);
     list-style: none;
     color: white;
+    border-radius: 5px;
 }
 
-.profile-items * {
+.profile-items > * {
     padding: 10px;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.3);
 }
 
 .profile-dropdown {
@@ -25,8 +26,22 @@
     max-width: 200px;
 }
 
+#profile-dropdown-user-info {
+    padding-top: 10px;
+}
+
+#dropdown-username {
+    font-size: 18px;
+}
+
+#dropdown-email {
+    padding-top: 5px;
+    font-size: 14px;
+    color: gray;
+}
+
 #sidebar-link {
-    color: #FFFEBD;
+    color: white;
     background-color: transparent;
     border: none;
     text-decoration: none;

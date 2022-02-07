@@ -41,13 +41,13 @@ function ProfileButton({ user }) {
 						<li>
 							Account
 							<div id='profile-dropdown-user-info'>
-								<div>{user.username}</div>
-								<div>{user.email}</div>
+								<div id='dropdown-username'>{user.username}</div>
+								<div id='dropdown-email'>{user.email}</div>
 							</div>
 						</li>
 						<li>
 							<button id='sidebar-link' onClick={logout}>
-								Log Out
+								Sign Out {user.username}
 							</button>
 						</li>
 					</ul>
