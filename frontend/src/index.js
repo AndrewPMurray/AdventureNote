@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json';
 
 import './index.css';
 import App from './App';
@@ -15,6 +17,8 @@ import * as sessionActions from './store/session';
 import './index.css';
 
 const store = configureStore();
+
+TimeAgo.addDefaultLocale(en);
 
 if (process.env.NODE_ENV !== 'production') {
 	restoreCSRF();

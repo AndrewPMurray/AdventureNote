@@ -46,14 +46,25 @@ fade {
 }
 
 #note {
+    display: flex;
+    flex-direction: column;
     padding: 10px;
     height: 7vh;
-    font-weight: bold;
     cursor: pointer;
 }
 
-#note > * {
-    padding-bottom: 8px;
+#note-title {
+    font-weight: bold;
+}
+
+#note-content {
+    padding-top: 10px;
+    flex-grow: 1;
+}
+
+#note-updated-at {
+    align-self: flex-end;
+    color: rgba(150, 150, 150, 0.7)
 }
 
 #add-note {
