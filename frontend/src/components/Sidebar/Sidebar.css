@@ -55,7 +55,7 @@
     border-width: .01em;
     top: 0;
     left: 0;
-    max-height: 100vh;
+    height: 100vh;
     min-width: 200px;
 }
 
@@ -67,7 +67,7 @@
 	width: 18vh;
 	height: 5vh;
 	background-color: transparent;
-	color: #FFFEBD;
+	color: #8899A6;
 	border: none;
 	margin-right: 10px;
     cursor: pointer;
@@ -80,15 +80,29 @@
 }
 
 #sidebar-menu-items {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+#sidebar-menu-items > * {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
 #add-note-button {
-    background-color: #FFFEBD;
+    background-color: #8899A6;
+    border: none;
+    border-radius: 10px;
+    width: 125px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#notebooks-button {
+    background-color: #8899A6;
     border: none;
     border-radius: 10px;
     width: 125px;

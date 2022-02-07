@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import Landing from './components/Landing';
 import Notes from './components/Notes';
 import EditNote from './components/EditNote';
+import Notebooks from './components/Notebooks';
 
 // Utils & contexts as needed
 import * as sessionActions from './store/session';
@@ -42,6 +43,12 @@ function App() {
 							<Sidebar isLoaded={isLoaded} />
 							<Notes />
 							<EditNote activeNote={activeNote} />
+						</div>
+					</Route>
+					<Route path='/client/notebooks'>
+						<div id='client-landing-container'>
+							<Sidebar isLoaded={isLoaded} />
+							<Notebooks />
 						</div>
 					</Route>
 					<Route>

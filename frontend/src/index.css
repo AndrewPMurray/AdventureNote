@@ -49,17 +49,6 @@ table {
 }
 /* end reset */
 
-
-body {
-	background-color: #080808;
-	overflow-x: hidden;
-}
-
-#client-landing-container {
-	overflow: hidden;
-}
-
-
 /* animations */
 @keyframes fade-in {
 	from {
@@ -170,4 +159,17 @@ body {
 	transform-origin: right;
 	animation-duration: 250ms;
 	animation-timing-function: ease-in-out;
+}
+
+/* end animations */
+
+body {
+	background-color: #080808;
+	overflow-x: hidden;
+}
+
+#client-landing-container {
+	display: flex;
+	color: white;
+	overflow: hidden;
 }

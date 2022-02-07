@@ -1,8 +1,3 @@
-#client-landing-container {
-    display: flex;
-    color: white;
-}
-
 .notes-container {
     padding-top: 20px;
     background-color: #0E0E0E;
@@ -94,7 +89,7 @@
 
 #active-true {
     background-color: #1E1E1E;
-    border: 1px solid #FFFEBD;
+    border: 1px solid #8899A6;
 }
 
 /* width */
