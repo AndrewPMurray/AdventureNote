@@ -35,8 +35,9 @@
 
 #delete-note-button {
     display: flex;
-    color: red;
+    color: #930C10;
     text-decoration: none;
+    font-weight: bold;
     cursor: pointer;
 }
 

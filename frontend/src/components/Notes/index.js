@@ -55,8 +55,11 @@ function Notes() {
 						</div>
 					))}
 					{!notesArr.length && (
-						<div id='note' className='add-note' onClick={addNewNote}>
-							<span>No notes available, click here to add one now!</span>
+						<div id='add-note'>
+							<img src='images/quill-pen-graphic.png' />
+							<span onClick={addNewNote}>
+								No notes available, click here to add one now!
+							</span>
 						</div>
 					)}
 				</div>
