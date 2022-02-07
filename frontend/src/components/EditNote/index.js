@@ -44,25 +44,6 @@ const EditNote = ({ activeNote }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const fadeTimeout = () =>
-			setTimeout(() => {
-				setSavePrompt(false);
-				setNoChange(false);
-			}, 175);
-
-		const savePromptPopup = () =>
-			setTimeout(() => {
-				const savePrompt = document.getElementById('save-prompt');
-				savePrompt?.classList.remove('fade-in');
-				savePrompt?.classList.add('fade-out');
-				fadeTimeout();
-			}, 2000);
-
-		if (savePrompt) {
-			clearTimeout(savePromptPopup);
-			clearTimeout(fadeTimeout);
-		}
-
 		const editedNote = await dispatch(
 			editNote({
 				noteId,
@@ -73,8 +54,17 @@ const EditNote = ({ activeNote }) => {
 		);
 		dispatch(getNotes(user?.id));
 		if (editedNote.message) setNoChange(true);
+		const savePromptPopup = setTimeout(() => {
+			const savePrompt = document.getElementById('save-prompt');
+			savePrompt?.classList.remove('fade-in');
+			savePrompt?.classList.add('fade-out');
+			setTimeout(() => {
+				setSavePrompt(false);
+				setNoChange(false);
+			}, 175);
+		}, 2000);
+		if (savePrompt) clearTimeout(savePromptPopup);
 		setSavePrompt(true);
-		savePromptPopup();
 	};
 
 	const removeNote = async (e) => {
