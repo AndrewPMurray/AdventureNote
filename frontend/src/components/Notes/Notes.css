@@ -48,10 +48,15 @@ fade {
 #note {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 14px;
     height: 7vh;
     width: 370px;
     cursor: pointer;
+    transition-duration: 200ms;
+}
+
+#note:hover {
+    background-color: #1E1E1E;
 }
 
 #note-title {
@@ -88,9 +93,8 @@ fade {
 }
 
 #active-true {
-    background-color: #FFFEBD;
-    
-    color: black;
+    background-color: #1E1E1E;
+    border: 1px solid #FFFEBD;
 }
 
 /* width */

@@ -12,7 +12,7 @@ function NoteNode({ note }) {
 					: 'Untitled'}
 			</p>
 			<p id='note-content'>
-				{note?.content?.length > 30 ? `${note.content?.slice(0, 90)}...` : note?.content}
+				{note?.content?.length > 90 ? `${note.content?.slice(0, 90)}...` : note?.content}
 			</p>
 			<p id='note-updated-at'>
 				{note.createdAt === note.updatedAt ? 'Created' : 'Updated'}{' '}
