@@ -42,6 +42,7 @@
 .form-field li{
 	list-style: none;
 	font-size: 14px;
+	padding-top: 3px;
 }
 
 #login-demo-buttons {

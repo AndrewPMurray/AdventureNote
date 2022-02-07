@@ -37,7 +37,7 @@ function App() {
 						<Navigation isLoaded={isLoaded} />
 						<Landing />
 					</Route>
-					<Route path='/client'>
+					<Route path='/client/notes'>
 						<div id='client-landing-container'>
 							<Sidebar isLoaded={isLoaded} />
 							<Notes />

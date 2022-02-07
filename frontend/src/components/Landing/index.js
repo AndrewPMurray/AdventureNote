@@ -11,7 +11,7 @@ function Landing() {
 
 	useEffect(() => {
 		if (user !== null) {
-			history.push('/client');
+			history.push('/client/notes');
 		}
 	}, [user, history]);
 

@@ -56,7 +56,7 @@ function Notes() {
 					))}
 					{!notesArr.length && (
 						<div id='add-note'>
-							<img src='images/quill-pen-graphic.png' />
+							<img src='/images/quill-pen-graphic.png' alt='Add a note!' />
 							<span onClick={addNewNote}>
 								No notes available, click here to add one now!
 							</span>
