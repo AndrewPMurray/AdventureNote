@@ -26,7 +26,6 @@ const EditNote = ({ activeNote }) => {
 		let animation;
 		if (expandNote) animation = 'slide-right';
 		else animation = 'slide-left';
-		document.querySelector('.edit-note').classList.remove('slide-right');
 		document.querySelector('.edit-note').classList.add(animation);
 		setExpandNote(!expandNote);
 		setTimeout(() => {
@@ -35,7 +34,7 @@ const EditNote = ({ activeNote }) => {
 	};
 
 	return !activeNote ? null : (
-		<div className='edit-note slide-right'>
+		<div className='edit-note'>
 			<i
 				id='expand-collapse-arrow'
 				className='fas fa-arrows-alt-h'

@@ -6,8 +6,8 @@
 .notes-container {
     margin-top: 20px;
     background-color: #0B0B0B;
-    min-width: 300px;
-    width: 30vw;
+    min-width: 25vw;
+    width: 25vw;
 }
 
 #notes-header {
