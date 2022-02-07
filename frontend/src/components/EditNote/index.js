@@ -52,8 +52,11 @@ const EditNote = ({ activeNote }) => {
 				notebookId: null,
 			})
 		);
+
 		dispatch(getNotes(user?.id));
+
 		if (editedNote.message) setNoChange(true);
+
 		const savePromptPopup = setTimeout(() => {
 			const savePrompt = document.getElementById('save-prompt');
 			savePrompt?.classList.remove('fade-in');
@@ -63,7 +66,9 @@ const EditNote = ({ activeNote }) => {
 				setNoChange(false);
 			}, 175);
 		}, 2000);
+
 		if (savePrompt) clearTimeout(savePromptPopup);
+
 		setSavePrompt(true);
 	};
 
