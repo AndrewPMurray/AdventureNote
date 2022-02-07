@@ -47,14 +47,13 @@ export const addNote = (userId) => async (dispatch) => {
 };
 
 export const editNote = (note) => async (dispatch) => {
-	console.log(note);
 	const response = await csrfFetch(`/api/notes/`, {
 		method: 'PUT',
 		body: JSON.stringify(note),
 	});
 	if (response.ok) {
 		const editedNote = await response.json();
-		dispatch(update(editedNote));
+		if (!editedNote.message) dispatch(update(editedNote));
 		return editedNote;
 	}
 };

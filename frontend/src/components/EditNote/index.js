@@ -15,6 +15,7 @@ const EditNote = ({ activeNote }) => {
 	const [content, setContent] = useState(note?.content || '');
 	const [showMenu, setShowMenu] = useState(false);
 	const [savePrompt, setSavePrompt] = useState(false);
+	const [noChange, setNoChange] = useState(false);
 	const { expandNote, setExpandNote } = useShowHide();
 	const dispatch = useDispatch();
 
@@ -43,7 +44,26 @@ const EditNote = ({ activeNote }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		await dispatch(
+		const fadeTimeout = () =>
+			setTimeout(() => {
+				setSavePrompt(false);
+				setNoChange(false);
+			}, 175);
+
+		const savePromptPopup = () =>
+			setTimeout(() => {
+				const savePrompt = document.getElementById('save-prompt');
+				savePrompt?.classList.remove('fade-in');
+				savePrompt?.classList.add('fade-out');
+				fadeTimeout();
+			}, 2000);
+
+		if (savePrompt) {
+			clearTimeout(savePromptPopup);
+			clearTimeout(fadeTimeout);
+		}
+
+		const editedNote = await dispatch(
 			editNote({
 				noteId,
 				name,
@@ -52,14 +72,9 @@ const EditNote = ({ activeNote }) => {
 			})
 		);
 		dispatch(getNotes(user?.id));
+		if (editedNote.message) setNoChange(true);
 		setSavePrompt(true);
-		setTimeout(() => {
-			document.getElementById('save-prompt').classList.remove('fade-in');
-			document.getElementById('save-prompt').classList.add('fade-out');
-			setTimeout(() => {
-				setSavePrompt(false);
-			}, 175);
-		}, 2000);
+		savePromptPopup();
 	};
 
 	const removeNote = async (e) => {
@@ -117,7 +132,7 @@ const EditNote = ({ activeNote }) => {
 			</form>
 			{savePrompt && (
 				<div id='save-prompt' className='fade-in'>
-					Note saved
+					{noChange ? 'No changes detected' : 'Note saved'}
 				</div>
 			)}
 		</div>

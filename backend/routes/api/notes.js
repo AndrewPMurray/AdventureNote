@@ -46,6 +46,9 @@ router.put(
 	asyncHandler(async (req, res) => {
 		const { noteId, name, content } = req.body;
 		const note = await Note.findOne({ where: { id: noteId } });
+		if (name === note.name && content === note.content) {
+			return res.json({ message: 'no new changes' });
+		}
 		const newNote = await note.update({
 			name,
 			content,
