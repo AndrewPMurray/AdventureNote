@@ -15,7 +15,8 @@ function NoteNode({ note }) {
 				{note?.content?.length > 30 ? `${note.content?.slice(0, 90)}...` : note?.content}
 			</p>
 			<p id='note-updated-at'>
-				Updated <ReactTimeAgo date={note?.updatedAt} />
+				{note.createdAt === note.updatedAt ? 'Created' : 'Updated'}{' '}
+				<ReactTimeAgo date={note?.updatedAt} />
 			</p>
 		</div>
 	);
