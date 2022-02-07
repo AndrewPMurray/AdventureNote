@@ -8,7 +8,25 @@
     background-color: #0E0E0E;
     min-width: 400px;
     width: 400px;
+    height: 95vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
+
+fade {
+    position: absolute;
+    bottom: 0px;
+    
+    width: 400px;
+    height: 150px;
+    border: none;
+    
+    background-image: linear-gradient(to bottom, 
+        rgba(14, 14, 14, 0), 
+        rgba(14, 14, 14, 1)
+    70%);
+}
+    
 
 #notes-header {
     padding-left: 10px;
@@ -21,7 +39,7 @@
     flex-direction: column;
 }
 
-.notes-list > * {
+.notes-list > *:not(fade) {
     border-top: 1px solid rgba(30, 30, 30, 0.7);
     border-right: 1px solid rgba(30, 30, 30, 0.7);
     border-bottom: 1px solid rgba(30, 30, 30, 0.7);
@@ -62,3 +80,23 @@
     
     color: black;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

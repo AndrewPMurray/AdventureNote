@@ -55,6 +55,10 @@ body {
 	overflow-x: hidden;
 }
 
+#client-landing-container {
+	overflow: hidden;
+}
+
 
 /* animations */
 @keyframes fade-in {

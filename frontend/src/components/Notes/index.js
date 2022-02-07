@@ -62,6 +62,7 @@ function Notes() {
 							</span>
 						</div>
 					)}
+					<fade />
 				</div>
 			</div>
 		)

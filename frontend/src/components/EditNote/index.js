@@ -14,6 +14,7 @@ const EditNote = ({ activeNote }) => {
 	const [name, setName] = useState(note?.name || '');
 	const [content, setContent] = useState(note?.content || '');
 	const [showMenu, setShowMenu] = useState(false);
+	const [savePrompt, setSavePrompt] = useState(false);
 	const { expandNote, setExpandNote } = useShowHide();
 	const dispatch = useDispatch();
 
@@ -51,6 +52,14 @@ const EditNote = ({ activeNote }) => {
 			})
 		);
 		dispatch(getNotes(user?.id));
+		setSavePrompt(true);
+		setTimeout(() => {
+			document.getElementById('save-prompt').classList.remove('fade-in');
+			document.getElementById('save-prompt').classList.add('fade-out');
+			setTimeout(() => {
+				setSavePrompt(false);
+			}, 175);
+		}, 2000);
 	};
 
 	const removeNote = async (e) => {
@@ -106,6 +115,11 @@ const EditNote = ({ activeNote }) => {
 					Save
 				</button>
 			</form>
+			{savePrompt && (
+				<div id='save-prompt' className='fade-in'>
+					Note saved
+				</div>
+			)}
 		</div>
 	);
 };

@@ -4,6 +4,8 @@
     background-color: #1A1A1A;
     width: 100vw;
     height: 100vh;
+    overflow-y: hidden;
+    right: 0;
 }
 
 .note-utils-container {
@@ -23,7 +25,7 @@
 
 .note-menu-items {
     position: absolute;
-    right: 5px;
+    right: 1vw;
     top: 4vh;
     background-color: #080808;
     border: 1px solid rgba(30, 30, 30, 0.7);
@@ -78,4 +80,14 @@
     background-color: #FFFEBD;
     color: black;
     cursor: pointer;
+}
+
+#save-prompt {
+    position: absolute;
+    bottom: 15vh;
+    right: 2vw;
+    font-size: 24px;
+    background-color: rgba(0, 129, 0, 0.479);
+    padding: 10px;
+    border-radius: 5px;
 }
