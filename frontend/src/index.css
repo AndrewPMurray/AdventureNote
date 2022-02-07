@@ -52,32 +52,11 @@ table {
 
 body {
 	background-color: #080808;
+	overflow: hidden;
 }
+
 
 /* animations */
-.fade-in {
-	animation-name: fade-in;
-	animation-duration: 200ms;
-	animation-timing-function: ease-in-out;
-}
-
-.fade-out {
-	animation-name: fade-out;
-	animation-duration: 200ms;
-	animation-timing-function: ease-in-out;
-}
-
-.fade-in-grow {
-	animation-name: fade-in-grow;
-	animation-duration: 200ms;
-	animation-timing-function: ease-in-out;
-}
-
-.fade-out-shrink {
-		animation-name: fade-out-shrink;
-		animation-duration: 200ms;
-		animation-timing-function: ease-in-out;
-}
 
 @keyframes fade-in {
 	from {
@@ -117,4 +96,73 @@ body {
 		transform: scaleY(0.7) scaleX(0.7);
 		opacity: 0;
 	}
+}
+
+@keyframes slide-from-left-offscreen {
+	from{
+		transform: translateX(-100%);
+	}
+	to{
+		transform: translateX(0%);
+	}
+}
+
+@keyframes slide-right {
+	from{
+		transform: scaleX(1.9)
+	}
+	to{
+		transform: scaleX(1)
+	}
+}
+
+@keyframes slide-left {
+	from {
+		transform: translateX(30vw);
+	}
+	to {
+		transform: translateX(0px);
+	}
+}
+
+.fade-in {
+	animation-name: fade-in;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+}
+
+.fade-out {
+	animation-name: fade-out;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+}
+
+.fade-in-grow {
+	animation-name: fade-in-grow;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+}
+
+.fade-out-shrink {
+	animation-name: fade-out-shrink;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+}
+
+.slide-from-offscreen {
+	animation-name: slide-from-left-offscreen;
+	animation-duration: 250ms;
+	animation-timing-function: ease-in-out;
+}
+
+.slide-right {
+	animation-name: slide-right;
+	animation-duration: 250ms;
+	animation-timing-function: ease-in-out;
+}
+
+.slide-left {
+	animation-name: slide-left;
+	animation-duration: 250ms;
+	animation-timing-function: ease-in-out;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Sidebar.css';
@@ -12,7 +12,7 @@ function Sidebar({ isLoaded }) {
 
 	return (
 		!expandNote && (
-			<div className='sidebar-container'>
+			<div className='sidebar-container slide-from-offscreen'>
 				<ul className='sidebar'>
 					<li>{isLoaded && profileButton}</li>
 				</ul>

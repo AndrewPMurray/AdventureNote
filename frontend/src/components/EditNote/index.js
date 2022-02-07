@@ -22,14 +22,24 @@ const EditNote = ({ activeNote }) => {
 		e.preventDefault();
 	};
 
-	console.log(expandNote);
+	const moveSidebars = () => {
+		let animation;
+		if (expandNote) animation = 'slide-right';
+		else animation = 'slide-left';
+		document.querySelector('.edit-note').classList.remove('slide-right');
+		document.querySelector('.edit-note').classList.add(animation);
+		setExpandNote(!expandNote);
+		setTimeout(() => {
+			document.querySelector('.edit-note').classList.remove(animation);
+		}, 250);
+	};
 
 	return !activeNote ? null : (
-		<div className='edit-note'>
+		<div className='edit-note slide-right'>
 			<i
 				id='expand-collapse-arrow'
 				className='fas fa-arrows-alt-h'
-				onClick={() => setExpandNote(!expandNote)}
+				onClick={moveSidebars}
 			></i>
 			<form id='edit-note-form' onSubmit={handleSubmit}>
 				<input

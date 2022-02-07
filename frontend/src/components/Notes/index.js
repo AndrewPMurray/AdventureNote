@@ -41,7 +41,7 @@ function Notes() {
 
 	return (
 		!expandNote && (
-			<div className='notes-container'>
+			<div className='notes-container slide-from-offscreen'>
 				<h2 id='notes-header'>All notes</h2>
 
 				<div className='notes-list'>
