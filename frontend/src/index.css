@@ -52,6 +52,7 @@ table {
 
 body {
 	background-color: #080808;
+	overflow-x: hidden;
 }
 
 
@@ -107,7 +108,7 @@ body {
 
 @keyframes slide-right {
 	from{
-		transform: scaleX(1.9)
+		transform: scaleX(1.6)
 	}
 	to{
 		transform: scaleX(1)
@@ -116,10 +117,10 @@ body {
 
 @keyframes slide-left {
 	from {
-		transform: translateX(30vw);
+		transform: scaleX(0.6);
 	}
 	to {
-		transform: translateX(0px);
+		transform: translateX(1);
 	}
 }
 
@@ -155,12 +156,14 @@ body {
 
 .slide-right {
 	animation-name: slide-right;
+	transform-origin: right;
 	animation-duration: 250ms;
 	animation-timing-function: ease-in-out;
 }
 
 .slide-left {
 	animation-name: slide-left;
+	transform-origin: right;
 	animation-duration: 250ms;
 	animation-timing-function: ease-in-out;
 }

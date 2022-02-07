@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { editNote, deleteNote, getNotes } from '../../store/notes';
 
 import './EditNote.css';
 import '../LoginSignupForm.css';
@@ -9,17 +10,52 @@ import { useShowHide } from '../../context/ShowHide';
 const EditNote = ({ activeNote }) => {
 	const noteId = activeNote;
 	const note = useSelector((state) => state.notes[activeNote]);
-	const [title, setTitle] = useState(note?.title || '');
+	const user = useSelector((state) => state.session.user);
+	const [name, setName] = useState(note?.name || '');
 	const [content, setContent] = useState(note?.content || '');
+	const [showMenu, setShowMenu] = useState(false);
 	const { expandNote, setExpandNote } = useShowHide();
+	const dispatch = useDispatch();
+
+	const openMenu = () => {
+		if (showMenu) return;
+		setShowMenu(true);
+	};
 
 	useEffect(() => {
-		setTitle(note?.title || '');
-		setContent(note?.content || '');
-	}, [note?.title, note?.content]);
+		if (!showMenu) return;
 
-	const handleSubmit = (e) => {
+		const closeMenu = () => {
+			setShowMenu(false);
+		};
+
+		document.addEventListener('click', closeMenu);
+
+		return () => document.removeEventListener('click', closeMenu);
+	}, [showMenu]);
+
+	useEffect(() => {
+		setName(note?.name || '');
+		setContent(note?.content || '');
+	}, [note?.name, note?.content]);
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		await dispatch(
+			editNote({
+				noteId,
+				name,
+				content,
+				notebookId: null,
+			})
+		);
+		dispatch(getNotes(user?.id));
+	};
+
+	const removeNote = async (e) => {
+		await dispatch(deleteNote(noteId));
+		dispatch(getNotes(user?.id));
 	};
 
 	const moveSidebars = () => {
@@ -35,17 +71,30 @@ const EditNote = ({ activeNote }) => {
 
 	return !activeNote ? null : (
 		<div className='edit-note'>
-			<i
-				id='expand-collapse-arrow'
-				className='fas fa-arrows-alt-h'
-				onClick={moveSidebars}
-			></i>
+			<div className='note-utils-container'>
+				<i
+					id='expand-collapse-arrow'
+					className={
+						expandNote ? 'fas fa-angle-double-right' : 'fas fa-angle-double-left'
+					}
+					onClick={moveSidebars}
+				></i>
+				<i id='note-hamburger-menu' className='fas fa-bars' onClick={openMenu}></i>
+				{showMenu && (
+					<ul className='note-menu-items fade-in'>
+						<div id='delete-note-button' to='/' onClick={removeNote}>
+							<i className='fas fa-trash-alt' />
+							<p>Delete note</p>
+						</div>
+					</ul>
+				)}
+			</div>
 			<form id='edit-note-form' onSubmit={handleSubmit}>
 				<input
 					type='text'
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-					placeholder='Title'
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+					placeholder='Name'
 				/>
 				<textarea
 					value={content}

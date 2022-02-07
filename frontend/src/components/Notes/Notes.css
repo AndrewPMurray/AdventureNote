@@ -32,11 +32,16 @@
     font-weight: bold;
 }
 
+#note > * {
+    padding-bottom: 8px;
+}
+
 .add-note {
     cursor: pointer;
 }
 
 #active-true {
     background-color: #FFFEBD;
+    
     color: black;
 }

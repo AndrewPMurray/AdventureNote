@@ -44,12 +44,24 @@ router.put(
 	'/',
 	csrfProtection,
 	asyncHandler(async (req, res) => {
-		const { userId, title, content } = req.body;
-		const note = await Note.findOne({ where: userId });
+		const { noteId, name, content } = req.body;
+		const note = await Note.findOne({ where: { id: noteId } });
 		const newNote = await note.update({
-			title,
+			name,
 			content,
 		});
+		return res.json(newNote);
+	})
+);
+
+router.delete(
+	'/',
+	csrfProtection,
+	asyncHandler(async (req, res) => {
+		const { id } = req.body;
+		const note = await Note.findByPk(id);
+		const deletedNote = await note.destroy();
+		return res.json({ message: 'success' });
 	})
 );
 

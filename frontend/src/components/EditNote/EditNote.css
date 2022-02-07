@@ -1,21 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@700&display=swap');
+
 .edit-note {
     background-color: #1A1A1A;
     width: 100vw;
     height: 100vh;
 }
 
+.note-utils-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid rgba(60, 60, 60, 0.7);
+}
+
 #expand-collapse-arrow {
     cursor: pointer;
-    padding: 5px;
+}
+
+#note-hamburger-menu {
+    cursor: pointer;
+}
+
+.note-menu-items {
+    position: absolute;
+    right: 5px;
+    top: 4vh;
+    background-color: #080808;
+    border: 1px solid rgba(30, 30, 30, 0.7);
+}
+
+.note-menu-items * {
+    padding: 10px;
+}
+
+#delete-note-button {
+    display: flex;
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #edit-note-form {
     display: flex;
     flex-direction: column;
+    padding-left: 10px;
 }
 
 #edit-note-form * {
     border: none;
+    outline: none;
 }
 
 #edit-note-form > input {
@@ -34,8 +67,14 @@
 }
 
 .edit-note-button {
-    max-width: 100px;
+    margin-right: 25px;
+    width: 100px;
+    height: 50px;
+    font-family: 'Old Standard TT';
+    border-radius: 5px;
+    font-size: 20px;
     align-self: flex-end;
     background-color: #FFFEBD;
     color: black;
+    cursor: pointer;
 }
