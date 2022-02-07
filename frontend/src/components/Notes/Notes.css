@@ -50,6 +50,7 @@ fade {
     flex-direction: column;
     padding: 10px;
     height: 7vh;
+    width: 370px;
     cursor: pointer;
 }
 
@@ -60,10 +61,10 @@ fade {
 #note-content {
     padding-top: 10px;
     flex-grow: 1;
+    word-break: break-all;
 }
 
 #note-updated-at {
-    align-self: flex-end;
     color: rgba(150, 150, 150, 0.7)
 }
 
