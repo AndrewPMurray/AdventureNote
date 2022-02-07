@@ -8,7 +8,7 @@ import './Navigation.css';
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
 
-	const signupLinks = sessionUser ? null : (
+	const loginLink = sessionUser ? null : (
 		<div className='nav-login-signup-links'>
 			<LoginFormModal />
 		</div>
@@ -21,7 +21,7 @@ function Navigation({ isLoaded }) {
 					<img src='/images/quill-pen-graphic-colorized.png' />
 					<h1>AdventureNote</h1>
 				</NavLink>
-				<li>{isLoaded && signupLinks}</li>
+				<li>{isLoaded && loginLink}</li>
 			</ul>
 		</div>
 	);

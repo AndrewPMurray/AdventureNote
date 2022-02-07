@@ -12,8 +12,8 @@
 	align-items: flex-start;
 	align-content: flex-start;
 	list-style: none;
-	margin-top: 20px;
-	margin-left: 10px;
+	padding-top: 20px;
+	padding-left: 20px;
 }
 
 .nav li {
@@ -37,7 +37,7 @@
 }
 
 .nav-login-signup-links * {
-	padding: 0 10px;
+	padding: 0 20px;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
