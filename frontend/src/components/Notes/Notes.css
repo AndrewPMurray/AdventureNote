@@ -9,7 +9,7 @@
     min-width: 400px;
     width: 400px;
     height: 95vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
