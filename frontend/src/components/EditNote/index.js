@@ -56,6 +56,7 @@ const EditNote = ({ activeNote }) => {
 	const removeNote = async (e) => {
 		await dispatch(deleteNote(noteId));
 		dispatch(getNotes(user?.id));
+		setExpandNote(false);
 	};
 
 	const moveSidebars = () => {
