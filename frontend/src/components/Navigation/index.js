@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -18,7 +17,7 @@ function Navigation({ isLoaded }) {
 		<div className='nav-container'>
 			<ul className='nav'>
 				<NavLink to='/'>
-					<img src='/images/quill-pen-graphic-colorized.png' />
+					<img src='/images/quill-pen-graphic-colorized.png' alt='feather-logo' />
 					<h1>AdventureNote</h1>
 				</NavLink>
 				<li>{isLoaded && loginLink}</li>

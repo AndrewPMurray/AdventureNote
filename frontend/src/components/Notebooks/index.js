@@ -15,51 +15,57 @@ function Notebooks() {
 	const notebooksArr = Object.values(notebooks);
 
 	useEffect(() => {
-		if (user === null) {
-			history.push('/');
-		}
-	}, [user, history]);
-
-	useEffect(() => {
 		if (user) {
 			dispatch(getNotebooks(user?.id));
 		}
 	}, [dispatch, user]);
 
+	useEffect(() => {
+		if (user === null) {
+			history.push('/client/notes');
+		}
+	}, [user, history]);
+
 	return (
 		<div className='notebooks-container'>
 			<Link to='/client/notes'>Back to all notes</Link>
 			<h2 id='notebooks-header'>Notebooks</h2>
-			<div id='notebooks-table-container'>
-				<div id='notebooks-table-pre-header'>
-					<p>
-						{notebooksArr.length
-							? notebooksArr.length > 1
-								? `${notebooksArr.length} notebooks`
-								: `${notebooksArr.length} notebook`
-							: 'No notebooks'}
-					</p>
-					<NotebookFormModal />
-				</div>
-				<div id='notebooks-table'>
+			<div id='notebooks-table-pre-header'>
+				<p>
+					{notebooksArr.length
+						? notebooksArr.length > 1
+							? `${notebooksArr.length} notebooks`
+							: `1 notebook`
+						: 'No notebooks'}
+				</p>
+				<NotebookFormModal />
+			</div>
+			<table id='notebooks-table'>
+				<thead>
 					<tr id='table-header'>
 						<th>Title</th>
 						<th>Created by</th>
 						<th>Updated</th>
 						<th>Actions</th>
 					</tr>
-					{notebooksArr.map((notebook) => (
-						<tr>
-							<td>{notebook.title}</td>
-							<td>{user.username}</td>
+				</thead>
+				{notebooksArr.map((notebook) => (
+					<tbody key={notebook.id}>
+						<tr id='table-body'>
 							<td>
-								<ReactTimeAgo date={notebook.updatedAt} />
+								<Link to={`/client/notebooks/${notebook.id}`}>
+									{notebook.title}
+								</Link>
+							</td>
+							<td>{user?.username}</td>
+							<td>
+								<ReactTimeAgo date={Date.parse(notebook.updatedAt)} />
 							</td>
 							<td></td>
 						</tr>
-					))}
-				</div>
-			</div>
+					</tbody>
+				))}
+			</table>
 		</div>
 	);
 }

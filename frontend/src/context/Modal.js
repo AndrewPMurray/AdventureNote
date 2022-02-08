@@ -42,7 +42,7 @@ export function Modal({ onClose, children }) {
 				clearTimeout(timeout);
 			};
 		});
-	}, [modalNode]);
+	}, [modalNode, onClose]);
 
 	if (!modalNode) return null;
 

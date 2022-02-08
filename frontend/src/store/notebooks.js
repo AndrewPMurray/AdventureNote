@@ -34,6 +34,16 @@ export const getNotebooks = () => async (dispatch) => {
 	}
 };
 
+export const addNotebook = (payload) => async (dispatch) => {
+	const response = await csrfFetch('/api/notebooks', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(payload),
+	});
+};
+
 const initialState = {};
 
 const notebooksReducer = (state = initialState, action) => {

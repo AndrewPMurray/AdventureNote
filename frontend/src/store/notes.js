@@ -37,6 +37,9 @@ export const getNotes = () => async (dispatch) => {
 export const addNote = (userId) => async (dispatch) => {
 	const response = await csrfFetch('/api/notes', {
 		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
 		body: JSON.stringify({ userId: userId }),
 	});
 	if (response.ok) {
@@ -49,6 +52,9 @@ export const addNote = (userId) => async (dispatch) => {
 export const editNote = (note) => async (dispatch) => {
 	const response = await csrfFetch(`/api/notes/`, {
 		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+		},
 		body: JSON.stringify(note),
 	});
 	if (response.ok) {
@@ -61,6 +67,9 @@ export const editNote = (note) => async (dispatch) => {
 export const deleteNote = (noteId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/notes/`, {
 		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
 		body: JSON.stringify({ id: noteId }),
 	});
 

@@ -20,15 +20,15 @@ function App() {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const user = useSelector((state) => state.session.user);
 
+	useEffect(() => {
+		dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+	}, [dispatch]);
+
 	if (!user) {
 		document.body.style.backgroundColor = 'white';
 	} else {
 		document.body.style.backgroundColor = '';
 	}
-
-	useEffect(() => {
-		dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-	}, [dispatch]);
 
 	return (
 		<>
@@ -45,7 +45,7 @@ function App() {
 							<EditNote activeNote={activeNote} />
 						</div>
 					</Route>
-					<Route path='/client/notebooks'>
+					<Route exact path='/client/notebooks'>
 						<div id='client-landing-container'>
 							<Sidebar isLoaded={isLoaded} />
 							<Notebooks />

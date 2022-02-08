@@ -28,13 +28,13 @@ const LoginForm = () => {
 				password: 'password',
 			})
 		).catch(async (res) => {
-			const data = await res.json();
+			await res.json();
 		});
 	};
 
 	return (
 		<div className='login-signup-form-container'>
-			<img src='/images/quill-pen-graphic-colorized.png' />
+			<img src='/images/quill-pen-graphic-colorized.png' alt='feather-logo' />
 			{errors.invalid && <li id='errors'>{errors.invalid}</li>}
 			<h2>Login</h2>
 			<form className='login-signup-form' onSubmit={handleSubmit}>

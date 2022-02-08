@@ -31,7 +31,7 @@ function Notes() {
 
 	useEffect(() => {
 		if (user) {
-			dispatch(getNotes(user?.id));
+			dispatch(getNotes());
 		}
 	}, [dispatch, user]);
 

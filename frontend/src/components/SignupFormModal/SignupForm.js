@@ -25,7 +25,7 @@ const SignupForm = () => {
 
 	return (
 		<div className='login-signup-form-container'>
-			<img src='/images/quill-pen-graphic-colorized.png' />
+			<img src='/images/quill-pen-graphic-colorized.png' alt='feather-logo' />
 			<h2>Sign up here to begin using AdventureNote</h2>
 			<form className='login-signup-form' onSubmit={handleSubmit}>
 				<div className='form-field'>

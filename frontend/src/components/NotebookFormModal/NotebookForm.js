@@ -1,21 +1,30 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import * as sessionActions from '../../store/session';
+import { addNotebook, getNotebooks } from '../../store/notebooks';
 import './NotebookForm.css';
 
-const SignupForm = () => {
+const NotebookForm = ({ showModal, setShowModal }) => {
 	const dispatch = useDispatch();
+	const user = useSelector((state) => state.session.user);
 	const [title, setTitle] = useState('');
 	const [errors, setErrors] = useState({});
+	const history = useHistory();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setErrors({});
-		return dispatch(sessionActions.signup({})).catch(async (res) => {
+		dispatch(
+			addNotebook({
+				title,
+				userId: user.id,
+			})
+		).catch(async (res) => {
 			const data = await res.json();
 			if (data && data.errors) setErrors(data.errors);
 		});
+		return dispatch(getNotebooks());
 	};
 
 	return (
@@ -30,7 +39,7 @@ const SignupForm = () => {
 			</div>
 			<form className='add-notebook-form' onSubmit={handleSubmit}>
 				<div className='form-field'>
-					<label for='title'>Title</label>
+					<label htmlFor='title'>Title</label>
 					<input
 						id='notebook-title-input'
 						type='text'
@@ -40,7 +49,11 @@ const SignupForm = () => {
 					/>
 				</div>
 				<div id='add-notebook-button'>
-					<button type='submit' disabled={title.length === 0}>
+					<button
+						type='submit'
+						disabled={title.length === 0}
+						onClick={() => setTimeout(() => setShowModal(false), 100)}
+					>
 						Create
 					</button>
 				</div>
@@ -49,4 +62,4 @@ const SignupForm = () => {
 	);
 };
 
-export default SignupForm;
+export default NotebookForm;

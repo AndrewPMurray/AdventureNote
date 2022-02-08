@@ -16,7 +16,7 @@ function NoteNode({ note }) {
 			</p>
 			<p id='note-updated-at'>
 				{note.createdAt === note.updatedAt ? 'Created' : 'Updated'}{' '}
-				<ReactTimeAgo date={note?.updatedAt} />
+				<ReactTimeAgo date={Date.parse(note?.updatedAt)} />
 			</p>
 		</div>
 	);
