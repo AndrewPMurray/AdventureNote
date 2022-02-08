@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
-import { getNotes, addNote } from '../../store/notes';
+import ReactTimeAgo from 'react-time-ago';
+import { getNotebooks } from '../../store/notebooks';
+import NotebookFormModal from '../NotebookFormModal';
 import './Notebooks.css';
 
 function Notebooks() {
@@ -10,7 +12,19 @@ function Notebooks() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const addNotebook = () => {};
+	const notebooksArr = Object.values(notebooks);
+
+	useEffect(() => {
+		if (user === null) {
+			history.push('/');
+		}
+	}, [user, history]);
+
+	useEffect(() => {
+		if (user) {
+			dispatch(getNotebooks(user?.id));
+		}
+	}, [dispatch, user]);
 
 	return (
 		<div className='notebooks-container'>
@@ -18,11 +32,14 @@ function Notebooks() {
 			<h2 id='notebooks-header'>Notebooks</h2>
 			<div id='notebooks-table-container'>
 				<div id='notebooks-table-pre-header'>
-					<p>No notebooks</p>
-					<button id='new-notebook-button'>
-						<i className='fas fa-plus-square' style={{ paddingRight: '10px' }}></i>
-						New Notebook
-					</button>
+					<p>
+						{notebooksArr.length
+							? notebooksArr.length > 1
+								? `${notebooksArr.length} notebooks`
+								: `${notebooksArr.length} notebook`
+							: 'No notebooks'}
+					</p>
+					<NotebookFormModal />
 				</div>
 				<div id='notebooks-table'>
 					<tr id='table-header'>
@@ -31,12 +48,16 @@ function Notebooks() {
 						<th>Updated</th>
 						<th>Actions</th>
 					</tr>
-					<tr>
-						<td>data</td>
-						<td>data</td>
-						<td>data</td>
-						<td>data</td>
-					</tr>
+					{notebooksArr.map((notebook) => (
+						<tr>
+							<td>{notebook.title}</td>
+							<td>{user.username}</td>
+							<td>
+								<ReactTimeAgo date={notebook.updatedAt} />
+							</td>
+							<td></td>
+						</tr>
+					))}
 				</div>
 			</div>
 		</div>

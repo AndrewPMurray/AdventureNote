@@ -91,8 +91,8 @@ const notesReducer = (state = initialState, action) => {
 				notes[note.id] = note;
 			});
 			return {
-				...notes,
 				...state,
+				...notes,
 				list: sortByDate(action.list),
 			};
 		}
