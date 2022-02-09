@@ -5,7 +5,7 @@
     width: 100vw;
     height: 100vh;
     overflow-y: hidden;
-    right: 0;
+    transition-duration: 300ms;
 }
 
 .note-utils-container {

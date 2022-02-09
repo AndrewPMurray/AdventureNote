@@ -99,21 +99,33 @@ table {
 	}
 }
 
+@keyframes hide-left {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-100%);;
+	}
+}
+
 @keyframes slide-right {
 	from{
-		transform: scaleX(1.6)
+		transform: translateX(-1);
+		width: 100%;
 	}
 	to{
-		transform: scaleX(1)
+		transform: translateX(0)
 	}
 }
 
 @keyframes slide-left {
 	from {
-		transform: scaleX(0.6);
+		transform: translateX(0);
+		width: 50vw;
 	}
 	to {
-		transform: translateX(1);
+		transform: translateX(-1);
+		width: 100%;
 	}
 }
 
@@ -160,7 +172,7 @@ table {
 
 .slide-right {
 	animation-name: slide-right;
-	transform-origin: right;
+	transform-origin: left;
 	animation-duration: 250ms;
 	animation-timing-function: ease-in-out;
 }
@@ -170,6 +182,16 @@ table {
 	transform-origin: right;
 	animation-duration: 250ms;
 	animation-timing-function: ease-in-out;
+}
+
+.hide-left {
+	animation-name: hide-left;
+	animation-duration: 250ms;
+	animation-timing-function: ease-in-out;
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	left: 10vw;
 }
 
 .fade-in-slide-down {
@@ -188,6 +210,7 @@ body {
 
 #client-landing-container {
 	display: flex;
+	justify-content: flex-end;
 	color: white;
 	overflow: hidden;
 }

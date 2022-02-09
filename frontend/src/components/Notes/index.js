@@ -39,33 +39,37 @@ function Notes() {
 		setActiveNote(notes[0]?.id);
 	}, [notes, setActiveNote]);
 
-	return (
-		!expandNote && (
-			<div className='notes-container slide-from-offscreen'>
-				<h2 id='notes-header'>All notes</h2>
+	if (expandNote) {
+		document.querySelector('.notes-container')?.classList.add('hide-left');
+	} else {
+		document.querySelector('.notes-container')?.classList.remove('hide-left');
+	}
 
-				<div className='notes-list'>
-					{notesArr.map((note) => (
-						<div
-							id={`active-${note.id === activeNote}`}
-							key={note.id}
-							onClick={() => setActiveNote(note.id)}
-						>
-							{note.userId === user?.id && <NoteNode key={note.id} note={note} />}
-						</div>
-					))}
-					{!notesArr.length && (
-						<div id='add-note'>
-							<img src='/images/quill-pen-graphic.png' alt='Add a note!' />
-							<span onClick={addNewNote}>
-								No notes available, click here to add one now!
-							</span>
-						</div>
-					)}
-					<div id='fade' />
-				</div>
+	return (
+		<div className='notes-container'>
+			<h2 id='notes-header'>All notes</h2>
+
+			<div className='notes-list'>
+				{notesArr.map((note) => (
+					<div
+						id={`active-${note.id === activeNote}`}
+						key={note.id}
+						onClick={() => setActiveNote(note.id)}
+					>
+						{note.userId === user?.id && <NoteNode key={note.id} note={note} />}
+					</div>
+				))}
+				{!notesArr.length && (
+					<div id='add-note'>
+						<img src='/images/quill-pen-graphic.png' alt='Add a note!' />
+						<span onClick={addNewNote}>
+							No notes available, click here to add one now!
+						</span>
+					</div>
+				)}
+				<div id='fade' />
 			</div>
-		)
+		</div>
 	);
 }
 

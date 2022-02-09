@@ -20,31 +20,34 @@ function Sidebar({ isLoaded }) {
 		history.push('/client/notes');
 	};
 
+	if (expandNote) {
+		document.querySelector('.sidebar-container')?.classList.add('hide-left');
+	} else {
+		document.querySelector('.sidebar-container')?.classList.remove('hide-left');
+	}
+
 	const profileButton = user ? <ProfileButton user={user} /> : null;
 
 	return (
-		!expandNote && (
-			<div className='sidebar-container slide-from-offscreen'>
-				<ul className='sidebar'>
-					<li>{isLoaded && profileButton}</li>
-					<div id='sidebar-menu-items'>
-						<button id='add-note-button' onClick={addNewNote}>
-							<i className='fas fa-plus' style={{ paddingRight: '10px' }}></i>
-							Add Note
+		<div className='sidebar-container'>
+			<ul className='sidebar'>
+				<li>{isLoaded && profileButton}</li>
+				<div id='sidebar-menu-items'>
+					<Link to='/client/notes'>
+						<button id='add-note-button'>
+							{/* onClick={addNewNote} <i className='fas fa-plus' style={{ paddingRight: '10px' }}></i> */}
+							Notes
 						</button>
-						<Link to='/client/notebooks'>
-							<button id='notebooks-button'>
-								<i
-									className='fas fa-book-open'
-									style={{ paddingRight: '10px' }}
-								></i>
-								Notebooks
-							</button>
-						</Link>
-					</div>
-				</ul>
-			</div>
-		)
+					</Link>
+					<Link to='/client/notebooks'>
+						<button id='notebooks-button'>
+							<i className='fas fa-book-open' style={{ paddingRight: '10px' }}></i>
+							Notebooks
+						</button>
+					</Link>
+				</div>
+			</ul>
+		</div>
 	);
 }
 

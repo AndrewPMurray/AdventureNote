@@ -6,6 +6,7 @@
     height: 95vh;
     overflow-y: auto;
     overflow-x: hidden;
+    transition-duration: 250ms;
 }
 
 #fade {

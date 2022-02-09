@@ -53,10 +53,9 @@
     background-color: #080808;
     border-right:  1px solid rgba(30, 30, 30, 0.7);
     border-width: .01em;
-    top: 0;
-    left: 0;
     height: 100vh;
     min-width: 200px;
+    transition-duration: 300ms;
 }
 
 .sidebar-user-button {
