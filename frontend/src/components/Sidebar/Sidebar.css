@@ -132,3 +132,8 @@
     height: 35px;
     cursor: pointer;
 }
+
+#notes-button > a,
+#notebooks-button > a {
+    padding: 8px 0;
+}

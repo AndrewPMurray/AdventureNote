@@ -2,7 +2,7 @@
     padding-top: 20px;
     background-color: #0E0E0E;
     min-width: 400px;
-    width: calc(350px + 10vw);
+    max-width: 400px;
     height: 95vh;
     overflow-y: auto;
     overflow-x: hidden;

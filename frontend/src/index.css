@@ -210,7 +210,6 @@ body {
 
 #client-landing-container {
 	display: flex;
-	justify-content: flex-end;
 	color: white;
 	overflow: hidden;
 }
