@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getNotes, addNote } from '../../store/notes';
 import { useShowHide } from '../../context/ShowHide';
 import NoteNode from './NoteNode';
-import './Notes.css';
+import './NotebookNotes.css';
 
-function Notes() {
+function NotebookNotes() {
+	const notebookId = useParams().notebookId;
 	const notes = useSelector((state) => state.notes.list);
 	const user = useSelector((state) => state.session.user);
 	const { activeNote, setActiveNote, expandNote } = useShowHide();
 	const dispatch = useDispatch();
 	const history = useHistory();
+
+	const notebookNotesArr = notes?.filter((note) => note?.notebookId === +notebookId);
 
 	const addNewNote = async (e) => {
 		e.preventDefault();
@@ -19,7 +22,7 @@ function Notes() {
 		const newNote = await dispatch(
 			addNote({
 				userId: user.id,
-				notebookId: null,
+				notebookId,
 			})
 		);
 		dispatch(getNotes(user?.id));
@@ -39,12 +42,10 @@ function Notes() {
 	}, [dispatch, user]);
 
 	useEffect(() => {
-		if (notes.includes(activeNote)) {
+		if (notebookNotesArr.includes(activeNote)) {
 			setActiveNote(activeNote || null);
-		} else {
-			setActiveNote(notes[0] || null);
-		}
-	}, [notes, setActiveNote]);
+		} else setActiveNote(notebookNotesArr[0] || null);
+	}, [notebookNotesArr, setActiveNote]);
 
 	if (expandNote) {
 		document.querySelector('.notes-container')?.classList.add('hide-left');
@@ -57,7 +58,7 @@ function Notes() {
 			<h2 id='notes-header'>All notes</h2>
 
 			<div className='notes-list'>
-				{notes.map((note) => (
+				{notebookNotesArr.map((note) => (
 					<div
 						id={`active-${note.id === activeNote?.id}`}
 						key={note.id}
@@ -66,7 +67,7 @@ function Notes() {
 						{note.userId === user?.id && <NoteNode key={note.id} note={note} />}
 					</div>
 				))}
-				{!notes.length && (
+				{!notebookNotesArr.length && (
 					<div id='add-note'>
 						<img src='/images/quill-pen-graphic.png' alt='Add a note!' />
 						<span onClick={addNewNote}>
@@ -80,4 +81,4 @@ function Notes() {
 	);
 }
 
-export default Notes;
+export default NotebookNotes;

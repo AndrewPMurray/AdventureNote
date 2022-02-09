@@ -29,12 +29,12 @@ router.post(
 	'/',
 	csrfProtection,
 	asyncHandler(async (req, res) => {
-		const userId = req.body.userId;
+		const { userId, notebookId } = req.body;
 		const newNote = await Note.create({
 			name: null,
 			content: null,
 			userId,
-			notebookId: null,
+			notebookId,
 		});
 		return res.json(newNote);
 	})
@@ -62,7 +62,6 @@ router.delete(
 	'/:id',
 	csrfProtection,
 	asyncHandler(async (req, res) => {
-		console.log(req.params);
 		const { id } = req.params;
 		const note = await Note.findByPk(id);
 		await note.destroy();

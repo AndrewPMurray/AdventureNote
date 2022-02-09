@@ -34,13 +34,13 @@ export const getNotes = () => async (dispatch) => {
 	}
 };
 
-export const addNote = (userId) => async (dispatch) => {
+export const addNote = (note) => async (dispatch) => {
 	const response = await csrfFetch('/api/notes', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ userId: userId }),
+		body: JSON.stringify(note),
 	});
 	if (response.ok) {
 		const newNote = await response.json();

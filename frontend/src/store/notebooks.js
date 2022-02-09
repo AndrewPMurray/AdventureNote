@@ -91,7 +91,6 @@ const notebooksReducer = (state = initialState, action) => {
 			return { ...state, ...notebooks };
 		}
 		case ADD_NOTEBOOK: {
-			console.log(action.notebook.id);
 			const newState = { ...state, [action.notebook.id]: action.notebook };
 			return newState;
 		}

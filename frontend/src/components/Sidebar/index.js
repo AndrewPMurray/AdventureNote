@@ -4,7 +4,7 @@ import ProfileButton from './ProfileButton';
 import './Sidebar.css';
 import { useShowHide } from '../../context/ShowHide';
 import { addNote, getNotes } from '../../store/notes';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 function Sidebar({ isLoaded }) {
@@ -13,14 +13,19 @@ function Sidebar({ isLoaded }) {
 	const { expandNote, setActiveNote } = useShowHide();
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const { notebookId } = useParams();
 
 	const addNewNote = async (e) => {
 		e.preventDefault();
 
-		const newNote = await dispatch(addNote(user.id));
+		const newNote = await dispatch(
+			addNote({
+				userId: user.id,
+				notebookId: notebookId || null,
+			})
+		);
 		dispatch(getNotes(user?.id));
 		setActiveNote(newNote.id);
-		history.push('/client/notes');
 	};
 
 	useEffect(() => {

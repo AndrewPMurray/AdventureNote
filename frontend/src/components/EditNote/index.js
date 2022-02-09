@@ -4,15 +4,16 @@ import { editNote, deleteNote, getNotes } from '../../store/notes';
 
 import './EditNote.css';
 import '../LoginSignupForm.css';
+import CopyMoveNoteModal from '../CopyMoveNoteModal';
 
 import { useShowHide } from '../../context/ShowHide';
 
 const EditNote = ({ activeNote }) => {
-	const noteId = activeNote;
-	const note = useSelector((state) => state.notes[activeNote]);
+	const noteId = activeNote?.id;
+	const notebookId = activeNote?.notebookId;
 	const user = useSelector((state) => state.session.user);
-	const [name, setName] = useState(note?.name || '');
-	const [content, setContent] = useState(note?.content || '');
+	const [name, setName] = useState(activeNote?.name);
+	const [content, setContent] = useState(activeNote?.content);
 	const [showMenu, setShowMenu] = useState(false);
 	const [savePrompt, setSavePrompt] = useState(false);
 	const [noChange, setNoChange] = useState(false);
@@ -27,19 +28,21 @@ const EditNote = ({ activeNote }) => {
 	useEffect(() => {
 		if (!showMenu) return;
 
-		const closeMenu = () => {
+		const closeMenu = (e) => {
+			if (e.target === document.querySelector('#copy-move-button')) return;
+			if (e.target === document.querySelector('#delete-note-text')) return;
 			setShowMenu(false);
 		};
 
-		document.addEventListener('click', closeMenu);
+		document.querySelector('#client-landing-container').addEventListener('click', closeMenu);
 
 		return () => document.removeEventListener('click', closeMenu);
 	}, [showMenu]);
 
 	useEffect(() => {
-		setName(note?.name || '');
-		setContent(note?.content || '');
-	}, [note?.name, note?.content]);
+		setName(activeNote?.name);
+		setContent(activeNote?.content);
+	}, [activeNote?.name, activeNote?.content]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -49,7 +52,7 @@ const EditNote = ({ activeNote }) => {
 				id: noteId,
 				name,
 				content,
-				notebookId: null,
+				notebookId: notebookId,
 			})
 		);
 
@@ -72,10 +75,11 @@ const EditNote = ({ activeNote }) => {
 		setSavePrompt(true);
 	};
 
-	const removeNote = async (e) => {
+	const removeNote = async () => {
 		await dispatch(deleteNote(noteId));
 		dispatch(getNotes(user?.id));
 		setExpandNote(false);
+		setShowMenu(false);
 	};
 
 	const moveSidebars = () => {
@@ -110,9 +114,10 @@ const EditNote = ({ activeNote }) => {
 				<i id='note-hamburger-menu' className='fas fa-bars' onClick={openMenu}></i>
 				{showMenu && (
 					<ul className='note-menu-items fade-in-slide-down'>
+						<CopyMoveNoteModal note={activeNote} />
 						<div id='delete-note-button' onClick={removeNote}>
 							<i className='fas fa-trash-alt' />
-							<p>Delete note</p>
+							<p id='delete-note-text'>Delete note</p>
 						</div>
 					</ul>
 				)}
@@ -120,12 +125,12 @@ const EditNote = ({ activeNote }) => {
 			<form id='edit-note-form' onSubmit={handleSubmit}>
 				<input
 					type='text'
-					value={name}
+					value={name || ''}
 					onChange={(e) => setName(e.target.value)}
 					placeholder='Name'
 				/>
 				<textarea
-					value={content}
+					value={content || ''}
 					onChange={(e) => setContent(e.target.value)}
 					placeholder='Start taking your notes here'
 				/>

@@ -43,7 +43,6 @@ function Notebooks() {
 	}, [user, history]);
 
 	const removeNotebook = async (notebookId) => {
-		console.log(notebookId);
 		await dispatch(deleteNotebook(notebookId));
 		dispatch(getNotebooks(user?.id));
 	};
