@@ -84,7 +84,10 @@ function Notebooks() {
 							</td>
 							<td>
 								<p id='notebook-menu-icon' onClick={() => setMenuId(notebook.id)}>
-									M
+									<i
+										className='fas fa-ellipsis-v'
+										style={{ width: '40px', textAlign: 'center' }}
+									></i>
 								</p>
 								{menuId === notebook.id && (
 									<ul className='notebook-menu-items fade-in'>
