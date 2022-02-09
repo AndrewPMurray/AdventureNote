@@ -39,12 +39,33 @@ router.post(
 	validateNotebook,
 	asyncHandler(async (req, res) => {
 		const { title, userId } = req.body;
-		console.log(title, userId);
 		const newNotebook = await Notebook.create({
 			title,
 			userId,
 		});
 		return res.json(newNotebook);
+	})
+);
+
+router.put(
+	'/:id',
+	csrfProtection,
+	asyncHandler(async (req, res) => {
+		const { title, notebookId } = req.body;
+		const notebook = await Notebook.findByPk(notebookId);
+		const editedNotebook = await notebook.update({ title });
+		return res.json(editedNotebook);
+	})
+);
+
+router.delete(
+	'/:id',
+	csrfProtection,
+	asyncHandler(async (req, res) => {
+		const { id } = req.params;
+		const notebook = await Notebook.findByPk(id);
+		await notebook.destroy();
+		return res.json({ message: 'success' });
 	})
 );
 

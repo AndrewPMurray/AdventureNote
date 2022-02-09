@@ -45,12 +45,13 @@
 #notebooks-table > * > tr {
     display: flex;
     justify-content: space-between;
-    width: calc(200px * 2vw);
+    width: calc(300px * 2vw);
     text-align: left
 }
 
 #notebooks-table > * > tr > * {
-    width: 10vmin;
+    width: 225px;
+    word-break: break-all;
 }
 
 #table-header {
@@ -76,4 +77,31 @@
 
 #table-body > * > a:hover {
     text-decoration: underline;
+}
+
+#notebook-menu-icon {
+    cursor: pointer;
+}
+
+.notebook-menu-items {
+    position: absolute;
+    background-color:#080808;
+    padding: 0 20px;
+    padding-top: 20px;
+}
+
+.notebook-menu-items * {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+#delete-notebook-button {
+    display: flex;
+    color: #930C10;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#delete-notebook-button > *:not(i) {
+    padding-left: 5px;
 }

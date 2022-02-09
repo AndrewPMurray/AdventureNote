@@ -46,7 +46,7 @@ const EditNote = ({ activeNote }) => {
 
 		const editedNote = await dispatch(
 			editNote({
-				noteId,
+				id: noteId,
 				name,
 				content,
 				notebookId: null,
@@ -102,7 +102,7 @@ const EditNote = ({ activeNote }) => {
 				<i id='note-hamburger-menu' className='fas fa-bars' onClick={openMenu}></i>
 				{showMenu && (
 					<ul className='note-menu-items fade-in'>
-						<div id='delete-note-button' to='/' onClick={removeNote}>
+						<div id='delete-note-button' onClick={removeNote}>
 							<i className='fas fa-trash-alt' />
 							<p>Delete note</p>
 						</div>

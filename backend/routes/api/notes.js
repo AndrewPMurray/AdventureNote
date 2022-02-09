@@ -41,11 +41,11 @@ router.post(
 );
 
 router.put(
-	'/',
+	'/:id',
 	csrfProtection,
 	asyncHandler(async (req, res) => {
-		const { noteId, name, content } = req.body;
-		const note = await Note.findOne({ where: { id: noteId } });
+		const { id, name, content } = req.body;
+		const note = await Note.findByPk(id);
 		if (name === note.name && content === note.content) {
 			return res.json({ message: 'no new changes' });
 		}
@@ -58,12 +58,13 @@ router.put(
 );
 
 router.delete(
-	'/',
+	'/:id',
 	csrfProtection,
 	asyncHandler(async (req, res) => {
-		const { id } = req.body;
+		console.log(req.params);
+		const { id } = req.params;
 		const note = await Note.findByPk(id);
-		const deletedNote = await note.destroy();
+		await note.destroy();
 		return res.json({ message: 'success' });
 	})
 );

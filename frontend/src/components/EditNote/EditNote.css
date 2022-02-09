@@ -25,8 +25,8 @@
 
 .note-menu-items {
     position: absolute;
-    right: 1vw;
-    top: 4vh;
+    top: calc(20px + 2vh);
+    right: 1px;
     background-color: #080808;
     border-radius: 5px;
 }

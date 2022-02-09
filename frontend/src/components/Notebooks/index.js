@@ -1,18 +1,36 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import ReactTimeAgo from 'react-time-ago';
-import { getNotebooks } from '../../store/notebooks';
+import { deleteNotebook, getNotebooks } from '../../store/notebooks';
 import NotebookFormModal from '../NotebookFormModal';
+import EditNotebookFormModal from '../EditNotebookFormModal';
 import './Notebooks.css';
 
 function Notebooks() {
+	const [menuId, setMenuId] = useState(null);
+	const [showModal, setShowModal] = useState(false);
+	const [title, setTitle] = useState('');
 	const notebooks = useSelector((state) => state.notebooks);
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const notebooksArr = Object.values(notebooks);
+
+	useEffect(() => {
+		if (!menuId) return;
+
+		const closeMenu = (e) => {
+			if (e.target === document.querySelector('#edit-notebook-text')) return;
+			if (e.target === document.querySelector('#delete-notebook-text')) return;
+			setMenuId(null);
+		};
+
+		document.querySelector('.notebooks-container').addEventListener('click', closeMenu);
+
+		return () => document.removeEventListener('click', closeMenu);
+	}, [menuId]);
 
 	useEffect(() => {
 		if (user) {
@@ -25,6 +43,12 @@ function Notebooks() {
 			history.push('/client/notes');
 		}
 	}, [user, history]);
+
+	const removeNotebook = async (notebookId) => {
+		console.log(notebookId);
+		await dispatch(deleteNotebook(notebookId));
+		dispatch(getNotebooks(user?.id));
+	};
 
 	return (
 		<div className='notebooks-container'>
@@ -51,7 +75,7 @@ function Notebooks() {
 				</thead>
 				{notebooksArr.map((notebook) => (
 					<tbody key={notebook.id}>
-						<tr id='table-body'>
+						<tr key={notebook.id} id='table-body'>
 							<td>
 								<Link to={`/client/notebooks/${notebook.id}`}>
 									{notebook.title}
@@ -61,7 +85,28 @@ function Notebooks() {
 							<td>
 								<ReactTimeAgo date={Date.parse(notebook.updatedAt)} />
 							</td>
-							<td></td>
+							<td>
+								<p id='notebook-menu-icon' onClick={() => setMenuId(notebook.id)}>
+									M
+								</p>
+								{menuId === notebook.id && (
+									<ul className='notebook-menu-items fade-in'>
+										<EditNotebookFormModal
+											title={notebook.title}
+											id={notebook.id}
+										/>
+										<div id='delete-notebook-button'>
+											<i className='fas fa-trash-alt' />
+											<p
+												id='delete-notebook-text'
+												onClick={() => removeNotebook(notebook.id)}
+											>
+												Delete notebook
+											</p>
+										</div>
+									</ul>
+								)}
+							</td>
 						</tr>
 					</tbody>
 				))}

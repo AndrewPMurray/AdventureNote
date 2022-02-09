@@ -50,7 +50,7 @@ export const addNote = (userId) => async (dispatch) => {
 };
 
 export const editNote = (note) => async (dispatch) => {
-	const response = await csrfFetch(`/api/notes/`, {
+	const response = await csrfFetch(`/api/notes/${note.id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -65,12 +65,11 @@ export const editNote = (note) => async (dispatch) => {
 };
 
 export const deleteNote = (noteId) => async (dispatch) => {
-	const response = await csrfFetch(`/api/notes/`, {
+	const response = await csrfFetch(`/api/notes/${noteId}`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ id: noteId }),
 	});
 
 	if (response.ok) {
@@ -106,7 +105,7 @@ const notesReducer = (state = initialState, action) => {
 			};
 		}
 		case ADD_NOTE: {
-			const newState = { ...state, [action.id]: { id: action.id } };
+			const newState = { ...state, [action.note.id]: action.note };
 			return newState;
 		}
 		case REMOVE_NOTE: {
