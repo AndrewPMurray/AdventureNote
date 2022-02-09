@@ -20,7 +20,7 @@
     padding: 10px;
 }
 
-.add-notebook-container > div > p {
+.edit-notebook-container > div > p {
     padding-top: 15px;
     font-size: 14px;
     color: #AAAAAA;
@@ -58,6 +58,7 @@
     height: 30px;
     border: none;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 #edit-notebook-button > button:disabled {
