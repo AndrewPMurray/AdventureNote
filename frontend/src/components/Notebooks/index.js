@@ -5,6 +5,7 @@ import ReactTimeAgo from 'react-time-ago';
 import { deleteNotebook, getNotebooks } from '../../store/notebooks';
 import NotebookFormModal from '../NotebookFormModal';
 import EditNotebookFormModal from '../EditNotebookFormModal';
+import DeleteNotebookModal from '../DeleteNotebookModal';
 import './Notebooks.css';
 
 function Notebooks() {
@@ -41,11 +42,6 @@ function Notebooks() {
 			history.push('/client/notes');
 		}
 	}, [user, history]);
-
-	const removeNotebook = async (notebookId) => {
-		await dispatch(deleteNotebook(notebookId));
-		dispatch(getNotebooks(user?.id));
-	};
 
 	return (
 		<div className='notebooks-container fade-in'>
@@ -95,15 +91,7 @@ function Notebooks() {
 											id={notebook.id}
 											setMenuId={setMenuId}
 										/>
-										<div id='delete-notebook-button'>
-											<i className='fas fa-trash-alt' />
-											<p
-												id='delete-notebook-text'
-												onClick={() => removeNotebook(notebook.id)}
-											>
-												Delete notebook
-											</p>
-										</div>
+										<DeleteNotebookModal notebook={notebook} />
 									</ul>
 								)}
 							</td>

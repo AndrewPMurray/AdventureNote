@@ -2,12 +2,14 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getNotes, addNote } from '../../store/notes';
+import { getNotebooks } from '../../store/notebooks';
 import { useShowHide } from '../../context/ShowHide';
 import NoteNode from './NoteNode';
 import './NotebookNotes.css';
 
 function NotebookNotes() {
 	const notebookId = useParams().notebookId;
+	const notebook = useSelector((state) => state.notebooks[notebookId]);
 	const notes = useSelector((state) => state.notes.list);
 	const user = useSelector((state) => state.session.user);
 	const { activeNote, setActiveNote, expandNote } = useShowHide();
@@ -38,6 +40,7 @@ function NotebookNotes() {
 	useEffect(() => {
 		if (user) {
 			dispatch(getNotes());
+			dispatch(getNotebooks());
 		}
 	}, [dispatch, user]);
 
@@ -55,7 +58,7 @@ function NotebookNotes() {
 
 	return (
 		<div className='notes-container fade-in'>
-			<h2 id='notes-header'>All notes</h2>
+			<h2 id='notes-header'>{notebook?.title}</h2>
 
 			<div className='notes-list'>
 				{notebookNotesArr.map((note) => (

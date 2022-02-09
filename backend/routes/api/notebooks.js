@@ -8,7 +8,7 @@ const { restoreUser } = require('../../utils/auth');
 
 const csrfProtection = csurf({ cookie: true });
 
-const { Notebook } = require('../../db/models');
+const { Notebook, Note } = require('../../db/models');
 
 const router = express.Router();
 
@@ -64,6 +64,8 @@ router.delete(
 	asyncHandler(async (req, res) => {
 		const { id } = req.params;
 		const notebook = await Notebook.findByPk(id);
+		const notebookNotes = await Note.findAll({ where: { notebookId: id } });
+		notebookNotes.forEach(async (note) => await note.destroy());
 		await notebook.destroy();
 		return res.json({ message: 'success' });
 	})
