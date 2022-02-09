@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EditNotebookForm from './EditNotebookForm';
 
-const EditNotebookFormModal = ({ title, id }) => {
+const EditNotebookFormModal = ({ title, id, setMenuId }) => {
 	const [showModal, setShowModal] = useState(false);
 
 	return (
@@ -12,7 +12,12 @@ const EditNotebookFormModal = ({ title, id }) => {
 			</div>
 			{showModal && (
 				<Modal onClose={() => setShowModal(false)}>
-					<EditNotebookForm setShowModal={setShowModal} title={title} id={id} />
+					<EditNotebookForm
+						setShowModal={setShowModal}
+						setMenuId={setMenuId}
+						title={title}
+						id={id}
+					/>
 				</Modal>
 			)}
 		</>

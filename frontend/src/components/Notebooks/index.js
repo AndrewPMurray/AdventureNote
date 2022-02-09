@@ -94,6 +94,7 @@ function Notebooks() {
 										<EditNotebookFormModal
 											title={notebook.title}
 											id={notebook.id}
+											setMenuId={setMenuId}
 										/>
 										<div id='delete-notebook-button'>
 											<i className='fas fa-trash-alt' />

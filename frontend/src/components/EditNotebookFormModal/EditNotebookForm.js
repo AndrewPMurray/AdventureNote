@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { updateNotebook, getNotebooks } from '../../store/notebooks';
 import './EditNotebookForm.css';
 
-const EditNotebookForm = ({ title, setShowModal, id }) => {
+const EditNotebookForm = ({ setShowModal, setMenuId, id, title }) => {
 	const dispatch = useDispatch();
 	const [editTitle, setEditTitle] = useState(title);
 
@@ -40,7 +40,12 @@ const EditNotebookForm = ({ title, setShowModal, id }) => {
 					<button
 						type='submit'
 						disabled={title.length === 0}
-						onClick={() => setTimeout(() => setShowModal(false), 100)}
+						onClick={() =>
+							setTimeout(() => {
+								setShowModal(false);
+								setMenuId(null);
+							}, 100)
+						}
 					>
 						Update
 					</button>
