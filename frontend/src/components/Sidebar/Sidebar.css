@@ -113,9 +113,8 @@
 
 .fa-plus {
     transition-duration: 200ms;
-    border-radius: 20px;
-    padding: 2px;
-    padding-left: 10px;
+    border-radius: 15px;
+    padding: 9px;
 }
 
 .fa-plus:hover {

@@ -114,7 +114,7 @@ table {
 		width: 100%;
 	}
 	to{
-		transform: translateX(calc(10px + 35vw))
+		transform: translateX(calc(50px + 40vw))
 	}
 }
 
