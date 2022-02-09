@@ -1,9 +1,10 @@
 .notebooks-container {
     background-color: #0E0E0E;
     min-width: 400px;
-    width: 95vw;
+    width: 100vw;
     height: 100vh;
     overflow: auto;
+    animation-duration: 300ms;
 }
 
 .notebooks-container > a,
@@ -18,6 +19,7 @@
 
 #notebooks-header {
     font-size: 24px;
+    padding-top: 50px;
 }
 
 #notebooks-table-pre-header {

@@ -2,11 +2,12 @@
     padding-top: 20px;
     background-color: #0E0E0E;
     min-width: 400px;
-    width: 400px;
+    width: calc(350px + 10vw);
     height: 95vh;
     overflow-y: auto;
     overflow-x: hidden;
     transition-duration: 250ms;
+    animation-duration: 300ms;
 }
 
 #fade {

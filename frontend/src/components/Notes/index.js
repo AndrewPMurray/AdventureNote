@@ -46,7 +46,7 @@ function Notes() {
 	}
 
 	return (
-		<div className='notes-container'>
+		<div className='notes-container fade-in'>
 			<h2 id='notes-header'>All notes</h2>
 
 			<div className='notes-list'>

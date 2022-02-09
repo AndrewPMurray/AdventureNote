@@ -49,8 +49,7 @@ function Notebooks() {
 	};
 
 	return (
-		<div className='notebooks-container'>
-			<Link to='/client/notes'>Back to all notes</Link>
+		<div className='notebooks-container fade-in'>
 			<h2 id='notebooks-header'>Notebooks</h2>
 			<div id='notebooks-table-pre-header'>
 				<p>

@@ -29,7 +29,7 @@ function Sidebar({ isLoaded }) {
 	const profileButton = user ? <ProfileButton user={user} /> : null;
 
 	return (
-		<div className='sidebar-container'>
+		<div className='sidebar-container fade-in'>
 			<ul className='sidebar'>
 				<li>{isLoaded && profileButton}</li>
 				<div id='sidebar-menu-items'>

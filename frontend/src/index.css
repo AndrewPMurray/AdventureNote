@@ -110,18 +110,18 @@ table {
 
 @keyframes slide-right {
 	from{
-		transform: translateX(-1);
+		transform: translateX(0);
 		width: 100%;
 	}
 	to{
-		transform: translateX(0)
+		transform: translateX(calc(10px + 35vw))
 	}
 }
 
 @keyframes slide-left {
 	from {
 		transform: translateX(0);
-		width: 50vw;
+		width: calc(10px + 55vw);
 	}
 	to {
 		transform: translateX(-1);
