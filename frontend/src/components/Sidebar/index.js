@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Sidebar.css';
@@ -7,6 +8,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 function Sidebar({ isLoaded }) {
 	const user = useSelector((state) => state.session.user);
+	const [hover, setHover] = useState(null);
 	const { expandNote, setActiveNote } = useShowHide();
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -33,18 +35,30 @@ function Sidebar({ isLoaded }) {
 			<ul className='sidebar'>
 				<li>{isLoaded && profileButton}</li>
 				<div id='sidebar-menu-items'>
-					<Link to='/client/notes'>
-						<button id='add-note-button'>
-							{/* onClick={addNewNote} <i className='fas fa-plus' style={{ paddingRight: '10px' }}></i> */}
+					<button
+						id='notes-button'
+						onMouseEnter={(e) => setHover(e.target)}
+						onMouseLeave={(e) => setHover(null)}
+					>
+						{/* onClick={addNewNote}  */}
+						<Link to='/client/notes'>
+							<i className='fas fa-sticky-note' style={{ paddingRight: '10px' }}></i>
 							Notes
-						</button>
-					</Link>
-					<Link to='/client/notebooks'>
-						<button id='notebooks-button'>
+						</Link>
+						{hover === document.querySelector('#notes-button') && (
+							<i
+								className='fas fa-plus fade-in'
+								style={{ paddingRight: '10px' }}
+								onClick={addNewNote}
+							></i>
+						)}
+					</button>
+					<button id='notebooks-button'>
+						<Link to='/client/notebooks'>
 							<i className='fas fa-book-open' style={{ paddingRight: '10px' }}></i>
 							Notebooks
-						</button>
-					</Link>
+						</Link>
+					</button>
 				</div>
 			</ul>
 		</div>
