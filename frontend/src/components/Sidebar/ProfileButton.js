@@ -37,7 +37,7 @@ function ProfileButton({ user }) {
 					<h3 id='sidebar-username'>{user.username}</h3>
 				</button>
 				{showMenu && (
-					<ul className='profile-items fade-in'>
+					<ul className='profile-items fade-in-slide-down'>
 						<li>
 							Account
 							<div id='profile-dropdown-user-info'>

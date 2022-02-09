@@ -101,7 +101,7 @@ const EditNote = ({ activeNote }) => {
 				></i>
 				<i id='note-hamburger-menu' className='fas fa-bars' onClick={openMenu}></i>
 				{showMenu && (
-					<ul className='note-menu-items fade-in'>
+					<ul className='note-menu-items fade-in-slide-down'>
 						<div id='delete-note-button' onClick={removeNote}>
 							<i className='fas fa-trash-alt' />
 							<p>Delete note</p>

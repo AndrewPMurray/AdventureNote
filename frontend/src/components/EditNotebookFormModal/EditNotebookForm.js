@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { updateNotebook, getNotebooks } from '../../store/notebooks';
 import './EditNotebookForm.css';
 
 const EditNotebookForm = ({ title, setShowModal, id }) => {
 	const dispatch = useDispatch();
-	const user = useSelector((state) => state.session.user);
 	const [editTitle, setEditTitle] = useState(title);
 
 	const handleSubmit = (e) => {

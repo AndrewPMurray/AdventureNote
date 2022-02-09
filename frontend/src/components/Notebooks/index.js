@@ -9,8 +9,6 @@ import './Notebooks.css';
 
 function Notebooks() {
 	const [menuId, setMenuId] = useState(null);
-	const [showModal, setShowModal] = useState(false);
-	const [title, setTitle] = useState('');
 	const notebooks = useSelector((state) => state.notebooks);
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();

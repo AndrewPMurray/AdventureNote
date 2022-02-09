@@ -44,14 +44,15 @@ router.put(
 	'/:id',
 	csrfProtection,
 	asyncHandler(async (req, res) => {
-		const { id, name, content } = req.body;
+		const { id, name, content, notebookId } = req.body;
 		const note = await Note.findByPk(id);
-		if (name === note.name && content === note.content) {
+		if (name === note.name && content === note.content && notebookId === note.notebookId) {
 			return res.json({ message: 'no new changes' });
 		}
 		const newNote = await note.update({
 			name,
 			content,
+			notebookId,
 		});
 		return res.json(newNote);
 	})
