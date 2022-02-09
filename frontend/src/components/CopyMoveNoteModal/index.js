@@ -8,7 +8,7 @@ const CopyMoveNoteModal = ({ note }) => {
 	return (
 		<>
 			<div id='copy-move-button' onClick={() => setShowModal(true)}>
-				Copy/Move Note
+				Move Note
 			</div>
 			{showModal && (
 				<Modal onClose={() => setShowModal(false)}>

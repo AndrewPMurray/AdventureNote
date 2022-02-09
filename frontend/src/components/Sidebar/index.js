@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import Search from './Search';
 import './Sidebar.css';
 import { useShowHide } from '../../context/ShowHide';
 import { addNote, getNotes } from '../../store/notes';
@@ -47,13 +48,13 @@ function Sidebar({ isLoaded }) {
 		<div className='sidebar-container fade-in'>
 			<ul className='sidebar'>
 				<li>{isLoaded && profileButton}</li>
-				<div id='sidebar-menu-items'>
+				<li>{isLoaded && <Search />}</li>
+				<li id='sidebar-menu-items'>
 					<button
 						id='notes-button'
 						onMouseEnter={(e) => setHover(e.target)}
 						onMouseLeave={(e) => setHover(null)}
 					>
-						{/* onClick={addNewNote}  */}
 						<Link to='/client/notes'>
 							<i className='fas fa-sticky-note' style={{ paddingRight: '10px' }}></i>
 							Notes
@@ -72,7 +73,7 @@ function Sidebar({ isLoaded }) {
 							Notebooks
 						</Link>
 					</button>
-				</div>
+				</li>
 			</ul>
 		</div>
 	);

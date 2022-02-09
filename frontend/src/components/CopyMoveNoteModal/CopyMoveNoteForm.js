@@ -28,7 +28,6 @@ const CopyMoveNoteForm = ({ setShowModal, note }) => {
 
 	const handleMove = async (e) => {
 		e.preventDefault();
-		console.log(note);
 
 		await dispatch(
 			editNote({

@@ -17,7 +17,7 @@ const EditNote = ({ activeNote }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [savePrompt, setSavePrompt] = useState(false);
 	const [noChange, setNoChange] = useState(false);
-	const { expandNote, setExpandNote } = useShowHide();
+	const { expandNote, setExpandNote, setActiveNote } = useShowHide();
 	const dispatch = useDispatch();
 
 	const openMenu = () => {
@@ -56,8 +56,6 @@ const EditNote = ({ activeNote }) => {
 			})
 		);
 
-		dispatch(getNotes(user?.id));
-
 		if (editedNote.message) setNoChange(true);
 
 		const savePromptPopup = setTimeout(() => {
@@ -73,6 +71,7 @@ const EditNote = ({ activeNote }) => {
 		if (savePrompt) clearTimeout(savePromptPopup);
 
 		setSavePrompt(true);
+		dispatch(getNotes(user?.id));
 	};
 
 	const removeNote = async () => {
@@ -128,11 +127,13 @@ const EditNote = ({ activeNote }) => {
 					value={name || ''}
 					onChange={(e) => setName(e.target.value)}
 					placeholder='Name'
+					// onBlur={handleSubmit}
 				/>
 				<textarea
 					value={content || ''}
 					onChange={(e) => setContent(e.target.value)}
 					placeholder='Start taking your notes here'
+					// onBlur={handleSubmit}
 				/>
 				<button className='edit-note-button' type='submit'>
 					Save
