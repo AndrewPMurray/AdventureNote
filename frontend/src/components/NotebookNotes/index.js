@@ -10,13 +10,13 @@ import './NotebookNotes.css';
 function NotebookNotes() {
 	const notebookId = useParams().notebookId;
 	const notebook = useSelector((state) => state.notebooks[notebookId]);
-	const notes = useSelector((state) => state.notes.list);
+	const notes = useSelector((state) => state.notes);
 	const user = useSelector((state) => state.session.user);
 	const { activeNote, setActiveNote, expandNote } = useShowHide();
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const notebookNotesArr = notes?.filter((note) => note?.notebookId === +notebookId);
+	const notebookNotesArr = notes?.list?.filter((note) => note?.notebookId === +notebookId);
 
 	const addNewNote = async (e) => {
 		e.preventDefault();
@@ -45,8 +45,11 @@ function NotebookNotes() {
 	}, [dispatch, user]);
 
 	useEffect(() => {
-		if (notebookNotesArr.includes(activeNote)) {
-			setActiveNote(activeNote || null);
+		if (
+			notes[activeNote?.id]?.id === activeNote?.id &&
+			notebookNotesArr.includes(notes[activeNote?.id])
+		) {
+			setActiveNote(activeNote);
 		} else setActiveNote(notebookNotesArr[0] || null);
 	}, [notebookNotesArr, setActiveNote, activeNote]);
 
