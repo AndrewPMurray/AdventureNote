@@ -102,27 +102,43 @@
 }
 
 #search-results {
-    background-color: white;
+    background-color: #1A1A1A;
+    border-radius: 5px;
     padding: 10px;
-    color: black;
+    color: white;
     position: absolute;
     left: 10px;
     width: calc(20px + 30vw);
     min-height: 300px;
+    border: 1px solid #8899A6;
+    z-index: 10;
+}
+
+#search-results > ul:first-child {
+    border-bottom: 2px solid #8899A6;
 }
 
 #search-results > ul {
     padding: 10px 0;
     font-weight: bold;
-    border-bottom: 2px solid black;
+}
+
+#search-results > * > li {
+    padding-top: 4px;
 }
 
 #search-results > * > li:first-child {
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
-#search-results li {
+#search-results li > a {
     font-weight: normal;
+    text-decoration: none;
+    color: #DDDDDD;
+}
+
+#search-results li > a:hover {
+    text-decoration: underline;
 }
 
 .fa-plus {

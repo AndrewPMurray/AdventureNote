@@ -53,16 +53,11 @@ function Search() {
 		return () => document.removeEventListener('click', closeMenu);
 	}, [showMenu]);
 
-	const handleSearch = (e) => {
-		if (e.key === 'Enter') history.push(`/client/search/${searchInput}`);
-	};
-
 	return (
 		<>
 			<div id='sidebar-search-container'>
 				<input
 					id='sidebar-search'
-					onKeyDown={handleSearch}
 					onClick={openMenu}
 					placeholder='&#xf002; Search'
 					value={searchInput}
