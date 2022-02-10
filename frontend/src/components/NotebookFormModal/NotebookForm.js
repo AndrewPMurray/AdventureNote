@@ -43,7 +43,6 @@ const NotebookForm = ({ setShowModal }) => {
 			<form className='add-notebook-form' onSubmit={handleSubmit}>
 				<div className='form-field'>
 					<label htmlFor='title'>Title</label>
-					{errors?.title && <p id='errors'>{errors.title}</p>}
 					<input
 						id='notebook-title-input'
 						type='text'
@@ -51,6 +50,11 @@ const NotebookForm = ({ setShowModal }) => {
 						onChange={(e) => setTitle(e.target.value)}
 						placeholder='Notebook Title'
 					/>
+					{errors?.title && (
+						<p style={{ paddingTop: '5px' }} id='errors'>
+							{errors.title}
+						</p>
+					)}
 				</div>
 				<div id='add-notebook-button' disabled={title.length === 0}>
 					<button type='submit'>Create</button>

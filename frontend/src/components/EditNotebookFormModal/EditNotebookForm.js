@@ -38,7 +38,6 @@ const EditNotebookForm = ({ setShowModal, setMenuId, id, title }) => {
 			<form className='edit-notebook-form' onSubmit={handleSubmit}>
 				<div className='form-field'>
 					<label htmlFor='title'>Title</label>
-					{errors?.title && <p id='errors'>{errors.title}</p>}
 					<input
 						id='notebook-title-input'
 						type='text'
@@ -46,6 +45,11 @@ const EditNotebookForm = ({ setShowModal, setMenuId, id, title }) => {
 						onChange={(e) => setEditTitle(e.target.value)}
 						placeholder='Notebook Title'
 					/>
+					{errors?.title && (
+						<p style={{ paddingTop: '5px' }} id='errors'>
+							{errors.title}
+						</p>
+					)}
 				</div>
 				<div id='edit-notebook-button'>
 					<button type='submit' disabled={editTitle.length === 0}>
