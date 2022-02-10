@@ -8,6 +8,7 @@ import { getNotebooks } from '../../store/notebooks';
 function NoteNode({ note }) {
 	const notebooks = useSelector((state) => state.notebooks);
 	const dispatch = useDispatch();
+	console.log(notebooks);
 
 	useEffect(() => {
 		dispatch(getNotebooks(note.userId));
