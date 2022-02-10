@@ -11,14 +11,7 @@ const CopyMoveNoteForm = ({ setShowModal, note }) => {
 	const notebooks = useSelector((state) => state.notebooks);
 
 	const notebooksArr = Object.values(notebooks);
-	const [notebookId, setNotebookId] = useState('');
-
-	useEffect(() => {
-		if (notebooks) {
-			const notebooksArr = Object.values(notebooks);
-			setNotebookId(notebooksArr[0]?.id);
-		}
-	}, [notebooks, setNotebookId]);
+	const [notebookId, setNotebookId] = useState('null');
 
 	useEffect(() => {
 		if (user) {
@@ -34,7 +27,7 @@ const CopyMoveNoteForm = ({ setShowModal, note }) => {
 				id: note.id,
 				name: note.name,
 				content: note.content,
-				notebookId: notebookId,
+				notebookId: notebookId === 'null' ? null : notebookId,
 			})
 		);
 		dispatch(getNotes(user.id));
@@ -60,6 +53,7 @@ const CopyMoveNoteForm = ({ setShowModal, note }) => {
 						onChange={(e) => setNotebookId(e.target.value)}
 						placeholder='Notebook Title'
 					>
+						<option value='null'>Move out of notebooks</option>
 						{notebooksArr.map((notebook) => (
 							<option key={notebook.id} value={notebook.id}>
 								{notebook.title}
