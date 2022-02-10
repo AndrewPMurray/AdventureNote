@@ -27,6 +27,8 @@ function Sidebar({ isLoaded }) {
 		);
 		dispatch(getNotes(user?.id));
 		setActiveNote(newNote.id);
+		if (!notebookId || history.location.pathname.includes('notes'))
+			history.push('/client/notes');
 	};
 
 	useEffect(() => {
