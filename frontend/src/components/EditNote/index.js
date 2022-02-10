@@ -14,16 +14,21 @@ const EditNote = ({ activeNote }) => {
 	const user = useSelector((state) => state.session.user);
 	const [name, setName] = useState(activeNote?.name);
 	const [content, setContent] = useState(activeNote?.content);
+	const [isTyping, setIsTyping] = useState(true);
 	const [showMenu, setShowMenu] = useState(false);
 	const [savePrompt, setSavePrompt] = useState(false);
-	const [noChange, setNoChange] = useState(false);
-	const { expandNote, setExpandNote, setActiveNote } = useShowHide();
+	const { expandNote, setExpandNote } = useShowHide();
 	const dispatch = useDispatch();
 
 	const openMenu = () => {
 		if (showMenu) return;
 		setShowMenu(true);
 	};
+
+	useEffect(() => {
+		setName(activeNote?.name);
+		setContent(activeNote?.content);
+	}, [activeNote?.name, activeNote?.content]);
 
 	useEffect(() => {
 		if (!showMenu) return;
@@ -39,24 +44,15 @@ const EditNote = ({ activeNote }) => {
 		return () => document.removeEventListener('click', closeMenu);
 	}, [showMenu]);
 
-	useEffect(() => {
-		setName(activeNote?.name);
-		setContent(activeNote?.content);
-	}, [activeNote?.name, activeNote?.content]);
-
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-
-		const editedNote = await dispatch(
+		await dispatch(
 			editNote({
 				id: noteId,
-				name,
-				content,
+				name: name,
+				content: content,
 				notebookId: notebookId,
 			})
 		);
-
-		if (editedNote.message) setNoChange(true);
 
 		const savePromptPopup = setTimeout(() => {
 			const savePrompt = document.getElementById('save-prompt');
@@ -64,7 +60,6 @@ const EditNote = ({ activeNote }) => {
 			savePrompt?.classList.add('fade-out');
 			setTimeout(() => {
 				setSavePrompt(false);
-				setNoChange(false);
 			}, 175);
 		}, 2000);
 
@@ -73,6 +68,18 @@ const EditNote = ({ activeNote }) => {
 		setSavePrompt(true);
 		dispatch(getNotes(user?.id));
 	};
+
+	useEffect(() => {
+		const saveMonitor = setInterval(() => {
+			if (isTyping) return;
+			handleSubmit();
+			setIsTyping(true);
+		}, 1000);
+
+		return () => clearInterval(saveMonitor);
+	});
+
+	const timer = () => setTimeout(() => setIsTyping(false), 500);
 
 	const removeNote = async () => {
 		await dispatch(deleteNote(noteId));
@@ -126,22 +133,24 @@ const EditNote = ({ activeNote }) => {
 					type='text'
 					value={name || ''}
 					onChange={(e) => setName(e.target.value)}
+					onKeyUp={() => timer()}
+					onKeyDown={() => clearTimeout(timer())}
 					placeholder='Name'
-					// onBlur={handleSubmit}
 				/>
 				<textarea
 					value={content || ''}
 					onChange={(e) => setContent(e.target.value)}
 					placeholder='Start taking your notes here'
-					// onBlur={handleSubmit}
+					onKeyUp={() => timer()}
+					onKeyDown={() => clearTimeout(timer())}
 				/>
-				<button className='edit-note-button' type='submit'>
+				{/* <button className='edit-note-button' type='submit'>
 					Save
-				</button>
+				</button> */}
 			</form>
 			{savePrompt && (
 				<div id='save-prompt' className='fade-in'>
-					{noChange ? 'No changes detected' : 'Note saved'}
+					Note saved
 				</div>
 			)}
 		</div>
