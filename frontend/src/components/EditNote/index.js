@@ -76,7 +76,7 @@ const EditNote = ({ activeNote }) => {
 			if (isTyping) return;
 			handleSubmit();
 			setIsTyping(true);
-		}, 1000);
+		}, 750);
 
 		return () => {
 			clearInterval(saveMonitor);
