@@ -40,7 +40,6 @@ router.post(
 	csrfProtection,
 	validateNotebook,
 	asyncHandler(async (req, res) => {
-		console.log('boop!');
 		const { title, userId } = req.body;
 		const newNotebook = await Notebook.create({
 			title,
