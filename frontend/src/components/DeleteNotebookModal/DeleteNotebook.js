@@ -16,9 +16,10 @@ const DeleteNotebook = ({ setShowModal, notebook }) => {
 		return () => clearTimeout(timer);
 	});
 
-	const removeNotebook = async (notebookId) => {
-		await dispatch(deleteNotebook(notebookId));
-		dispatch(getNotebooks(user?.id));
+	const removeNotebook = async () => {
+		await dispatch(deleteNotebook(notebook.id)).then(() => {
+			setShowModal(false);
+		});
 	};
 
 	return (
@@ -31,14 +32,7 @@ const DeleteNotebook = ({ setShowModal, notebook }) => {
 				</p>
 			</div>
 			<div id='confirm-delete-notebook-button'>
-				<button
-					type='submit'
-					disabled={disabled}
-					onClick={() => {
-						removeNotebook(notebook.id);
-						setTimeout(() => setShowModal(false), 100);
-					}}
-				>
+				<button type='submit' disabled={disabled} onClick={removeNotebook}>
 					Confirm
 				</button>
 			</div>

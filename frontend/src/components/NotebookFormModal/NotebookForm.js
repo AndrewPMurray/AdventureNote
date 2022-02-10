@@ -56,8 +56,10 @@ const NotebookForm = ({ setShowModal }) => {
 						</p>
 					)}
 				</div>
-				<div id='add-notebook-button' disabled={title.length === 0}>
-					<button type='submit'>Create</button>
+				<div id='add-notebook-button'>
+					<button type='submit' disabled={title.length === 0}>
+						Create
+					</button>
 				</div>
 			</form>
 		</div>
