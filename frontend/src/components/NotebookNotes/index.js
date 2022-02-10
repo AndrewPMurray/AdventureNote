@@ -49,7 +49,7 @@ function NotebookNotes() {
 			notes[activeNote?.id]?.id === activeNote?.id &&
 			notebookNotesArr.includes(notes[activeNote?.id])
 		) {
-			setActiveNote(activeNote);
+			setActiveNote(notes[activeNote?.id]);
 		} else setActiveNote(notebookNotesArr[0] || null);
 	}, [notebookNotesArr, setActiveNote, activeNote]);
 
