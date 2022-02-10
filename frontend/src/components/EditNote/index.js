@@ -54,22 +54,28 @@ const EditNote = ({ activeNote }) => {
 			})
 		);
 
-		const savePromptPopup = setTimeout(() => {
-			const savePrompt = document.getElementById('save-prompt');
-			savePrompt?.classList.remove('fade-in');
-			savePrompt?.classList.add('fade-out');
-			setTimeout(() => {
-				setSavePrompt(false);
-			}, 175);
-		}, 2000);
+		savePromptPopup();
 
-		if (savePrompt) clearTimeout(savePromptPopup);
+		if (savePrompt) clearTimeout(savePromptPopup());
 
 		setSavePrompt(true);
 		dispatch(getNotes(user?.id));
 	};
 
 	const timer = () => setTimeout(() => setIsTyping(false), 500);
+
+	const savePromptTimeout = () =>
+		setTimeout(() => {
+			setSavePrompt(false);
+		}, 175);
+
+	const savePromptPopup = () =>
+		setTimeout(() => {
+			const savePrompt = document.getElementById('save-prompt');
+			savePrompt?.classList.remove('fade-in');
+			savePrompt?.classList.add('fade-out');
+			savePromptTimeout();
+		}, 2000);
 
 	useEffect(() => {
 		const saveMonitor = setInterval(() => {
@@ -80,7 +86,9 @@ const EditNote = ({ activeNote }) => {
 
 		return () => {
 			clearInterval(saveMonitor);
-			clearTimeout(timer);
+			clearTimeout(timer());
+			clearTimeout(savePromptPopup());
+			clearTimeout(savePromptTimeout());
 		};
 	});
 
