@@ -74,7 +74,7 @@ function NotebookNotes() {
 					<div id='add-note'>
 						<img src='/images/quill-pen-graphic.png' alt='Add a note!' />
 						<span onClick={addNewNote}>
-							No notes available, click here to add one now!
+							No notes in this notebook, click here to add one now!
 						</span>
 					</div>
 				)}
