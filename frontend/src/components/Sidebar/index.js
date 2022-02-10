@@ -50,8 +50,8 @@ function Sidebar({ isLoaded }) {
 		<div className='sidebar-container fade-in'>
 			<ul className='sidebar'>
 				<li>{isLoaded && profileButton}</li>
-				<li>{isLoaded && <Search />}</li>
 				<li id='sidebar-menu-items'>
+					{isLoaded && <Search />}
 					<button
 						id='notes-button'
 						onMouseEnter={(e) => setHover(e.target)}

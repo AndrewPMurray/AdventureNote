@@ -87,59 +87,65 @@
     align-items: center;
 }
 
+#sidebar-search {
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+}
+
 #sidebar-menu-items > * {
     margin: 5px 0;
     text-decoration: none;
 }
 
-#sidebar-menu-items > * > * {
-    text-decoration: none;
-    color: black;
-}
-
 #search-results {
     background-color: white;
     position: absolute;
-    width: calc(20px + 20vw);
-    min-height: 200px;
+    left: 10px;
+    width: calc(20px + 30vw);
+    min-height: 300px;
 }
 
-#notes-button {
-    background-color: #8899A6;
-    border: none;
-    border-radius: 10px;
-    width: 150px;
-    height: 35px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 20px;
-}
 
 .fa-plus {
     transition-duration: 200ms;
     border-radius: 15px;
     padding: 9px;
+    justify-self: flex-end;
 }
 
 .fa-plus:hover {
     background-color: #CCCCCC;
 }
 
+#notes-button, 
 #notebooks-button {
     display: flex;
     align-items: center;
     padding-left: 20px;
-    background-color: #8899A6;
-    border: none;
-    border-radius: 10px;
-    width: 150px;
+    width: calc(150px + 10vw);
+    max-width: 200px;
     height: 35px;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
+    transition-duration: 200ms;
+}
+
+#notes-button:hover,
+#notebooks-button:hover {
+    background-color: #8899A6;
 }
 
 #notes-button > a,
 #notebooks-button > a {
+    text-decoration: none;
+    justify-self: flex-end;
+    flex-grow: 1;
     padding: 6px 0;
+    color: white;
+    display: flex;
 }

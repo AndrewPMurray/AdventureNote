@@ -34,9 +34,9 @@ function Search() {
 			<div id='sidebar-search-container'>
 				<input
 					id='sidebar-search'
-					placeholder='Search'
 					onKeyDown={handleSearch}
 					onClick={openMenu}
+					placeholder='&#xf002; Search'
 				></input>
 				{showMenu && (
 					<div id='search-results' onKeyDown={handleSearch}>
