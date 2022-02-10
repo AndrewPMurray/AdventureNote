@@ -15,6 +15,8 @@ const router = express.Router();
 const validateNotebook = [
 	check('title')
 		.exists({ checkFalsy: true })
+		.withMessage('Please provide a title for your notebook')
+		.isLength({ min: 1 })
 		.withMessage('Please provide a title for your notebook'),
 	handleValidationErrors,
 ];
@@ -38,6 +40,7 @@ router.post(
 	csrfProtection,
 	validateNotebook,
 	asyncHandler(async (req, res) => {
+		console.log('boop!');
 		const { title, userId } = req.body;
 		const newNotebook = await Notebook.create({
 			title,
@@ -50,6 +53,7 @@ router.post(
 router.put(
 	'/:id',
 	csrfProtection,
+	validateNotebook,
 	asyncHandler(async (req, res) => {
 		const { title, notebookId } = req.body;
 		const notebook = await Notebook.findByPk(notebookId);

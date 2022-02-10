@@ -5,7 +5,7 @@ import { editNote, getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
 import './CopyMoveNoteForm.css';
 
-const CopyMoveNoteForm = ({ setShowModal, note }) => {
+const CopyMoveNoteForm = ({ setShowModal, setShowMenu, note }) => {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.session.user);
 	const notebooks = useSelector((state) => state.notebooks);
@@ -29,7 +29,10 @@ const CopyMoveNoteForm = ({ setShowModal, note }) => {
 				content: note.content,
 				notebookId: notebookId === 'null' ? null : notebookId,
 			})
-		);
+		).then(() => {
+			setShowModal(false);
+			setShowMenu(false);
+		});
 		dispatch(getNotes(user.id));
 	};
 
@@ -63,11 +66,7 @@ const CopyMoveNoteForm = ({ setShowModal, note }) => {
 				</div>
 				<div id='copy-move-button-container'>
 					<div id='move-note-button'>
-						<button
-							type='submit'
-							disabled={notebookId?.length === 0}
-							onClick={() => setTimeout(() => setShowModal(false), 100)}
-						>
+						<button type='submit' disabled={notebookId?.length === 0}>
 							Move
 						</button>
 					</div>

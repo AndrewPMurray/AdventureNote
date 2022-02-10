@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import CopyMoveNoteForm from './CopyMoveNoteForm';
 
-const CopyMoveNoteModal = ({ note }) => {
+const CopyMoveNoteModal = ({ note, setShowMenu }) => {
 	const [showModal, setShowModal] = useState(false);
 
 	return (
@@ -12,7 +12,11 @@ const CopyMoveNoteModal = ({ note }) => {
 			</div>
 			{showModal && (
 				<Modal onClose={() => setShowModal(false)}>
-					<CopyMoveNoteForm note={note} setShowModal={setShowModal} />
+					<CopyMoveNoteForm
+						note={note}
+						setShowMenu={setShowMenu}
+						setShowModal={setShowModal}
+					/>
 				</Modal>
 			)}
 		</>

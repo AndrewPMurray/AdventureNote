@@ -57,11 +57,9 @@ export const updateNotebook = (payload) => async (dispatch) => {
 		},
 		body: JSON.stringify(payload),
 	});
-	if (response.ok) {
-		const editedNotebook = await response.json();
-		dispatch(update(editedNotebook));
-		return editedNotebook;
-	}
+	const editedNotebook = await response.json();
+	dispatch(update(editedNotebook));
+	return editedNotebook;
 };
 
 export const deleteNotebook = (notebookId) => async (dispatch) => {

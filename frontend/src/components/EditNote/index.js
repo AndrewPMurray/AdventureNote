@@ -131,7 +131,7 @@ const EditNote = ({ activeNote }) => {
 				<i id='note-hamburger-menu' className='fas fa-bars' onClick={openMenu}></i>
 				{showMenu && (
 					<ul className='note-menu-items fade-in-slide-down'>
-						<CopyMoveNoteModal note={activeNote} />
+						<CopyMoveNoteModal note={activeNote} setShowMenu={setShowMenu} />
 						<div id='delete-note-button' onClick={removeNote}>
 							<i className='fas fa-trash-alt' />
 							<p id='delete-note-text'>Delete note</p>

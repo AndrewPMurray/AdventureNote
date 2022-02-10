@@ -8,16 +8,26 @@ const NotebookForm = ({ setShowModal }) => {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.session.user);
 	const [title, setTitle] = useState('');
+	const [errors, setErrors] = useState({});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(
+		setErrors({});
+		return dispatch(
 			addNotebook({
 				title,
 				userId: user.id,
 			})
-		);
-		return dispatch(getNotebooks());
+		)
+			.then((res) => {
+				setShowModal(false);
+			})
+			.catch(async (res) => {
+				const data = await res.json();
+				if (data && data.errors) {
+					setErrors(data.errors);
+				}
+			});
 	};
 
 	return (
@@ -33,6 +43,7 @@ const NotebookForm = ({ setShowModal }) => {
 			<form className='add-notebook-form' onSubmit={handleSubmit}>
 				<div className='form-field'>
 					<label htmlFor='title'>Title</label>
+					{errors?.title && <p id='errors'>{errors.title}</p>}
 					<input
 						id='notebook-title-input'
 						type='text'
@@ -41,14 +52,8 @@ const NotebookForm = ({ setShowModal }) => {
 						placeholder='Notebook Title'
 					/>
 				</div>
-				<div id='add-notebook-button'>
-					<button
-						type='submit'
-						disabled={title.length === 0}
-						onClick={() => setTimeout(() => setShowModal(false), 100)}
-					>
-						Create
-					</button>
+				<div id='add-notebook-button' disabled={title.length === 0}>
+					<button type='submit'>Create</button>
 				</div>
 			</form>
 		</div>
