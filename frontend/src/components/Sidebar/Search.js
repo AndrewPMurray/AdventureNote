@@ -74,7 +74,10 @@ function Search() {
 										<li key={note.id}>
 											<Link
 												to='/client/notes'
-												onClick={() => setActiveNote(note)}
+												onClick={() => {
+													setActiveNote(note);
+													setSearchInput('');
+												}}
 											>
 												{note.name}
 											</Link>
@@ -89,7 +92,10 @@ function Search() {
 								return (
 									i < 10 && (
 										<li key={notebook.id}>
-											<Link to={`/client/notebooks/${notebook.id}`}>
+											<Link
+												to={`/client/notebooks/${notebook.id}`}
+												onClick={() => setSearchInput('')}
+											>
 												{notebook.title}
 											</Link>
 										</li>
