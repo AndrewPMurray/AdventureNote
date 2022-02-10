@@ -69,6 +69,8 @@ const EditNote = ({ activeNote }) => {
 		dispatch(getNotes(user?.id));
 	};
 
+	const timer = () => setTimeout(() => setIsTyping(false), 500);
+
 	useEffect(() => {
 		const saveMonitor = setInterval(() => {
 			if (isTyping) return;
@@ -76,10 +78,11 @@ const EditNote = ({ activeNote }) => {
 			setIsTyping(true);
 		}, 1000);
 
-		return () => clearInterval(saveMonitor);
+		return () => {
+			clearInterval(saveMonitor);
+			clearTimeout(timer);
+		};
 	});
-
-	const timer = () => setTimeout(() => setIsTyping(false), 500);
 
 	const removeNote = async () => {
 		await dispatch(deleteNote(noteId));
