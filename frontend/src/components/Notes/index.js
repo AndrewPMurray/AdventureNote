@@ -7,7 +7,7 @@ import NoteNode from './NoteNode';
 import './Notes.css';
 
 function Notes() {
-	const notes = useSelector((state) => state.notes.list);
+	const notes = useSelector((state) => state.notes);
 	const user = useSelector((state) => state.session.user);
 	const { activeNote, setActiveNote, expandNote } = useShowHide();
 	const dispatch = useDispatch();
@@ -39,12 +39,15 @@ function Notes() {
 	}, [dispatch, user]);
 
 	useEffect(() => {
-		if (notes.includes(activeNote)) {
-			setActiveNote(activeNote || null);
+		if (notes[activeNote?.id] === undefined) {
+			setActiveNote(notes.list[0] || null);
+		} else if (notes[activeNote?.id]?.id === activeNote?.id) {
+			if (notes[activeNote?.id] === activeNote) setActiveNote(activeNote || null);
+			else setActiveNote(notes[activeNote?.id]);
 		} else {
-			setActiveNote(notes[0] || null);
+			setActiveNote(notes.list[0] || null);
 		}
-	}, [notes, setActiveNote]);
+	}, [notes, setActiveNote, activeNote]);
 
 	if (expandNote) {
 		document.querySelector('.notes-container')?.classList.add('hide-left');
@@ -57,7 +60,7 @@ function Notes() {
 			<h2 id='notes-header'>All notes</h2>
 
 			<div className='notes-list'>
-				{notes.map((note) => (
+				{notes.list.map((note) => (
 					<div
 						id={`active-${note.id === activeNote?.id}`}
 						key={note.id}
@@ -66,7 +69,7 @@ function Notes() {
 						{note.userId === user?.id && <NoteNode key={note.id} note={note} />}
 					</div>
 				))}
-				{!notes.length && (
+				{!notes.list.length && (
 					<div id='add-note'>
 						<img src='/images/quill-pen-graphic.png' alt='Add a note!' />
 						<span onClick={addNewNote}>

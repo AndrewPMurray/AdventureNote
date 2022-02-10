@@ -48,7 +48,7 @@ function NotebookNotes() {
 		if (notebookNotesArr.includes(activeNote)) {
 			setActiveNote(activeNote || null);
 		} else setActiveNote(notebookNotesArr[0] || null);
-	}, [notebookNotesArr, setActiveNote]);
+	}, [notebookNotesArr, setActiveNote, activeNote]);
 
 	if (expandNote) {
 		document.querySelector('.notes-container')?.classList.add('hide-left');
