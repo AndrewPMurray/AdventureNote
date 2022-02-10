@@ -15,7 +15,14 @@ function ProfileButton({ user }) {
 	useEffect(() => {
 		if (!showMenu) return;
 
-		const closeMenu = () => {
+		const closeMenu = (e) => {
+			console.log(e.target);
+			if (e.target === document.querySelector('.profile-items fade-in-slide-down')) return;
+			if (e.target === document.querySelector('#profile-dropdown-user-info')) return;
+			if (e.target === document.querySelector('#account-item')) return;
+			if (e.target === document.querySelector('#logout-item')) return;
+			if (e.target === document.querySelector('#dropdown-username')) return;
+			if (e.target === document.querySelector('#dropdown-email')) return;
 			setShowMenu(false);
 		};
 
@@ -38,14 +45,14 @@ function ProfileButton({ user }) {
 				</button>
 				{showMenu && (
 					<ul className='profile-items fade-in-slide-down'>
-						<li>
+						<li id='account-item'>
 							Account
 							<div id='profile-dropdown-user-info'>
 								<div id='dropdown-username'>{user.username}</div>
 								<div id='dropdown-email'>{user.email}</div>
 							</div>
 						</li>
-						<li>
+						<li id='logout-item'>
 							<button id='sidebar-link' onClick={logout}>
 								Sign Out {user.username}
 							</button>
