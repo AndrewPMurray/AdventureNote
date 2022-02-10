@@ -62,7 +62,7 @@ function Search() {
 					placeholder='&#xf002; Search'
 					value={searchInput}
 					onChange={(e) => setSearchInput(e.target.value)}
-					autocomplete='off'
+					autoComplete='off'
 				></input>
 				{showMenu && (
 					<div id='search-results'>

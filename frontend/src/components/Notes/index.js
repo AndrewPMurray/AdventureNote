@@ -40,7 +40,7 @@ function Notes() {
 
 	useEffect(() => {
 		if (notes[activeNote?.id] === undefined) {
-			setActiveNote(notes.list[0] || null);
+			setActiveNote(notes?.list[0] || null);
 		} else if (notes[activeNote?.id]?.id === activeNote?.id) {
 			if (notes[activeNote?.id] === activeNote) setActiveNote(activeNote || null);
 			else setActiveNote(notes[activeNote?.id]);
