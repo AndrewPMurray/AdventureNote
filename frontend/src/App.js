@@ -10,6 +10,7 @@ import Notes from './components/Notes';
 import EditNote from './components/EditNote';
 import Notebooks from './components/Notebooks';
 import NotebookNotes from './components/NotebookNotes';
+import NotFound from './components/NotFound';
 
 // Utils & contexts as needed
 import * as sessionActions from './store/session';
@@ -60,7 +61,7 @@ function App() {
 						</div>
 					</Route>
 					<Route>
-						<h2>Not Found</h2>
+						<NotFound />
 					</Route>
 				</Switch>
 			)}
