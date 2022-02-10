@@ -63,11 +63,21 @@
 #note-content {
     padding-top: 10px;
     word-break: break-all;
-    flex-grow: 0;
+    flex-grow: 1;
 }
 
 #notebook {
-    padding-top: 10px;
+    padding: 10px 0;
+    color: rgba(150, 150, 150, 0.7)
+}
+
+#notebook > a {
+    color: rgba(150, 150, 150, 0.7);
+    text-decoration: none;   
+}
+
+#notebook > a:hover {
+    text-decoration: underline;
 }
 
 #note-updated-at {

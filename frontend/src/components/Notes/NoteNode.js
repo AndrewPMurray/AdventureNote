@@ -28,7 +28,7 @@ function NoteNode({ note }) {
 			</p>
 			{note?.notebookId && (
 				<p id='notebook'>
-					In notebook:{' '}
+					In Notebook:{' '}
 					<Link to={`/client/notebooks/${note.notebookId}`}>
 						{notebooks[note.notebookId]?.title}
 					</Link>
