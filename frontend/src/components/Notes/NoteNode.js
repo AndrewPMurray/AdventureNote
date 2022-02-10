@@ -30,7 +30,9 @@ function NoteNode({ note }) {
 				<p id='notebook'>
 					In Notebook:{' '}
 					<Link to={`/client/notebooks/${note.notebookId}`}>
-						{notebooks[note.notebookId]?.title}
+						{notebooks[note.notebookId]?.title.length > 25
+							? `${notebooks[note.notebookId]?.title.slice(0, 25)}...`
+							: notebooks[note.notebookId]?.title}
 					</Link>
 				</p>
 			)}
