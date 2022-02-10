@@ -70,7 +70,9 @@ function Notebooks() {
 						<tr key={notebook.id} id='table-body'>
 							<td>
 								<Link to={`/client/notebooks/${notebook.id}`}>
-									{notebook.title}
+									{notebook.title.length > 30
+										? `${notebook.title.slice(0, 25)}...`
+										: notebook.title}
 								</Link>
 							</td>
 							<td>{user?.username}</td>
