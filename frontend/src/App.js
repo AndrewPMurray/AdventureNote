@@ -28,7 +28,7 @@ function App() {
 	if (!user) {
 		document.body.style.backgroundColor = 'white';
 	} else {
-		document.body.style.backgroundColor = '';
+		document.body.style.backgroundColor = 'black';
 	}
 
 	return (

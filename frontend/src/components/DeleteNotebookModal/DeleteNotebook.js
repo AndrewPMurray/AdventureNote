@@ -22,15 +22,15 @@ const DeleteNotebook = ({ setShowModal, notebook }) => {
 	};
 
 	return (
-		<div className='add-notebook-container'>
+		<div className='confirm-delete-notebook-container'>
 			<div>
-				<h2>Deleting Notebook</h2>
+				<h2>Deleting {notebook.title}</h2>
 				<p>
 					This will delete all notes associated with the notebook! Please be sure to move
 					any notes you would like to keep. Are you sure you want to delete this notebook?
 				</p>
 			</div>
-			<div id='add-notebook-button'>
+			<div id='confirm-delete-notebook-button'>
 				<button
 					type='submit'
 					disabled={disabled}
