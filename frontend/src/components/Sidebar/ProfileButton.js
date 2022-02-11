@@ -20,7 +20,6 @@ function ProfileButton({ user }) {
 		if (!showMenu) return;
 
 		const closeMenu = (e) => {
-			console.log(e.target);
 			if (e.target === document.querySelector('.profile-items fade-in-slide-down')) return;
 			if (e.target === document.querySelector('#profile-dropdown-user-info')) return;
 			if (e.target === document.querySelector('#account-item')) return;
