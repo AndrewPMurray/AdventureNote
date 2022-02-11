@@ -51,7 +51,7 @@ function NotebookNotes() {
 		) {
 			setActiveNote(notes[activeNote?.id]);
 		} else setActiveNote(notebookNotesArr[0] || null);
-	}, [notebookNotesArr, setActiveNote, activeNote]);
+	}, [notebookNotesArr, setActiveNote, activeNote, notes]);
 
 	if (expandNote) {
 		document.querySelector('.notes-container')?.classList.add('hide-left');
