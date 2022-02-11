@@ -16,6 +16,9 @@ function Landing() {
 			history.push('/client/notes');
 		}
 		setActiveNote(null);
+		document.body.style.backgroundColor = 'white';
+
+		return () => (document.body.style.backgroundColor = '');
 	}, [user, history, setActiveNote]);
 
 	return (
