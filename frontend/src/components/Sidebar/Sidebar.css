@@ -68,7 +68,7 @@
 	width: 18vh;
 	height: 5vh;
 	background-color: transparent;
-	color: #A21232;
+	color: #DECE9C;
 	border: none;
 	margin-right: 10px;
     cursor: pointer;
@@ -147,11 +147,11 @@
     border-radius: 15px;
     padding: 9px;
     justify-self: flex-end;
-    color: #DECE9C;
 }
 
 .fa-plus:hover {
     background-color: #D24262;
+    color: white;
 }
 
 #notes-button, 
@@ -168,6 +168,10 @@
     transition-duration: 200ms;
 }
 
+#notes-button:hover * {
+    color: white;
+}
+
 #notes-button:hover,
 #notebooks-button:hover {
     background-color: #A21232;
@@ -179,6 +183,11 @@
     justify-self: flex-end;
     flex-grow: 1;
     padding: 6px 0;
-    color: white;
+    color: #DECE9C;
     display: flex;
 }
+
+#notes-button > *:hover,
+#notebooks-button > *:hover {
+    color: white;
+} 

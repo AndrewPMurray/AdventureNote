@@ -41,7 +41,8 @@
 }
 
 #confirm-delete-notebook-button > button {
-    background-color: #8899A6;
+    background-color: #A21232;
+    color: white;
     width: 70px;
     height: 30px;
     border: none;
@@ -50,5 +51,6 @@
 }
 
 #confirm-delete-notebook-button > button:disabled {
+    color: black;
     background-color: #555555;
 }

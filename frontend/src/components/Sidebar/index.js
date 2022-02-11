@@ -55,7 +55,7 @@ function Sidebar({ isLoaded }) {
 					<button
 						id='notes-button'
 						onMouseEnter={(e) => setHover(e.target)}
-						onMouseLeave={(e) => setHover(null)}
+						onMouseLeave={() => setHover(null)}
 					>
 						<Link to='/client/notes'>
 							<i className='fas fa-sticky-note' style={{ paddingRight: '10px' }}></i>

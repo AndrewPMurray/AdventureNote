@@ -53,7 +53,8 @@
 }
 
 #add-notebook-button > button {
-    background-color: #8899A6;
+    background-color: #A21232;
+    color: white;
     width: 70px;
     height: 30px;
     border: none;
@@ -62,5 +63,6 @@
 }
 
 #add-notebook-button > button:disabled {
+    color: rgba(16, 16, 16, 0.3);
     background-color: #555555;
 }
