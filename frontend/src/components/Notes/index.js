@@ -13,6 +13,8 @@ function Notes() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+	console.log(activeNote);
+
 	const addNewNote = async (e) => {
 		e.preventDefault();
 

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { editNote, deleteNote, getNotes } from '../../store/notes';
+import { useShowHide } from '../../context/ShowHide';
 
 import './EditNote.css';
 import '../LoginSignupForm.css';
 import CopyMoveNoteModal from '../CopyMoveNoteModal';
 
-import { useShowHide } from '../../context/ShowHide';
-
-const EditNote = ({ activeNote }) => {
+const EditNote = () => {
+	const { expandNote, setExpandNote, activeNote } = useShowHide();
 	const noteId = activeNote?.id;
 	const notebookId = activeNote?.notebookId;
 	const user = useSelector((state) => state.session.user);
@@ -17,7 +18,6 @@ const EditNote = ({ activeNote }) => {
 	const [isTyping, setIsTyping] = useState(true);
 	const [showMenu, setShowMenu] = useState(false);
 	const [savePrompt, setSavePrompt] = useState(false);
-	const { expandNote, setExpandNote } = useShowHide();
 	const dispatch = useDispatch();
 
 	const openMenu = () => {

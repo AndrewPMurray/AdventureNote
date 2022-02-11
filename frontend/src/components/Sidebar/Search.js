@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
 import { getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
@@ -12,7 +12,6 @@ function Search() {
 	const [showMenu, setShowMenu] = useState(false);
 	const [searchInput, setSearchInput] = useState('');
 	const dispatch = useDispatch();
-	const history = useHistory();
 	const { setActiveNote } = useShowHide();
 
 	const notesArr = Object.values(notes);
@@ -62,6 +61,7 @@ function Search() {
 					placeholder='&#xf002; Search'
 					value={searchInput}
 					onChange={(e) => setSearchInput(e.target.value)}
+					onBlur={() => setSearchInput('')}
 					autoComplete='off'
 				></input>
 				{showMenu && (

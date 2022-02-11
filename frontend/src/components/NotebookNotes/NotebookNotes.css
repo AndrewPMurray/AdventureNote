@@ -76,11 +76,6 @@
     text-align: center;
 }
 
-#active-true {
-    background-color: #1E1E1E;
-    border: 1px solid #8899A6;
-}
-
 /* width */
 ::-webkit-scrollbar {
     width: 10px;

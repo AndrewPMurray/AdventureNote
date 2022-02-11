@@ -4,6 +4,7 @@ const LOAD_NOTES = 'notes/LOAD_NOTES';
 const ADD_NOTE = 'notes/ADD_NOTE';
 const REMOVE_NOTE = 'notes/REMOVE_NOTE';
 const UPDATE_NOTE = 'notes/UPDATE_NOTE';
+const RESET_STATE = 'notes/RESET_STATE';
 
 const load = (list) => ({
 	type: LOAD_NOTES,
@@ -24,6 +25,8 @@ const remove = (noteId) => ({
 	type: REMOVE_NOTE,
 	noteId,
 });
+
+export const clearNoteState = () => ({ type: RESET_STATE });
 
 export const getNotes = () => async (dispatch) => {
 	const response = await fetch('/api/notes');
@@ -117,6 +120,11 @@ const notesReducer = (state = initialState, action) => {
 			return {
 				...state,
 				[action.note.id]: action.note,
+			};
+		}
+		case RESET_STATE: {
+			return {
+				list: [],
 			};
 		}
 		default:

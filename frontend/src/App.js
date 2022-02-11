@@ -14,10 +14,8 @@ import NotFound from './components/NotFound';
 
 // Utils & contexts as needed
 import * as sessionActions from './store/session';
-import { useShowHide } from './context/ShowHide';
 
 function App() {
-	const { activeNote } = useShowHide();
 	const dispatch = useDispatch();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const user = useSelector((state) => state.session.user);
@@ -44,7 +42,7 @@ function App() {
 						<div id='client-landing-container'>
 							<Sidebar isLoaded={isLoaded} />
 							<Notes />
-							<EditNote activeNote={activeNote} />
+							<EditNote />
 						</div>
 					</Route>
 					<Route exact path='/client/notebooks'>
@@ -57,7 +55,7 @@ function App() {
 						<div id='client-landing-container'>
 							<Sidebar isLoaded={isLoaded} />
 							<NotebookNotes />
-							<EditNote activeNote={activeNote} />
+							<EditNote />
 						</div>
 					</Route>
 					<Route>

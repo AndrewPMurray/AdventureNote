@@ -74,7 +74,8 @@
 
 #copy-note-button > button,
 #move-note-button > button {
-    background-color: #8899A6;
+    background-color: #A21232;
+    color: white;
     width: 70px;
     height: 30px;
     border: none;

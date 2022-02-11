@@ -4,6 +4,7 @@ const LOAD_NOTEBOOKS = 'notebooks/LOAD_NOTEBOOKS';
 const ADD_NOTEBOOK = 'notebooks/ADD_NOTEBOOK';
 const REMOVE_NOTEBOOK = 'notebooks/REMOVE_NOTEBOOK';
 const UPDATE_NOTEBOOK = 'notebooks/UPDATE_NOTEBOOK';
+const RESET_STATE = 'notebooks/RESET_STATE';
 
 const load = (list) => ({
 	type: LOAD_NOTEBOOKS,
@@ -24,6 +25,8 @@ const remove = (notebookId) => ({
 	type: REMOVE_NOTEBOOK,
 	notebookId,
 });
+
+export const clearNotebookState = () => ({ type: RESET_STATE });
 
 export const getNotebooks = () => async (dispatch) => {
 	const response = await fetch('/api/notebooks');
@@ -102,6 +105,9 @@ const notebooksReducer = (state = initialState, action) => {
 			const newState = { ...state };
 			delete newState[action.notebookId];
 			return newState;
+		}
+		case RESET_STATE: {
+			return {};
 		}
 		default:
 			return state;

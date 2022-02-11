@@ -68,7 +68,7 @@
 	width: 18vh;
 	height: 5vh;
 	background-color: transparent;
-	color: #8899A6;
+	color: #A21232;
 	border: none;
 	margin-right: 10px;
     cursor: pointer;
@@ -111,12 +111,12 @@
     left: 10px;
     width: calc(20px + 30vw);
     min-height: 300px;
-    border: 1px solid #8899A6;
+    border: 1px solid #DECE9C;
     z-index: 10;
 }
 
 #search-results > ul:first-child {
-    border-bottom: 2px solid #8899A6;
+    border-bottom: 2px solid #DECE9C;
 }
 
 #search-results > ul {
@@ -147,10 +147,11 @@
     border-radius: 15px;
     padding: 9px;
     justify-self: flex-end;
+    color: #DECE9C;
 }
 
 .fa-plus:hover {
-    background-color: #CCCCCC;
+    background-color: #D24262;
 }
 
 #notes-button, 
@@ -169,7 +170,7 @@
 
 #notes-button:hover,
 #notebooks-button:hover {
-    background-color: #8899A6;
+    background-color: #A21232;
 }
 
 #notes-button > a,

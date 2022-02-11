@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './Sidebar.css';
+import { useShowHide } from '../../context/ShowHide';
+import { clearNoteState } from '../../store/notes';
+import { clearNotebookState } from '../../store/notebooks';
 
 function ProfileButton({ user }) {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
+	const { setActiveNote } = useShowHide();
 
 	const openMenu = () => {
 		if (showMenu) return;
@@ -33,6 +37,9 @@ function ProfileButton({ user }) {
 
 	const logout = (e) => {
 		e.preventDefault();
+		setActiveNote(null);
+		dispatch(clearNoteState());
+		dispatch(clearNotebookState());
 		dispatch(sessionActions.logout());
 	};
 
