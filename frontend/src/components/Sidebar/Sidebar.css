@@ -111,7 +111,7 @@
     left: 10px;
     width: calc(20px + 30vw);
     min-height: 300px;
-    border: 1px solid #DECE9C;
+    border: 1px solid rgba(222 ,206, 156, 0.5);
     z-index: 10;
 }
 

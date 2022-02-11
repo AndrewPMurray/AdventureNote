@@ -13,12 +13,10 @@ const DeleteNotebook = ({ setShowModal, notebook }) => {
 		const timer = setTimeout(() => setDisabled(false), 2000);
 
 		return () => clearTimeout(timer);
-	});
+	}, []);
 
 	const removeNotebook = async () => {
-		await dispatch(deleteNotebook(notebook.id)).then(() => {
-			setShowModal(false);
-		});
+		await dispatch(deleteNotebook(notebook.id));
 	};
 
 	return (

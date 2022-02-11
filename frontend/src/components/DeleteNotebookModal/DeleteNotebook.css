@@ -51,6 +51,6 @@
 }
 
 #confirm-delete-notebook-button > button:disabled {
-    color: black;
+    color: rgba(16, 16, 16, 0.3);
     background-color: #555555;
 }

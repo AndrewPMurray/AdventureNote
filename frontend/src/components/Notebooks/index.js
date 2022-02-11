@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import ReactTimeAgo from 'react-time-ago';
-import { deleteNotebook, getNotebooks } from '../../store/notebooks';
+import { getNotebooks } from '../../store/notebooks';
 import NotebookFormModal from '../NotebookFormModal';
 import EditNotebookFormModal from '../EditNotebookFormModal';
 import DeleteNotebookModal from '../DeleteNotebookModal';
@@ -28,7 +28,9 @@ function Notebooks() {
 
 		document.querySelector('.notebooks-container').addEventListener('click', closeMenu);
 
-		return () => document.removeEventListener('click', closeMenu);
+		return () => {
+			document.removeEventListener('click', closeMenu);
+		};
 	}, [menuId]);
 
 	useEffect(() => {

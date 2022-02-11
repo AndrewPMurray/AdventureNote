@@ -11,7 +11,7 @@ function NotFound() {
 	return (
 		<>
 			<div id='not-found-container'>
-				<img src='/images/trogdor.png' />
+				<img src='/images/trogdor.png' alt='Dagron' />
 				<h2>There be dragons here</h2>
 				<p>and it looks like it burninated your page...</p>
 				<Link to='/'>Return</Link>
