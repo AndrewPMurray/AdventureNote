@@ -2,6 +2,14 @@
 
 ### AdventureNote, an EverNote clone, is a website for users to organize and store notes regarding their DnD characters and campaigns.
 
+### Splash Page
+
+![splash]
+
+### Client Landing page (notes)
+
+![notes]
+
 To launch the application:
   - In both backend and frontend folders, run npm install to install dependencies
   - In the backend folder, use the .env.example to set up your .env file (Make sure to generate a secure JWT token and use a secure password for your database)
@@ -27,3 +35,7 @@ To launch the application:
 ### Links:
   - [Live website](https://adventurenote.herokuapp.com/)
   - [View the wiki](https://github.com/AndrewPMurray/AdventureNote/wiki)
+
+
+[splash]: ./frontend/public/images/splash.png
+[notes]: ./frontend/public/images/notes.png
