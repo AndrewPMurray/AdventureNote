@@ -27,7 +27,7 @@ To launch the application:
 ### Technologies used:
   - Frontend:
     - React
-      - 'react-time-ago' for displaying when note was updated 
+      - 'react-time-ago' for displaying when note was updated
     - Redux
   - Backend
     - Express
