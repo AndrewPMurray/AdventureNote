@@ -31,10 +31,53 @@ To launch the application:
     - Express
     - Sequelize
     - PostgreSQL
+    - 
+### Technical Details
+* AdventureNote uses an auto-save feature to save notes. When the note editing form renders, it sets an interval that listens in the background. A variable (isTyping) is defaulted to true. When you type in a note or a title, a timeout is triggered (and cleared on every new keypress). When the user stops typing, the timeout finishes and triggers isTyping to be false, which allows the handleSubmit to run, causing the form to save and reset isTyping to be true.
+
+```
+	const timer = () => setTimeout(() => setIsTyping(false), 500);
+  
+	useEffect(() => {
+		const saveMonitor = setInterval(() => {
+			if (isTyping) return;
+			handleSubmit();
+			setIsTyping(true);
+		}, 750);
+
+		return () => {
+			clearInterval(saveMonitor);
+			clearTimeout(timer());
+		};
+	});
+  
+  // in form render:
+  	<input
+					type='text'
+					value={name || ''}
+					onChange={(e) => setName(e.target.value)}
+					onKeyUp={() => timer()}
+					onKeyDown={() => clearTimeout(timer())}
+					placeholder='Name'
+				/>
+				<textarea
+					value={content || ''}
+					onChange={(e) => setContent(e.target.value)}
+					placeholder='Start taking your notes here'
+					onKeyUp={() => timer()}
+					onKeyDown={() => clearTimeout(timer())}
+				/>
+  
+```
+
 
 ### Links:
   - [Live website](https://adventurenote.herokuapp.com/)
   - [View the wiki](https://github.com/AndrewPMurray/AdventureNote/wiki)
+
+### To-Do:
+* [ ] Dynamic text editing
+* [ ] Tags
 
 
 [splash]: ./frontend/public/images/splash.png
