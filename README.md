@@ -54,21 +54,21 @@ To launch the application:
 	});
   
   // in form render:
-  	<input
-					type='text'
-					value={name || ''}
-					onChange={(e) => setName(e.target.value)}
-					onKeyUp={() => timer()}
-					onKeyDown={() => clearTimeout(timer())}
-					placeholder='Name'
-				/>
-				<textarea
-					value={content || ''}
-					onChange={(e) => setContent(e.target.value)}
-					placeholder='Start taking your notes here'
-					onKeyUp={() => timer()}
-					onKeyDown={() => clearTimeout(timer())}
-				/>
+	<input
+		type='text'
+		value={name || ''}
+		onChange={(e) => setName(e.target.value)}
+		onKeyUp={() => timer()}
+		onKeyDown={() => clearTimeout(timer())}
+		placeholder='Name'
+	/>
+	<textarea
+		value={content || ''}
+		onChange={(e) => setContent(e.target.value)}
+		placeholder='Start taking your notes here'
+		onKeyUp={() => timer()}
+		onKeyDown={() => clearTimeout(timer())}
+	/>
   
 ```
 
