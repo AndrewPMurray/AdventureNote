@@ -11,11 +11,13 @@
 ![notes]
 
 To launch the application:
-  - In both backend and frontend folders, run npm install to install dependencies
+  - Clone the git:
+      - https://github.com/AndrewPMurray/AdventureNote.git
+  - Inside the main git folder (where the frontend and backend folders are located) run npm install to install all dependencies.
   - In the backend folder, use the .env.example to set up your .env file (Make sure to generate a secure JWT token and use a secure password for your database)
-  - run psql as an admin user and create the db user using the following command (run from backend folder in terminal):
+  - run psql as an admin user and create the db user using the following command (be sure to use the same db password you used in your .env file):
     - CREATE USER adventurenote_app WITH PASSWORD [password] CREATEDB;
-  - run the following commands in terminal to create, migrate, and seed the database:
+  - run the following commands in terminal to create, migrate, and seed the database (run from backend folder in terminal):
     - npx dotenv sequelize db:create
     - npx dotenv sequelize db:migrate
     - npx dotenv sequelize db:seed:all
