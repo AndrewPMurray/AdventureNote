@@ -35,7 +35,7 @@ router.post(
 			const demoUser = await User.findOne({ where: { username: credential } });
 			if (demoUser === null) {
 				await User.signup({
-					email: 'MattMercerRocks@gmail.com',
+					email: 'MattMercerRocks@demo.io',
 					username: 'MattMercer',
 					password: 'password',
 				});
