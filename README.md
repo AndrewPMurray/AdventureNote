@@ -33,7 +33,7 @@ To launch the application:
     - Express
     - Sequelize
     - PostgreSQL
-    - 
+
 ### Technical Details
 * AdventureNote uses an auto-save feature to save notes. When the note editing form renders, it sets an interval that listens in the background. A variable (isTyping) is defaulted to true. When you type in a note or a title, a timeout is triggered (and cleared on every new keypress). When the user stops typing, the timeout finishes and triggers isTyping to be false, which allows the handleSubmit to run, causing the form to save and reset isTyping to be true.
 
