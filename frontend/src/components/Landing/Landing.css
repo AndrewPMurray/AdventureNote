@@ -44,3 +44,21 @@
 #signup-button:hover {
 	background-color: #AA4F50;
 }
+
+#footer {
+    background-color: lightgray;
+    border-top: 1px solid gray;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#footer > * {
+ font-size: 36px;
+ color: gray;
+ padding: 0 30px;
+}

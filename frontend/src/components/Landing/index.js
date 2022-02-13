@@ -29,6 +29,14 @@ function Landing() {
 				place.
 			</h3>
 			<SignupForm />
+			<div id='footer'>
+				<a href='https://www.linkedin.com/in/andrew-murray-304b39231/'>
+					<i className='fab fa-linkedin'></i>
+				</a>
+				<a href='https://github.com/andrewpmurray'>
+					<i className='fab fa-github'></i>
+				</a>
+			</div>
 		</div>
 	);
 }
