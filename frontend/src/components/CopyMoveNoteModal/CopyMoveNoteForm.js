@@ -39,11 +39,8 @@ const CopyMoveNoteForm = ({ setShowModal, setShowMenu, note }) => {
 	return (
 		<div className='copy-move-note-container'>
 			<div>
-				<h2>Copy or move note</h2>
-				<p>
-					Please choose a notebook to move your note. You may also copy the note if you
-					want to keep it in more than one place.
-				</p>
+				<h2>Move note</h2>
+				<p>Please choose a notebook to move your note.</p>
 			</div>
 			<form className='notebooks-list' onSubmit={handleMove}>
 				<div className='form-field'>
