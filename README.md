@@ -1,6 +1,6 @@
 # AdventureNote ReadMe
 
-### AdventureNote, an EverNote clone, is a website for users to organize and store notes regarding their DnD characters and campaigns.
+### AdventureNote, an app inspired by Evernote, is a website for users to organize and store notes regarding their DnD characters and campaigns.
 
 ### Splash Page
 
