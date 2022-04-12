@@ -36,7 +36,7 @@ function Notebooks() {
 		return () => {
 			document.removeEventListener('click', closeMenu);
 		};
-	}, [menuId]);
+	}, [menuId, expandNote, setExpandNote]);
 
 	useEffect(() => {
 		if (user) {
