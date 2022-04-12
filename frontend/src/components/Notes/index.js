@@ -49,12 +49,6 @@ function Notes() {
 		}
 	}, [notes, setActiveNote, activeNote]);
 
-	// if (expandNote) {
-	// 	document.querySelector('.notes-container')?.classList.add('hide-left');
-	// } else {
-	// 	document.querySelector('.notes-container')?.classList.remove('hide-left');
-	// }
-
 	return (
 		<div
 			className='notes-container fade-in'

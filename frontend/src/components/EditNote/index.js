@@ -99,25 +99,6 @@ const EditNote = () => {
 		setShowMenu(false);
 	};
 
-	const moveSidebars = () => {
-		let animation;
-		if (expandNote) {
-			animation = 'slide-right';
-			document.querySelector('.edit-note').classList.add(animation);
-			setTimeout(() => {
-				document.querySelector('.edit-note').classList.remove(animation);
-				setExpandNote(!expandNote);
-			}, 250);
-		} else {
-			animation = 'slide-left';
-			document.querySelector('.edit-note').classList.add(animation);
-			setExpandNote(!expandNote);
-			setTimeout(() => {
-				document.querySelector('.edit-note').classList.remove(animation);
-			}, 250);
-		}
-	};
-
 	return !activeNote ? null : (
 		<div className='edit-note'>
 			<div className='note-utils-container'>
@@ -155,9 +136,6 @@ const EditNote = () => {
 					onKeyUp={() => timer()}
 					onKeyDown={() => clearTimeout(timer())}
 				/>
-				{/* <button className='edit-note-button' type='submit'>
-					Save
-				</button> */}
 			</form>
 			{savePrompt && (
 				<div id='save-prompt' className='fade-in'>

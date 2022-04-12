@@ -6,7 +6,6 @@ import './Sidebar.css';
 import { useShowHide } from '../../context/ShowHide';
 import { addNote, getNotes } from '../../store/notes';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function Sidebar({ isLoaded }) {
 	const user = useSelector((state) => state.session.user);
@@ -30,19 +29,6 @@ function Sidebar({ isLoaded }) {
 		if (!notebookId || history.location.pathname.includes('notes'))
 			history.push('/client/notes');
 	};
-
-	// useEffect(() => {
-	// 	if (!document.querySelector('.edit-note')) {
-	// 		document.querySelector('#client-landing-container').style.justifyContent = 'flex-start';
-	// 	} else {
-	// 		document.querySelector('#client-landing-container').style.justifyContent = 'flex-end';
-	// 	}
-	// 	if (expandNote) {
-	// 		document.querySelector('.sidebar-container')?.classList.add('hide-left');
-	// 	} else {
-	// 		document.querySelector('.sidebar-container')?.classList.remove('hide-left');
-	// 	}
-	// });
 
 	const profileButton = user ? <ProfileButton user={user} /> : null;
 
