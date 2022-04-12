@@ -11,7 +11,7 @@ function NoteNode({ note }) {
 
 	useEffect(() => {
 		dispatch(getNotebooks(note.userId));
-	}, [dispatch]);
+	}, [dispatch, note.userId]);
 
 	return (
 		<div id='note' key={note.id}>

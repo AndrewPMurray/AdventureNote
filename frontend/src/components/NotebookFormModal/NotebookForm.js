@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addNotebook, getNotebooks } from '../../store/notebooks';
+import { addNotebook } from '../../store/notebooks';
 import './NotebookForm.css';
 
 const NotebookForm = ({ setShowModal }) => {

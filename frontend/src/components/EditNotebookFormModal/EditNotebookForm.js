@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateNotebook, getNotebooks } from '../../store/notebooks';
+import { updateNotebook } from '../../store/notebooks';
 import './EditNotebookForm.css';
 
 const EditNotebookForm = ({ setShowModal, setMenuId, id, title }) => {
