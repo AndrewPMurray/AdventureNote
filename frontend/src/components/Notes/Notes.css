@@ -1,8 +1,6 @@
 .notes-container {
     padding-top: 20px;
     background-color: #0E0E0E;
-    min-width: 400px;
-    max-width: 400px;
     height: 95vh;
     overflow-y: auto;
     overflow-x: hidden;
@@ -33,7 +31,6 @@
     flex-direction: column;
     padding: 14px;
     min-height: 125px;
-    width: 370px;
     cursor: pointer;
     transition-duration: 200ms;
 }

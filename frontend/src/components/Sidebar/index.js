@@ -31,27 +31,30 @@ function Sidebar({ isLoaded }) {
 			history.push('/client/notes');
 	};
 
-	useEffect(() => {
-		if (!document.querySelector('.edit-note')) {
-			document.querySelector('#client-landing-container').style.justifyContent = 'flex-start';
-		} else {
-			document.querySelector('#client-landing-container').style.justifyContent = 'flex-end';
-		}
-		if (expandNote) {
-			document.querySelector('.sidebar-container')?.classList.add('hide-left');
-		} else {
-			document.querySelector('.sidebar-container')?.classList.remove('hide-left');
-		}
-	});
+	// useEffect(() => {
+	// 	if (!document.querySelector('.edit-note')) {
+	// 		document.querySelector('#client-landing-container').style.justifyContent = 'flex-start';
+	// 	} else {
+	// 		document.querySelector('#client-landing-container').style.justifyContent = 'flex-end';
+	// 	}
+	// 	if (expandNote) {
+	// 		document.querySelector('.sidebar-container')?.classList.add('hide-left');
+	// 	} else {
+	// 		document.querySelector('.sidebar-container')?.classList.remove('hide-left');
+	// 	}
+	// });
 
 	const profileButton = user ? <ProfileButton user={user} /> : null;
 
 	return (
-		<div className='sidebar-container fade-in'>
+		<div
+			className='sidebar-container fade-in'
+			style={expandNote ? { width: 0 } : { width: '200px' }}
+		>
 			<ul className='sidebar'>
 				<li>{isLoaded && profileButton}</li>
 				<li id='sidebar-menu-items'>
-					{isLoaded && <Search />}
+					{isLoaded && !expandNote && <Search />}
 					<button
 						id='notes-button'
 						onMouseEnter={(e) => setHover(e.target)}

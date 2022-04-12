@@ -126,7 +126,7 @@ const EditNote = () => {
 					className={
 						expandNote ? 'fas fa-angle-double-right' : 'fas fa-angle-double-left'
 					}
-					onClick={moveSidebars}
+					onClick={() => setExpandNote(!expandNote)}
 				></i>
 				<i id='note-hamburger-menu' className='fas fa-bars' onClick={openMenu}></i>
 				{showMenu && (

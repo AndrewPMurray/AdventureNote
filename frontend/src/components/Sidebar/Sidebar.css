@@ -54,8 +54,6 @@
     border-right:  1px solid rgba(30, 30, 30, 0.7);
     border-width: .01em;
     height: 100vh;
-    width: calc(150px + 10vw);
-    max-width: 200px;
     transition-duration: 200ms;
     animation-duration: 300ms;
 }

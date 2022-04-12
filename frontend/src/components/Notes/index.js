@@ -49,14 +49,17 @@ function Notes() {
 		}
 	}, [notes, setActiveNote, activeNote]);
 
-	if (expandNote) {
-		document.querySelector('.notes-container')?.classList.add('hide-left');
-	} else {
-		document.querySelector('.notes-container')?.classList.remove('hide-left');
-	}
+	// if (expandNote) {
+	// 	document.querySelector('.notes-container')?.classList.add('hide-left');
+	// } else {
+	// 	document.querySelector('.notes-container')?.classList.remove('hide-left');
+	// }
 
 	return (
-		<div className='notes-container fade-in'>
+		<div
+			className='notes-container fade-in'
+			style={expandNote ? { width: 0 } : { width: '800px' }}
+		>
 			<h2 id='notes-header'>All notes</h2>
 
 			<div className='notes-list'>

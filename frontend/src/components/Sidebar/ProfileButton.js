@@ -9,7 +9,7 @@ import { clearNotebookState } from '../../store/notebooks';
 function ProfileButton({ user }) {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
-	const { setActiveNote } = useShowHide();
+	const { setActiveNote, expandNote } = useShowHide();
 
 	const openMenu = () => {
 		if (showMenu) return;
@@ -44,8 +44,12 @@ function ProfileButton({ user }) {
 
 	return (
 		<>
-			<div className='profile-dropdown'>
-				<button className='sidebar-user-button' onClick={openMenu}>
+			<div className='profile-dropdown' style={expandNote ? { width: 0 } : null}>
+				<button
+					className='sidebar-user-button'
+					onClick={openMenu}
+					style={expandNote ? { width: 0 } : null}
+				>
 					<i className='fas fa-user-circle' />
 					<h3 id='sidebar-username'>{user.username}</h3>
 				</button>
