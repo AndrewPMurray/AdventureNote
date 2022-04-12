@@ -33,9 +33,14 @@
     min-height: 125px;
     cursor: pointer;
     transition-duration: 200ms;
+    width: 100%;
 }
 
-#note:hover {
+#active-false {
+    transition-duration: 200ms;
+}
+
+#active-false:hover {
     background-color: #1E1E1E;
 }
 

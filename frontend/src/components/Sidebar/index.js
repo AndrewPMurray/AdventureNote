@@ -38,9 +38,9 @@ function Sidebar({ isLoaded }) {
 			style={expandNote ? { width: 0 } : { width: '200px' }}
 		>
 			<ul className='sidebar'>
-				<li>{isLoaded && profileButton}</li>
-				<li id='sidebar-menu-items'>
-					{isLoaded && !expandNote && <Search />}
+				<li>{isLoaded && !expandNote && profileButton}</li>
+				<li id='sidebar-menu-items' style={expandNote ? { display: 'none' } : null}>
+					{isLoaded && <Search />}
 					<button
 						id='notes-button'
 						onMouseEnter={(e) => setHover(e.target)}
