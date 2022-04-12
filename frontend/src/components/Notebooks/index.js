@@ -7,9 +7,11 @@ import NotebookFormModal from '../NotebookFormModal';
 import EditNotebookFormModal from '../EditNotebookFormModal';
 import DeleteNotebookModal from '../DeleteNotebookModal';
 import './Notebooks.css';
+import { useShowHide } from '../../context/ShowHide';
 
 function Notebooks() {
 	const [menuId, setMenuId] = useState(null);
+	const { expandNote, setExpandNote } = useShowHide();
 	const notebooks = useSelector((state) => state.notebooks);
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
@@ -18,6 +20,9 @@ function Notebooks() {
 	const notebooksArr = Object.values(notebooks);
 
 	useEffect(() => {
+		if (expandNote) {
+			setExpandNote(false);
+		}
 		if (!menuId) return;
 
 		const closeMenu = (e) => {
