@@ -185,7 +185,7 @@ const EditNote = () => {
 					{tagName.length > 0 && (
 						<div id='add-tag-list' style={{ cursor: 'auto' }}>
 							<p id='add-new-tag' style={{ cursor: 'pointer' }} onClick={createTag}>
-								Add Tag{' '}
+								Create Tag{' '}
 								{tagName.length > 10 ? `${tagName.slice(0, 10)}...` : tagName}
 							</p>
 							<ul id='select-tag' style={{ marginTop: '5px', cursor: 'pointer' }}>
