@@ -90,3 +90,36 @@
     padding: 10px;
     border-radius: 5px;
 }
+
+#tags-container {
+    display: flex;
+}
+
+#tag,
+#add-tag {
+    margin: 5px;
+    padding: 8px;
+    border-radius: 15px;
+    background-color: #555555;
+    cursor: pointer;
+    position: relative;
+}
+
+#add-tag-list {
+    position: absolute;
+    bottom: 40px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #555555;
+    width: 200px;
+}
+
+#add-new-tag {
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+    border-radius: 0;
+}
+
+#select-tag > li {
+    margin: 3px 0;
+}

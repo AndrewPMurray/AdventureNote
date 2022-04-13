@@ -7,14 +7,18 @@ import { useShowHide } from '../../context/ShowHide';
 import './EditNote.css';
 import '../LoginSignupForm.css';
 import CopyMoveNoteModal from '../CopyMoveNoteModal';
+import { getTags } from '../../store/tags';
 
 const EditNote = () => {
 	const { expandNote, setExpandNote, activeNote } = useShowHide();
 	const noteId = activeNote?.id;
 	const notebookId = activeNote?.notebookId;
+	const allTags = useSelector((state) => Object.values(state.tags)).filter((e) => e.id);
+	const noteTags = useSelector((state) => Object.values(state.tags.noteTags));
 	const user = useSelector((state) => state.session.user);
 	const [name, setName] = useState(activeNote?.name);
 	const [content, setContent] = useState(activeNote?.content);
+	const [tagName, setTagName] = useState('');
 	const [isTyping, setIsTyping] = useState(true);
 	const [showMenu, setShowMenu] = useState(false);
 	const [savePrompt, setSavePrompt] = useState(false);
@@ -25,10 +29,30 @@ const EditNote = () => {
 		setShowMenu(true);
 	};
 
+	const filteredTags = allTags.filter((tag) => {
+		let tagOnNote = false;
+		noteTags.every((noteTag) => {
+			if (tag.name === noteTag.name) {
+				tagOnNote = true;
+				return false;
+			}
+			return true;
+		});
+		if (!tagOnNote) return tag.name.toLowerCase().includes(tagName.toLowerCase());
+		else return false;
+	});
+
 	useEffect(() => {
 		setName(activeNote?.name);
 		setContent(activeNote?.content);
 	}, [activeNote?.name, activeNote?.content]);
+
+	useEffect(() => {
+		if (user && noteId) {
+			dispatch(getTags(user.id, noteId));
+		}
+		setTagName('');
+	}, [user, noteId, dispatch]);
 
 	useEffect(() => {
 		if (!showMenu) return;
@@ -60,6 +84,17 @@ const EditNote = () => {
 
 		setSavePrompt(true);
 		dispatch(getNotes(user?.id));
+	};
+
+	const createTag = async () => {
+		console.log(tagName);
+		return;
+	};
+
+	const addTagToNote = async (name) => {
+		console.log(name);
+		console.log(noteId);
+		return;
 	};
 
 	const timer = () => setTimeout(() => setIsTyping(false), 500);
@@ -120,7 +155,7 @@ const EditNote = () => {
 					</ul>
 				)}
 			</div>
-			<form id='edit-note-form' onSubmit={handleSubmit}>
+			<form id='edit-note-form' onSubmit={handleSubmit} onClick={() => setTagName('')}>
 				<input
 					type='text'
 					value={name || ''}
@@ -142,6 +177,43 @@ const EditNote = () => {
 					Note saved
 				</div>
 			)}
+			<div id='tags-container'>
+				{noteTags.map((tag) => (
+					<p id='tag'>{tag.name}</p>
+				))}
+				<div id='add-tag'>
+					{tagName.length > 0 && (
+						<div id='add-tag-list' style={{ cursor: 'auto' }}>
+							<p id='add-new-tag' style={{ cursor: 'pointer' }} onClick={createTag}>
+								Add Tag{' '}
+								{tagName.length > 10 ? `${tagName.slice(0, 10)}...` : tagName}
+							</p>
+							<ul id='select-tag' style={{ marginTop: '5px', cursor: 'pointer' }}>
+								{filteredTags.map((tag) => (
+									<li onClick={() => addTagToNote(tag.name)}>
+										{tag.name.length > 10
+											? `${tag.name.slice(0, 10)}...`
+											: tag.name}
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
+					<i className='fa-solid fa-tag' style={{ marginRight: '10px' }}></i>
+					<input
+						placeholder='Add Tag'
+						style={{
+							width: '75px',
+							border: 'none',
+							backgroundColor: 'transparent',
+							color: 'white',
+							height: '100%',
+						}}
+						value={tagName}
+						onChange={(e) => setTagName(e.target.value)}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 };
