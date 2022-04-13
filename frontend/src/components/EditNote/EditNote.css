@@ -46,12 +46,12 @@
 #edit-note-form {
     display: flex;
     flex-direction: column;
-    padding-left: 10px;
 }
 
 #edit-note-form * {
     border: none;
     outline: none;
+    padding-left: 10px;
 }
 
 #edit-note-form > input {
@@ -67,6 +67,7 @@
     height: 80vh;
     font-size: 20px;
     color: white;
+    border-bottom: 1px solid rgba(60, 60, 60, 0.7);
 }
 
 /* .edit-note-button {
