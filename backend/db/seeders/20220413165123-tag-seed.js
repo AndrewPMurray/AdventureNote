@@ -7,12 +7,18 @@ module.exports = {
 			[
 				{
 					name: 'Characters',
-					color: 'AA0000',
 					userId: 1,
 				},
 				{
 					name: 'Sessions',
-					color: '0000AA',
+					userId: 1,
+				},
+				{
+					name: 'Enemies',
+					userId: 1,
+				},
+				{
+					name: 'Items',
 					userId: 1,
 				},
 			],

@@ -12,10 +12,6 @@ module.exports = {
 				allowNull: false,
 				type: Sequelize.STRING(50),
 			},
-			color: {
-				allowNull: false,
-				type: Sequelize.STRING(10),
-			},
 			userId: {
 				allowNull: false,
 				type: Sequelize.INTEGER,

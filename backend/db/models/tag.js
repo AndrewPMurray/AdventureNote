@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
 		'Tag',
 		{
 			name: DataTypes.STRING(50),
-			color: DataTypes.STRING(10),
 			userId: DataTypes.INTEGER,
 		},
 		{}
@@ -13,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 		Tag.belongsTo(models.User, { foreignKey: 'userId' });
 		Tag.belongsToMany(models.Note, {
 			through: 'NoteTag',
+			as: 'NoteTags',
 			foreignKey: 'tagId',
 		});
 	};
