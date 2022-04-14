@@ -12,7 +12,7 @@ const { Tag, Note, NoteTag } = require('../../db/models');
 const router = express.Router();
 
 router.get(
-	'/:userId/:noteId',
+	'/:userId/',
 	restoreUser,
 	asyncHandler(async (req, res) => {
 		const { userId, noteId } = req.params;
@@ -21,18 +21,7 @@ router.get(
 				userId,
 			},
 		});
-		const noteTags = await Tag.findAll({
-			include: [
-				{
-					model: Note,
-					as: 'NoteTags',
-					where: {
-						id: noteId,
-					},
-				},
-			],
-		});
-		return res.json({ allTags, noteTags });
+		return res.json(allTags);
 	})
 );
 

@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const LOAD_TAGS = 'tags/LOAD_TAGS';
+const LOAD_NOTE_TAGS = 'tags/LOAD_NOTE_TAGS';
 const ADD_TAG = 'tags/ADD_TAG';
 const ADD_TAG_TO_NOTE = 'tags/ADD_TAG_TO_NOTE';
 const DELETE_TAG = 'tags/DELETE_TAG';
@@ -10,6 +11,11 @@ const RESET_STATE = 'tags/RESET_STATE';
 
 const load = (tags) => ({
 	type: LOAD_TAGS,
+	tags,
+});
+
+const loadByNote = (tags) => ({
+	type: LOAD_NOTE_TAGS,
 	tags,
 });
 
@@ -40,12 +46,21 @@ const removeFromNote = (tagId) => ({
 
 export const clearTagState = () => ({ type: RESET_STATE });
 
-export const getTags = (userId, noteId) => async (dispatch) => {
-	const response = await fetch(`/api/tags/${userId}/${noteId}`);
+export const getTags = (userId) => async (dispatch) => {
+	const response = await fetch(`/api/tags/${userId}`);
 
 	if (response.ok) {
 		const tags = await response.json();
 		dispatch(load(tags));
+	}
+};
+
+export const getTagsByNote = (noteId) => async (dispatch) => {
+	const response = await fetch(`/api/notes/${noteId}`);
+
+	if (response.ok) {
+		const tags = await response.json();
+		dispatch(loadByNote(tags));
 	}
 };
 
@@ -125,14 +140,18 @@ const tagsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case LOAD_TAGS: {
 			const tags = {};
-			action.tags.allTags.forEach((tag) => {
+			action.tags.forEach((tag) => {
 				tags[tag.id] = tag;
 			});
 			return {
 				...state,
 				...tags,
-				noteTags: [...action.tags.noteTags],
 			};
+		}
+		case LOAD_NOTE_TAGS: {
+			const newState = { ...state };
+			newState.noteTags = [...action.tags];
+			return newState;
 		}
 		case ADD_TAG: {
 			const newState = { ...state, [action.tag.id]: action.tag };

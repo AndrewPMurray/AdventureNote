@@ -14,6 +14,7 @@ import NotFound from './components/NotFound';
 
 // Utils & contexts as needed
 import * as sessionActions from './store/session';
+import TagNotes from './components/TagNotes';
 
 function App() {
 	const dispatch = useDispatch();
@@ -55,6 +56,13 @@ function App() {
 						<div id='client-landing-container'>
 							<Sidebar isLoaded={isLoaded} />
 							<NotebookNotes />
+							<EditNote />
+						</div>
+					</Route>
+					<Route path='/client/tags/:tagId'>
+						<div id='client-landing-container'>
+							<Sidebar isLoaded={isLoaded} />
+							<TagNotes />
 							<EditNote />
 						</div>
 					</Route>

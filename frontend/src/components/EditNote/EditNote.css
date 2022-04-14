@@ -6,6 +6,7 @@
     height: 100vh;
     overflow-y: hidden;
     transition-duration: 300ms;
+    z-index: 50;
 }
 
 .note-utils-container {

@@ -2,14 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { editNote, deleteNote, getNotes } from '../../store/notes';
-import { addTag, getTags, createTag, removeTag, editTag, deleteTag } from '../../store/tags';
+import {
+	addTag,
+	getTags,
+	getTagsByNote,
+	createTag,
+	removeTag,
+	editTag,
+	deleteTag,
+} from '../../store/tags';
 import { useShowHide } from '../../context/ShowHide';
 
 import './EditNote.css';
 import '../LoginSignupForm.css';
 import CopyMoveNoteModal from '../CopyMoveNoteModal';
+import { useHistory } from 'react-router-dom';
 
 const EditNote = () => {
+	const history = useHistory();
 	const { expandNote, setExpandNote, activeNote } = useShowHide();
 	const noteId = activeNote?.id;
 	const notebookId = activeNote?.notebookId;
@@ -52,7 +62,8 @@ const EditNote = () => {
 
 	useEffect(() => {
 		if (user && noteId) {
-			dispatch(getTags(user.id, noteId));
+			dispatch(getTags(user.id));
+			dispatch(getTagsByNote(noteId));
 		}
 		setTagName('');
 	}, [user, noteId, dispatch]);
@@ -230,7 +241,16 @@ const EditNote = () => {
 								>
 									Rename
 								</p>
-								<p id='tag-menu-item'>Filter By Tag</p>
+								<p
+									id='tag-menu-item'
+									onClick={() => {
+										setTagMenu(-1);
+										setExpandNote(false);
+										history.push(`/client/tags/${tag.id}`);
+									}}
+								>
+									Filter By Tag
+								</p>
 							</div>
 						)}
 						{renameTagField === tag.id ? (

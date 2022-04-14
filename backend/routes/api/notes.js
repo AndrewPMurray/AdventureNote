@@ -17,11 +17,37 @@ router.get(
 	asyncHandler(async (req, res) => {
 		const { user } = req;
 		const notes = await Note.findAll({
+			include: [
+				{
+					model: Tag,
+					as: 'NoteTags',
+				},
+			],
 			where: {
 				userId: user.id,
 			},
 		});
 		return res.json(notes);
+	})
+);
+
+router.get(
+	'/:noteId',
+	restoreUser,
+	asyncHandler(async (req, res) => {
+		const { noteId } = req.params;
+		const noteTags = await Tag.findAll({
+			include: [
+				{
+					model: Note,
+					as: 'NoteTags',
+					where: {
+						id: noteId,
+					},
+				},
+			],
+		});
+		return res.json(noteTags);
 	})
 );
 

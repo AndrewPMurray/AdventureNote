@@ -4,32 +4,31 @@ import { useHistory, useParams } from 'react-router-dom';
 import { getNotes, addNote } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
 import { useShowHide } from '../../context/ShowHide';
-import NoteNode from './NoteNode';
-import './NotebookNotes.css';
+import NoteNode from '../Notes/NoteNode';
+import './TagNotes.css';
+import { addTag } from '../../store/tags';
 
-function NotebookNotes() {
-	const notebookId = useParams().notebookId;
-	const notebook = useSelector((state) => state.notebooks[notebookId]);
+function TagNotes() {
+	const { tagId } = useParams();
+	const tag = useSelector((state) => state.tags[tagId]);
 	const notes = useSelector((state) => state.notes);
 	const user = useSelector((state) => state.session.user);
 	const { activeNote, setActiveNote, expandNote } = useShowHide();
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const notebookNotesArr = notes?.list?.filter((note) => note?.notebookId === +notebookId);
-
-	const addNewNote = async (e) => {
-		e.preventDefault();
-
-		const newNote = await dispatch(
-			addNote({
-				userId: user.id,
-				notebookId,
-			})
-		);
-		dispatch(getNotes(user?.id));
-		setActiveNote(newNote);
-	};
+	const tagNotesArr = notes?.list?.filter((note) => {
+		let hasTag = false;
+		note.NoteTags.every((noteTag) => {
+			if (noteTag.id === +tagId) {
+				hasTag = true;
+				return false;
+			}
+			return true;
+		});
+		if (hasTag) return true;
+		return false;
+	});
 
 	useEffect(() => {
 		if (user === null) {
@@ -47,21 +46,34 @@ function NotebookNotes() {
 	useEffect(() => {
 		if (
 			notes[activeNote?.id]?.id === activeNote?.id &&
-			notebookNotesArr.includes(notes[activeNote?.id])
+			tagNotesArr.includes(notes[activeNote?.id])
 		) {
 			setActiveNote(notes[activeNote?.id]);
-		} else setActiveNote(notebookNotesArr[0] || null);
-	}, [notebookNotesArr, setActiveNote, activeNote, notes]);
+		} else setActiveNote(tagNotesArr[0] || null);
+	}, [tagNotesArr, setActiveNote, activeNote, notes]);
+
+	const addNewNote = async (e) => {
+		e.preventDefault();
+
+		const newNote = await dispatch(
+			addNote({
+				userId: user.id,
+				notebookId: null,
+			})
+		);
+		await dispatch(addTag(tagId, newNote.id));
+		setActiveNote(newNote);
+	};
 
 	return (
 		<div
 			className='notes-container fade-in'
 			style={expandNote ? { width: 0 } : { minWidth: '400px' }}
 		>
-			<h2 id='notes-header'>{notebook?.title}</h2>
+			<h2 id='notes-header'>Tag: {tag?.name}</h2>
 
 			<div className='notes-list'>
-				{notebookNotesArr.map((note) => (
+				{tagNotesArr.map((note) => (
 					<div
 						id={`active-${note.id === activeNote?.id}`}
 						key={note.id}
@@ -70,11 +82,11 @@ function NotebookNotes() {
 						{note.userId === user?.id && <NoteNode key={note.id} note={note} />}
 					</div>
 				))}
-				{!notebookNotesArr.length && (
+				{!tagNotesArr.length && (
 					<div id='add-note'>
 						<img src='/images/quill-pen-graphic.png' alt='Add a note!' />
 						<span onClick={addNewNote}>
-							No notes in this notebook, click here to add one now!
+							No notes associated with this tag, click here to add one now!
 						</span>
 					</div>
 				)}
@@ -84,4 +96,4 @@ function NotebookNotes() {
 	);
 }
 
-export default NotebookNotes;
+export default TagNotes;

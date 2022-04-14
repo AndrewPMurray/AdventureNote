@@ -52,7 +52,7 @@ function Notes() {
 	return (
 		<div
 			className='notes-container fade-in'
-			style={expandNote ? { width: 0 } : { width: '800px' }}
+			style={expandNote ? { width: 0 } : { minWidth: '400px' }}
 		>
 			<h2 id='notes-header'>All notes</h2>
 
