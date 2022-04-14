@@ -1,10 +1,11 @@
 import { csrfFetch } from './csrf';
 
 const LOAD_TAGS = 'tags/LOAD_TAGS';
-const ADD_TAG = 'TAGs/ADD_TAG';
-const REMOVE_TAG = 'TAGs/REMOVE_TAG';
-const UPDATE_TAG = 'TAGs/UPDATE_TAG';
-const RESET_STATE = 'TAGs/RESET_STATE';
+const ADD_TAG = 'tags/ADD_TAG';
+const ADD_TAG_TO_NOTE = 'tags/ADD_TAG_TO_NOTE';
+const REMOVE_TAG = 'tags/REMOVE_TAG';
+const UPDATE_TAG = 'tags/UPDATE_TAG';
+const RESET_STATE = 'tags/RESET_STATE';
 
 const load = (tags) => ({
 	type: LOAD_TAGS,
@@ -13,6 +14,11 @@ const load = (tags) => ({
 
 const add = (tag) => ({
 	type: ADD_TAG,
+	tag,
+});
+
+const addToNote = (tag) => ({
+	type: ADD_TAG_TO_NOTE,
 	tag,
 });
 
@@ -37,7 +43,7 @@ export const getTags = (userId, noteId) => async (dispatch) => {
 	}
 };
 
-export const addTag = (tag) => async (dispatch) => {
+export const createTag = (tag) => async (dispatch) => {
 	const response = await csrfFetch('/api/tags', {
 		method: 'POST',
 		headers: {
@@ -49,6 +55,21 @@ export const addTag = (tag) => async (dispatch) => {
 		const newTag = await response.json();
 		dispatch(add(newTag));
 		return newTag;
+	}
+};
+
+export const addTag = (tagId, noteId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/notes/${noteId}/tags`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ tagId }),
+	});
+	if (response.ok) {
+		const newNoteTag = await response.json();
+		dispatch(addToNote(newNoteTag));
+		return newNoteTag;
 	}
 };
 
@@ -82,6 +103,16 @@ export const deleteTag = (tagId) => async (dispatch) => {
 	}
 };
 
+export const removeTag = (tagId, noteId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/notes/${noteId}/tags/${tagId}`, {
+		method: 'DELETE',
+	});
+	if (response.ok) {
+		const removedTag = await response.json();
+		dispatch(remove(tagId));
+	}
+};
+
 const initialState = { noteTags: [] };
 
 const tagsReducer = (state = initialState, action) => {
@@ -99,6 +130,11 @@ const tagsReducer = (state = initialState, action) => {
 		}
 		case ADD_TAG: {
 			const newState = { ...state, [action.tag.id]: action.tag };
+			return newState;
+		}
+		case ADD_TAG_TO_NOTE: {
+			const newState = { ...state };
+			state.noteTags.push(action.tag);
 			return newState;
 		}
 		case REMOVE_TAG: {

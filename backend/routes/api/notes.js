@@ -7,7 +7,7 @@ const { restoreUser } = require('../../utils/auth');
 const csrfProtection = csurf({ cookie: true });
 
 const { handleValidationErrors } = require('../../utils/validation');
-const { Note } = require('../../db/models');
+const { Note, NoteTag, Tag } = require('../../db/models');
 
 const router = express.Router();
 
@@ -37,6 +37,21 @@ router.post(
 			notebookId,
 		});
 		return res.json(newNote);
+	})
+);
+
+router.post(
+	'/:noteId/tags',
+	csrfProtection,
+	asyncHandler(async (req, res) => {
+		const { noteId } = req.params;
+		const { tagId } = req.body;
+		const tag = await Tag.findByPk(tagId);
+		const newNoteTag = await NoteTag.create({
+			noteId,
+			tagId,
+		});
+		return res.json(tag);
 	})
 );
 

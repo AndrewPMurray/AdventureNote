@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { editNote, deleteNote, getNotes } from '../../store/notes';
+import { addTag, getTags, createTag } from '../../store/tags';
 import { useShowHide } from '../../context/ShowHide';
 
 import './EditNote.css';
 import '../LoginSignupForm.css';
 import CopyMoveNoteModal from '../CopyMoveNoteModal';
-import { getTags } from '../../store/tags';
 
 const EditNote = () => {
 	const { expandNote, setExpandNote, activeNote } = useShowHide();
@@ -86,15 +86,14 @@ const EditNote = () => {
 		dispatch(getNotes(user?.id));
 	};
 
-	const createTag = async () => {
-		console.log(tagName);
-		return;
+	const createNewTag = async () => {
+		const newTag = await dispatch(createTag({ name: tagName, userId: user.id }));
+		addTagToNote(newTag.id);
 	};
 
-	const addTagToNote = async (name) => {
-		console.log(name);
-		console.log(noteId);
-		return;
+	const addTagToNote = async (tagId) => {
+		await dispatch(addTag(tagId, noteId));
+		setTagName('');
 	};
 
 	const timer = () => setTimeout(() => setIsTyping(false), 500);
@@ -179,18 +178,24 @@ const EditNote = () => {
 			)}
 			<div id='tags-container'>
 				{noteTags.map((tag) => (
-					<p id='tag'>{tag.name}</p>
+					<p key={`note-tag-${tag.id}`} id='tag'>
+						{tag.name}
+					</p>
 				))}
 				<div id='add-tag'>
 					{tagName.length > 0 && (
 						<div id='add-tag-list' style={{ cursor: 'auto' }}>
-							<p id='add-new-tag' style={{ cursor: 'pointer' }} onClick={createTag}>
+							<p
+								id='add-new-tag'
+								style={{ cursor: 'pointer' }}
+								onClick={createNewTag}
+							>
 								Create Tag{' '}
 								{tagName.length > 10 ? `${tagName.slice(0, 10)}...` : tagName}
 							</p>
 							<ul id='select-tag' style={{ marginTop: '5px', cursor: 'pointer' }}>
 								{filteredTags.map((tag) => (
-									<li onClick={() => addTagToNote(tag.name)}>
+									<li key={`tag-${tag.id}`} onClick={() => addTagToNote(tag.id)}>
 										{tag.name.length > 10
 											? `${tag.name.slice(0, 10)}...`
 											: tag.name}

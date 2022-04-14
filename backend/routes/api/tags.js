@@ -40,34 +40,33 @@ router.post(
 	'/',
 	csrfProtection,
 	asyncHandler(async (req, res) => {
-		const { userId, notebookId } = req.body;
-		const newNote = await Note.create({
-			name: null,
-			content: null,
+		const { userId, name } = req.body;
+		console.log(userId, name);
+		const newTag = await Tag.create({
+			name,
 			userId,
-			notebookId,
 		});
-		return res.json(newNote);
+		return res.json(newTag);
 	})
 );
 
-router.put(
-	'/:id',
-	csrfProtection,
-	asyncHandler(async (req, res) => {
-		const { id, name, content, notebookId } = req.body;
-		const note = await Note.findByPk(id);
-		if (name === note.name && content === note.content && notebookId === note.notebookId) {
-			return res.json({ message: 'no new changes' });
-		}
-		const newNote = await note.update({
-			name,
-			content,
-			notebookId,
-		});
-		return res.json(newNote);
-	})
-);
+// router.put(
+// 	'/:id',
+// 	csrfProtection,
+// 	asyncHandler(async (req, res) => {
+// 		const { id, name, content, notebookId } = req.body;
+// 		const note = await Note.findByPk(id);
+// 		if (name === note.name && content === note.content && notebookId === note.notebookId) {
+// 			return res.json({ message: 'no new changes' });
+// 		}
+// 		const newNote = await note.update({
+// 			name,
+// 			content,
+// 			notebookId,
+// 		});
+// 		return res.json(newNote);
+// 	})
+// );
 
 router.delete(
 	'/:id',
