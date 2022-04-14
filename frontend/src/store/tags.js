@@ -3,7 +3,8 @@ import { csrfFetch } from './csrf';
 const LOAD_TAGS = 'tags/LOAD_TAGS';
 const ADD_TAG = 'tags/ADD_TAG';
 const ADD_TAG_TO_NOTE = 'tags/ADD_TAG_TO_NOTE';
-const REMOVE_TAG = 'tags/REMOVE_TAG';
+const DELETE_TAG = 'tags/DELETE_TAG';
+const REMOVE_TAG_FROM_NOTE = 'tags/REMOVE_TAG_FROM_NOTE';
 const UPDATE_TAG = 'tags/UPDATE_TAG';
 const RESET_STATE = 'tags/RESET_STATE';
 
@@ -28,7 +29,12 @@ const update = (tag) => ({
 });
 
 const remove = (tagId) => ({
-	type: REMOVE_TAG,
+	type: DELETE_TAG,
+	tagId,
+});
+
+const removeFromNote = (tagId) => ({
+	type: REMOVE_TAG_FROM_NOTE,
 	tagId,
 });
 
@@ -99,6 +105,7 @@ export const deleteTag = (tagId) => async (dispatch) => {
 	if (response.ok) {
 		const deletedTag = await response.json();
 		dispatch(remove(tagId));
+		dispatch(removeFromNote(tagId));
 		return deletedTag;
 	}
 };
@@ -108,8 +115,7 @@ export const removeTag = (tagId, noteId) => async (dispatch) => {
 		method: 'DELETE',
 	});
 	if (response.ok) {
-		const removedTag = await response.json();
-		dispatch(remove(tagId));
+		dispatch(removeFromNote(tagId));
 	}
 };
 
@@ -137,16 +143,29 @@ const tagsReducer = (state = initialState, action) => {
 			state.noteTags.push(action.tag);
 			return newState;
 		}
-		case REMOVE_TAG: {
+		case DELETE_TAG: {
 			const newState = { ...state };
 			delete newState[action.tagId];
 			return newState;
 		}
+		case REMOVE_TAG_FROM_NOTE: {
+			const newState = { ...state };
+			newState.noteTags = newState.noteTags.filter((tag) => tag.id !== action.tagId);
+			return newState;
+		}
 		case UPDATE_TAG: {
-			return {
+			const newState = {
 				...state,
 				[action.tag.id]: action.tag,
 			};
+			newState.noteTags.every((tag, i) => {
+				if (tag.id === action.tag.id) {
+					newState.noteTags.splice(i, 1, action.tag);
+					return false;
+				}
+				return true;
+			});
+			return newState;
 		}
 		case RESET_STATE: {
 			return {};

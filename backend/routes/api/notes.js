@@ -84,4 +84,20 @@ router.delete(
 	})
 );
 
+router.delete(
+	'/:noteId/tags/:tagId',
+	csrfProtection,
+	asyncHandler(async (req, res) => {
+		const { noteId, tagId } = req.params;
+		const noteTag = await NoteTag.findOne({
+			where: {
+				noteId,
+				tagId,
+			},
+		});
+		await noteTag.destroy();
+		return res.json({ message: 'success' });
+	})
+);
+
 module.exports = router;

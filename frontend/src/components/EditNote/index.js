@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { editNote, deleteNote, getNotes } from '../../store/notes';
-import { addTag, getTags, createTag } from '../../store/tags';
+import { addTag, getTags, createTag, removeTag, editTag, deleteTag } from '../../store/tags';
 import { useShowHide } from '../../context/ShowHide';
 
 import './EditNote.css';
@@ -19,8 +19,11 @@ const EditNote = () => {
 	const [name, setName] = useState(activeNote?.name);
 	const [content, setContent] = useState(activeNote?.content);
 	const [tagName, setTagName] = useState('');
+	const [renameTag, setRenameTag] = useState('');
+	const [renameTagField, setRenameTagField] = useState(-1);
 	const [isTyping, setIsTyping] = useState(true);
 	const [showMenu, setShowMenu] = useState(false);
+	const [tagMenu, setTagMenu] = useState(-1);
 	const [savePrompt, setSavePrompt] = useState(false);
 	const dispatch = useDispatch();
 
@@ -94,6 +97,28 @@ const EditNote = () => {
 	const addTagToNote = async (tagId) => {
 		await dispatch(addTag(tagId, noteId));
 		setTagName('');
+	};
+
+	const deleteTagFromNotes = async (tagId) => {
+		await dispatch(deleteTag(tagId));
+		setTagMenu(-1);
+	};
+
+	const handleTagRename = async (e, tagId) => {
+		if (e.key !== 'Enter') return;
+		await dispatch(
+			editTag({
+				id: tagId,
+				name: renameTag,
+				userId: user.id,
+			})
+		);
+		setRenameTagField(-1);
+	};
+
+	const removeTagFromNote = async (tagId) => {
+		await dispatch(removeTag(tagId, noteId));
+		setTagMenu(-1);
 	};
 
 	const timer = () => setTimeout(() => setIsTyping(false), 500);
@@ -178,9 +203,58 @@ const EditNote = () => {
 			)}
 			<div id='tags-container'>
 				{noteTags.map((tag) => (
-					<p key={`note-tag-${tag.id}`} id='tag'>
-						{tag.name}
-					</p>
+					<button
+						key={`note-tag-${tag.id}`}
+						id='tag-menu-container'
+						onBlur={() => setTagMenu(-1)}
+					>
+						{tag.id === tagMenu && (
+							<div id='tag-menu' className='fade-in'>
+								<p
+									id='tag-menu-item'
+									style={{ color: '#A21232' }}
+									onClick={() => deleteTagFromNotes(tag.id)}
+								>
+									Delete Tag From All Notes
+								</p>
+								<p id='tag-menu-item' onClick={() => removeTagFromNote(tag.id)}>
+									Remove Tag
+								</p>
+								<p
+									id='tag-menu-item'
+									onClick={() => {
+										setRenameTag(tag.name);
+										setRenameTagField(tag.id);
+										setTagMenu(-1);
+									}}
+								>
+									Rename
+								</p>
+								<p id='tag-menu-item'>Filter By Tag</p>
+							</div>
+						)}
+						{renameTagField === tag.id ? (
+							<input
+								style={{
+									border: 'none',
+									color: 'white',
+									cursor: 'text',
+									height: '20px',
+									width: '120px',
+								}}
+								id='tag'
+								value={renameTag}
+								onChange={(e) => setRenameTag(e.target.value)}
+								onKeyPress={(e) => handleTagRename(e, tag.id)}
+								onBlur={() => setRenameTagField(-1)}
+								autoFocus={true}
+							/>
+						) : (
+							<p id='tag' onClick={() => setTagMenu(tag.id)}>
+								{tag.name}
+							</p>
+						)}
+					</button>
 				))}
 				<div id='add-tag'>
 					{tagName.length > 0 && (

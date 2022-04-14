@@ -7,7 +7,7 @@ const { restoreUser } = require('../../utils/auth');
 const csrfProtection = csurf({ cookie: true });
 
 const { handleValidationErrors } = require('../../utils/validation');
-const { Tag, Note } = require('../../db/models');
+const { Tag, Note, NoteTag } = require('../../db/models');
 
 const router = express.Router();
 
@@ -50,31 +50,38 @@ router.post(
 	})
 );
 
-// router.put(
-// 	'/:id',
-// 	csrfProtection,
-// 	asyncHandler(async (req, res) => {
-// 		const { id, name, content, notebookId } = req.body;
-// 		const note = await Note.findByPk(id);
-// 		if (name === note.name && content === note.content && notebookId === note.notebookId) {
-// 			return res.json({ message: 'no new changes' });
-// 		}
-// 		const newNote = await note.update({
-// 			name,
-// 			content,
-// 			notebookId,
-// 		});
-// 		return res.json(newNote);
-// 	})
-// );
+router.put(
+	'/:id',
+	csrfProtection,
+	asyncHandler(async (req, res) => {
+		const { id, name, userId } = req.body;
+		const tag = await Tag.findByPk(id);
+		if (name === tag.name) {
+			return res.json({ message: 'no new changes' });
+		}
+		const newTag = await tag.update({
+			name,
+			userId,
+		});
+		return res.json(newTag);
+	})
+);
 
 router.delete(
 	'/:id',
 	csrfProtection,
 	asyncHandler(async (req, res) => {
 		const { id } = req.params;
-		const note = await Note.findByPk(id);
-		await note.destroy();
+		const tag = await Tag.findByPk(id);
+		const noteTags = await NoteTag.findAll({
+			where: {
+				tagId: id,
+			},
+		});
+		noteTags.forEach(async (noteTag) => {
+			await noteTag.destroy();
+		});
+		await tag.destroy();
 		return res.json({ message: 'success' });
 	})
 );
