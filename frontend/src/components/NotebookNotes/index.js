@@ -56,7 +56,9 @@ function NotebookNotes() {
 	return (
 		<div
 			className='notes-container fade-in'
-			style={expandNote ? { width: 0 } : { minWidth: '400px' }}
+			style={
+				expandNote ? { minWidth: 0, maxWidth: 0 } : { minWidth: '400px', maxWidth: '400px' }
+			}
 		>
 			<h2 id='notes-header'>{notebook?.title}</h2>
 
