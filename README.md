@@ -2,13 +2,13 @@
 
 ### AdventureNote, an app inspired by Evernote, is a website for users to organize and store notes regarding their DnD characters and campaigns.
 
-### Splash Page
-
-![splash]
-
 ### Client Landing page (notes)
 
 ![notes]
+
+### Notebooks
+
+![notebooks]
 
 To launch the application:
   - Clone the git:
@@ -79,8 +79,7 @@ To launch the application:
 
 ### To-Do:
 * [ ] Dynamic text editing
-* [ ] Tags
+* [X] Tags
 
-
-[splash]: ./frontend/public/images/splash.png
-[notes]: ./frontend/public/images/notes.png
+[notebooks]: https://user-images.githubusercontent.com/92741849/163466482-792ebd7b-9b47-4367-b403-b1f79a453a32.JPG
+[notes]: https://user-images.githubusercontent.com/92741849/163466683-24903885-a381-430b-b4a4-6c4d130435a9.JPG
