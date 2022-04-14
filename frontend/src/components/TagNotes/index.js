@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getNotes, addNote } from '../../store/notes';
-import { getNotebooks } from '../../store/notebooks';
 import { useShowHide } from '../../context/ShowHide';
 import NoteNode from '../Notes/NoteNode';
 import './TagNotes.css';
@@ -39,7 +38,6 @@ function TagNotes() {
 	useEffect(() => {
 		if (user) {
 			dispatch(getNotes());
-			dispatch(getNotebooks());
 		}
 	}, [dispatch, user]);
 

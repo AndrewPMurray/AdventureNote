@@ -112,6 +112,7 @@ const EditNote = () => {
 
 	const deleteTagFromNotes = async (tagId) => {
 		await dispatch(deleteTag(tagId));
+		await dispatch(getNotes(user?.id));
 		setTagMenu(-1);
 	};
 
@@ -129,6 +130,7 @@ const EditNote = () => {
 
 	const removeTagFromNote = async (tagId) => {
 		await dispatch(removeTag(tagId, noteId));
+		await dispatch(getNotes(user?.id));
 		setTagMenu(-1);
 	};
 
