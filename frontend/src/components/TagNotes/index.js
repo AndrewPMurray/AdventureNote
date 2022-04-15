@@ -78,7 +78,7 @@ function TagNotes() {
 						key={note.id}
 						onClick={() => setActiveNote(note)}
 					>
-						{note.userId === user?.id && <NoteNode key={note.id} note={note} />}
+						{note.userId === user?.id && <NoteNode note={note} />}
 					</div>
 				))}
 				{!tagNotesArr.length && (
