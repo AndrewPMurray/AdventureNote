@@ -25,8 +25,7 @@ function TagNotes() {
 			}
 			return true;
 		});
-		if (hasTag) return true;
-		return false;
+		return hasTag;
 	});
 
 	useEffect(() => {
