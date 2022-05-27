@@ -1,22 +1,7 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { csrfFetch } from './csrf';
 
-const SET_USER = 'session/setUser';
-const REMOVE_USER = 'session/removeUser';
-
-const setUser = (user) => {
-	return {
-		type: SET_USER,
-		payload: user,
-	};
-};
-
-const removeUser = () => {
-	return {
-		type: REMOVE_USER,
-	};
-};
-
-export const login = (user) => async (dispatch) => {
+export const login = createAsyncThunk('session/setUser', async (user) => {
 	const { credential, password } = user;
 	const response = await csrfFetch('/api/session', {
 		method: 'POST',
@@ -26,18 +11,16 @@ export const login = (user) => async (dispatch) => {
 		}),
 	});
 	const data = await response.json();
-	dispatch(setUser(data.user));
-	return response;
-};
+	return data.user;
+});
 
-export const restoreUser = () => async (dispatch) => {
+export const restoreUser = createAsyncThunk('session/restoreUser', async () => {
 	const response = await csrfFetch('/api/session');
 	const data = await response.json();
-	dispatch(setUser(data.user));
-	return response;
-};
+	return data.user;
+});
 
-export const signup = (user) => async (dispatch) => {
+export const signup = createAsyncThunk('session/signUpUser', async (user) => {
 	const { username, email, password, confirmPassword } = user;
 	const response = await csrfFetch('/api/users', {
 		method: 'POST',
@@ -49,34 +32,38 @@ export const signup = (user) => async (dispatch) => {
 		}),
 	});
 	const data = await response.json();
-	dispatch(setUser(data.user));
-	return response;
-};
+	return data.user;
+});
 
-export const logout = () => async (dispatch) => {
+export const logout = createAsyncThunk('session/logout', async () => {
 	const response = await csrfFetch('/api/session', {
 		method: 'DELETE',
 	});
-	dispatch(removeUser());
-	return response;
-};
+	const data = await response.json();
+	return data;
+});
 
 const initialState = { user: null };
 
-const sessionReducer = (state = initialState, action) => {
-	let newState;
-	switch (action.type) {
-		case SET_USER:
-			newState = Object.assign({}, state);
-			newState.user = action.payload || null;
-			return newState;
-		case REMOVE_USER:
-			newState = Object.assign({}, state);
-			newState.user = null;
-			return newState;
-		default:
-			return state;
-	}
-};
+const sessionSlice = createSlice({
+	name: 'session',
+	initialState,
+	reducers: {},
+	extraReducers: (builder) => {
+		builder
+			.addCase(login.fulfilled, (state, action) => {
+				state.user = action.payload || null;
+			})
+			.addCase(restoreUser.fulfilled, (state, action) => {
+				state.user = action.payload || null;
+			})
+			.addCase(signup.fulfilled, (state, action) => {
+				state.user = action.payload || null;
+			})
+			.addCase(logout.fulfilled, (state, action) => {
+				state.user = null;
+			});
+	},
+});
 
-export default sessionReducer;
+export default sessionSlice.reducer;

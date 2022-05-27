@@ -1,29 +1,30 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 import sessionReducer from './session';
 import notesReducer from './notes';
 import notebooksReducer from './notebooks';
 import tagsReducer from './tags';
 
-const rootReducer = combineReducers({
-	session: sessionReducer,
-	notes: notesReducer,
-	notebooks: notebooksReducer,
-	tags: tagsReducer,
+const store = configureStore({
+	reducer: {
+		session: sessionReducer,
+		notes: notesReducer,
+		notebooks: notebooksReducer,
+		tags: tagsReducer,
+	},
 });
 
-let enhancer;
+// let enhancer;
 
-if (process.env.NODE_ENV === 'production') {
-	enhancer = applyMiddleware(thunk);
-} else {
-	const logger = require('redux-logger').default;
-	const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-	enhancer = composeEnhancers(applyMiddleware(thunk, logger));
-}
+// if (process.env.NODE_ENV === 'production') {
+// 	enhancer = applyMiddleware(thunk);
+// } else {
+// 	const logger = require('redux-logger').default;
+// 	const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// 	enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+// }
 
-const configureStore = (preloadedState) => {
-	return createStore(rootReducer, preloadedState, enhancer);
-};
+// const configureStore = (preloadedState) => {
+// 	return createStore(rootReducer, preloadedState, enhancer);
+// };
 
-export default configureStore;
+export default store;

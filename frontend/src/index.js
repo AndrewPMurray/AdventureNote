@@ -11,12 +11,10 @@ import { ModalProvider } from './context/Modal';
 import ShowHideProvider from './context/ShowHide';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 
-import configureStore from './store';
+import store from './store';
 import * as sessionActions from './store/session';
 
 import './index.css';
-
-const store = configureStore();
 
 TimeAgo.addDefaultLocale(en);
 
