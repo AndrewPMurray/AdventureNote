@@ -60,7 +60,7 @@ const sessionSlice = createSlice({
 			.addCase(signup.fulfilled, (state, action) => {
 				state.user = action.payload || null;
 			})
-			.addCase(logout.fulfilled, (state, action) => {
+			.addCase(logout.fulfilled, (state, _action) => {
 				state.user = null;
 			});
 	},
